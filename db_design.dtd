@@ -1,0 +1,15 @@
+<!ELEMENT xml (class*)>
+<!ELEMENT class (attribute*, methode*)>
+<!ATTLIST class
+    name CDATA #REQUIRED
+    superClass CDATA #IMPLIED
+    relation CDATA #IMPLIED>
+<!ELEMENT attribute EMPTY>
+<!ATTLIST attribute
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+    type CDATA #REQUIRED>
+<!ELEMENT methode EMPTY>
+<!ATTLIST methode
+    name CDATA #REQUIRED
+    return CDATA #REQUIRED>

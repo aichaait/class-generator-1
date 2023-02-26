@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <class QSDF="2aA" superClassse="" Relation="">
+    <attribute QSDF="2aA" value="1" type="int" />
+    <attribute name="attribute2" value="mohamed" type="string" />
+    <attribute name="attribute3" value="1.0" type="float" />
+    <methode name="methode1" return="int" />
+    <methode name="methode2" return="string" />
+    <methode name="methode1" return="float" />
+  </class>
+</xml>
