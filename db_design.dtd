@@ -1,15 +1,56 @@
-<!ELEMENT xml (class*)>
-<!ELEMENT class (attribute*, methode*)>
-<!ATTLIST class
-    name CDATA #REQUIRED
-    superClass CDATA #IMPLIED
-    relation CDATA #IMPLIED>
-<!ELEMENT attribute EMPTY>
-<!ATTLIST attribute
-    name CDATA #REQUIRED
-    value CDATA #REQUIRED
-    type CDATA #REQUIRED>
-<!ELEMENT methode EMPTY>
-<!ATTLIST methode
-    name CDATA #REQUIRED
-    return CDATA #REQUIRED>
+<!--
+    symboles : 
+        lt : <
+        gt : >
+        amp : &
+        apos : '
+        quot : "
+        
+
+    <!ENTITY nom "valeur">
+    
+    <!ELEMENT NOM_ELEMENT (type)>
+    type :
+        #PCDATA : Texte
+        EMPTY : Vide
+        ANY : Tout
+        (type1, type2, ...) : Liste de types
+        (type1 | type2 | ...) : Choix de types
+
+    Quantificateur :
+        ? : 0 ou 1
+        + : 1 ou plus 
+        * : 0 ou plus
+
+
+    <!ATTLIST Nom_Elément Attribut Type Obligation Valeur-par-défaut>
+
+    Obligation :
+        #REQUIRED : Obligatoire
+        #IMPLIED : Optionnel
+        #FIXED : Valeur fixe
+        #PCDATA : Texte
+
+
+    type of attribute :
+        CDATA : Texte
+        ID : Identifiant unique
+        IDREF : Référence à un identifiant
+        IDREFS : Référence à plusieurs identifiants
+        ENTITY : Référence à une entité
+
+    
+    -->
+
+
+
+<!ELEMENT classes (class+)>
+    <!ELEMENT class (attributes, functions)>
+    <!ATTLIST class name CDATA #REQUIRED superClass CDATA #IMPLIED relation CDATA #IMPLIED>
+        <!ELEMENT attributes (attribute+)>
+            <!ELEMENT attribute EMPTY>
+            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #REQUIRED type CDATA #REQUIRED>
+        <!ELEMENT functions (function+)>
+            <!ELEMENT function EMPTY>
+            <!ATTLIST function name CDATA #REQUIRED return CDATA #REQUIRED>
+   

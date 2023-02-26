@@ -1,13 +1,14 @@
+package MyLibraries;
 import org.jdom2.*;
 import java.util.List;
 import java.io.FileWriter;
 
 
-public class JWrite {
+public class WriteXmlToJava {
    public void printClassFromXmlIntoJavaFile(Element monClass){
         try{
             String className = monClass.getAttributeValue("name");
-            FileWriter  JavaFile = new FileWriter(capitalize(className)+".java",true );
+            FileWriter  JavaFile = new FileWriter(capitalize(className)+".java" );
 
             JavaFile.write("public class "+capitalize(className) +"{"+"\n");
             printAttributesDeClass(monClass, JavaFile);
@@ -32,7 +33,7 @@ public class JWrite {
         }
     }
     public void printAttributesDeClass(Element monClass, FileWriter JavaFile){
-        List<Element> listDesAtributtes = monClass.getChildren("attribute");
+        List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         for (int i = 0; i < listDesAtributtes.size(); i++) {
             Element monAtributte = (Element) listDesAtributtes.get(i);
             String name = monAtributte.getAttributeValue("name");
@@ -56,7 +57,7 @@ public class JWrite {
 
     }
     public void printMethodesDeClass(Element monClass, FileWriter JavaFile){
-        List<Element> listDesMethodes = monClass.getChildren("methode");
+        List<Element> listDesMethodes = monClass.getChildren("functions").get(0).getChildren("function");
         for (int i = 0; i < listDesMethodes.size(); i++) {
             Element maMethode = (Element) listDesMethodes.get(i);
             String name = maMethode.getAttributeValue("name");
@@ -73,7 +74,7 @@ public class JWrite {
 
     }
     public void printGettersAndSetters(Element monClass, FileWriter JavaFile){
-        List<Element> listDesAtributtes = monClass.getChildren("attribute");
+        List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         for (int i = 0; i < listDesAtributtes.size(); i++) {
             Element monAtributte = (Element) listDesAtributtes.get(i);
             String name = monAtributte.getAttributeValue("name");
