@@ -10,7 +10,9 @@ public class WriteXmlToJava {
             String className = monClass.getAttributeValue("name");
             FileWriter  JavaFile = new FileWriter(capitalize(className)+".java" );
 
-            JavaFile.write("public class "+capitalize(className) +"{"+"\n");
+            JavaFile.write("public class "+capitalize(className));
+            printExtendIfWeHaveIt(monClass, JavaFile);
+            JavaFile.write(" {"+"\n");
             printAttributesDeClass(monClass, JavaFile);
             printGettersAndSetters(monClass, JavaFile);
             printMethodesDeClass(monClass, JavaFile);
@@ -21,6 +23,25 @@ public class WriteXmlToJava {
 
         }
     }
+
+
+
+
+    public void printExtendIfWeHaveIt(Element monClass ,FileWriter JavaFile){
+        String superClass = monClass.getAttributeValue("superClass");
+        if(!superClass.equals("")){
+            try{
+                JavaFile.write(" extends "+ capitalize(superClass));
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+
+
+
+
+
     public void  printClassesFromXmlIntoJavaFile(List<Element> list){
         try{
             for (int i = 0; i < list.size(); i++) {
@@ -32,6 +53,11 @@ public class WriteXmlToJava {
 
         }
     }
+
+
+
+
+
     public void printAttributesDeClass(Element monClass, FileWriter JavaFile){
         List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         for (int i = 0; i < listDesAtributtes.size(); i++) {
@@ -56,6 +82,9 @@ public class WriteXmlToJava {
         }
 
     }
+
+
+
     public void printMethodesDeClass(Element monClass, FileWriter JavaFile){
         List<Element> listDesMethodes = monClass.getChildren("functions").get(0).getChildren("function");
         for (int i = 0; i < listDesMethodes.size(); i++) {
@@ -73,6 +102,11 @@ public class WriteXmlToJava {
         }
 
     }
+
+
+
+
+
     public void printGettersAndSetters(Element monClass, FileWriter JavaFile){
         List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         for (int i = 0; i < listDesAtributtes.size(); i++) {
@@ -93,6 +127,10 @@ public class WriteXmlToJava {
         }
 
     }
+
+
+
+    
     public static String capitalize(String inputString) {
 
 		// get the first character of the inputString
