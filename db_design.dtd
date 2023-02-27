@@ -49,7 +49,7 @@
     <!ATTLIST class name CDATA #REQUIRED superClass CDATA #IMPLIED relation CDATA #IMPLIED>
         <!ELEMENT attributes (attribute+)>
             <!ELEMENT attribute EMPTY>
-            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #REQUIRED type CDATA #REQUIRED>
+            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>
         <!ELEMENT functions (function+)>
             <!ELEMENT function EMPTY>
             <!ATTLIST function name CDATA #REQUIRED return CDATA #REQUIRED>
