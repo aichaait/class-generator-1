@@ -1,12 +1,11 @@
-Plan :
-I.	Mapping Objet Relationnel :
-	Definition :
-	Pourquoi utilise ORM :
-•	Le modèle relationnel et le modèle objet
-•	Inadéquation d'impédance entre le modèle objet et le modèle relationnel
-	Avantages et inconvenients :
-	Les deferentes outiles existant :
-II.	Module et Metamodule :
-	Definition de module et metamodule
-	dtd comme un meta module 
-	xml comme un module
+Function we use to Convert XML to JAVA:
+    1 - public void printClassFromXmlIntoJavaFile(Element monClass)
+    2 - public void printExtendIfWeHaveIt(Element monClass ,FileWriter JavaFile)
+    3 - public void printClassesFromXmlIntoJavaFile(List<Element> list)
+    4 - public void printAttributesDeClass(Element monClass, FileWriter JavaFile)
+    5 - public void printMethodesDeClass(Element monClass, FileWriter JavaFile)
+    6 - public void printGettersAndSetters(Element monClass, FileWriter JavaFile)
+
+General Functions : 
+    1 - public static String capitalize(String inputString)
+
