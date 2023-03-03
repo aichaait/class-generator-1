@@ -45,12 +45,30 @@
 
 
 <!ELEMENT classes (class+)>
-    <!ELEMENT class (attributes, functions)>
-    <!ATTLIST class name CDATA #REQUIRED superClass CDATA #IMPLIED relation CDATA #IMPLIED>
-        <!ELEMENT attributes (attribute+)>
+
+
+    <!ELEMENT class (attributes?, methodes?,associations?)>
+    <!ATTLIST class name ID #REQUIRED superClass CDATA #IMPLIED relation CDATA #IMPLIED>
+        
+        <!ELEMENT attributes (attribute*)>
             <!ELEMENT attribute EMPTY>
             <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>
-        <!ELEMENT functions (function+)>
-            <!ELEMENT function EMPTY>
-            <!ATTLIST function name CDATA #REQUIRED return CDATA #REQUIRED>
+
+
+        <!ELEMENT methodes (methode*)>
+            <!ELEMENT methode (param*)>
+            <!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>
+                <!ELEMENT param EMPTY>
+                <!ATTLIST param name CDATA #REQUIRED type CDATA #REQUIRED>
+
+
+        <!ELEMENT associations (association*)>
+            <!ELEMENT association (classArrivee,roleDepart,roleArrivee)>
+            <!ATTLIST association type CDATA #REQUIRED>
+                <!ELEMENT classArrivee EMPTY>
+                <!ATTLIST classArrivee name IDREF #REQUIRED>
+                <!ELEMENT roleDepart EMPTY>
+                <!ATTLIST roleDepart name CDATA #REQUIRED>
+                <!ELEMENT roleArrivee EMPTY>
+                <!ATTLIST roleArrivee name CDATA #REQUIRED>
    

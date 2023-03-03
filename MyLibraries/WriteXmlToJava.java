@@ -86,13 +86,15 @@ public class WriteXmlToJava {
 
 
     public void printMethodesDeClass(Element monClass, FileWriter JavaFile){
-        List<Element> listDesMethodes = monClass.getChildren("functions").get(0).getChildren("function");
+        List<Element> listDesMethodes = monClass.getChildren("methodes").get(0).getChildren("methode");
         for (int i = 0; i < listDesMethodes.size(); i++) {
             Element maMethode = (Element) listDesMethodes.get(i);
             String name = maMethode.getAttributeValue("name");
             String type = maMethode.getAttributeValue("return");
             try{
-                JavaFile.write("\t"+"public "+type+" "+name+"()"+"{"+"\n");
+                JavaFile.write("\t"+"public "+type+" "+name+"(");
+                printLesParametres(maMethode, JavaFile);
+                JavaFile.write(")"+"{"+"\n");
                 JavaFile.write("\t"+"\t"+"//Ecrit ici"+"\n"+"\n");
                 JavaFile.write("\t"+"}"+"\n");
             }catch(Exception e){
@@ -102,7 +104,24 @@ public class WriteXmlToJava {
         }
 
     }
+    public void printLesParametres(Element maMethode, FileWriter JavaFile){
+        List<Element> listDesParametres = maMethode.getChildren("param");
+        for (int i = 0; i < listDesParametres.size(); i++) {
+            Element monParametre = (Element) listDesParametres.get(i);
+            String name = monParametre.getAttributeValue("name");
+            String type = monParametre.getAttributeValue("type");
+            try{
+                JavaFile.write(type+" "+name);
+                if(i != listDesParametres.size()-1){
+                    JavaFile.write(",");
+                }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
 
+            }
+        }
+
+    }
 
 
 
