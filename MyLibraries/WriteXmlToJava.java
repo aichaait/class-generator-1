@@ -93,7 +93,9 @@ public class WriteXmlToJava {
             String type = maMethode.getAttributeValue("return");
             try{
                 JavaFile.write("\t"+"public "+type+" "+name+"(");
+
                 printLesParametres(maMethode, JavaFile);
+                
                 JavaFile.write(")"+"{"+"\n");
                 JavaFile.write("\t"+"\t"+"//Ecrit ici"+"\n"+"\n");
                 JavaFile.write("\t"+"}"+"\n");
