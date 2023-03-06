@@ -12,6 +12,7 @@ public class WriteXmlToJava {
 
             JavaFile.write("public class "+capitalize(className));
             printExtendIfWeHaveIt(monClass, JavaFile);
+        
             JavaFile.write(" {"+"\n");
             printAttributesDeClass(monClass, JavaFile);
             printGettersAndSetters(monClass, JavaFile);
@@ -28,7 +29,11 @@ public class WriteXmlToJava {
 
 
     public void printExtendIfWeHaveIt(Element monClass ,FileWriter JavaFile){
+        
         String superClass = monClass.getAttributeValue("superClass");
+        if(superClass == null){
+            return;
+        }
         if(!superClass.equals("")){
             try{
                 JavaFile.write(" extends "+ capitalize(superClass));

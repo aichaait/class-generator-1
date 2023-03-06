@@ -4,7 +4,7 @@
 
 <classes>
     
-    <class name = "class1" superClass ="" >
+    <class name = "class1" >
         <attributes>
             <attribute name = "attribute1" value = "1" type = "int" />
             <attribute name = "attribute2" value = "mohamed" type = "String" />
@@ -53,8 +53,10 @@
         <associations>
             <association type ="aggregation">
                 <classArrivee name ="class3" />
-                <roleDepart name ="1" />
-                <roleArrivee name ="*" />
+                <roleDepart name ="derictreur" />
+                <roleArrivee name ="employee" />
+                <multiplicityDepart min ="1" max ="1" />
+                <multiplicityArrivee min ="0" max ="*" />
             </association>
         
         </associations>

@@ -48,7 +48,7 @@
 
 
     <!ELEMENT class (attributes?, methodes?,associations?)>
-    <!ATTLIST class name ID #REQUIRED superClass CDATA #IMPLIED relation CDATA #IMPLIED>
+    <!ATTLIST class name ID #REQUIRED superClass IDREFS #IMPLIED>
         
         <!ELEMENT attributes (attribute*)>
             <!ELEMENT attribute EMPTY>
@@ -63,7 +63,7 @@
 
 
         <!ELEMENT associations (association*)>
-            <!ELEMENT association (classArrivee,roleDepart,roleArrivee)>
+            <!ELEMENT association (classArrivee,roleDepart,roleArrivee,multiplicityDepart,multiplicityArrivee)>
             <!ATTLIST association type CDATA #REQUIRED>
                 <!ELEMENT classArrivee EMPTY>
                 <!ATTLIST classArrivee name IDREF #REQUIRED>
@@ -71,4 +71,8 @@
                 <!ATTLIST roleDepart name CDATA #REQUIRED>
                 <!ELEMENT roleArrivee EMPTY>
                 <!ATTLIST roleArrivee name CDATA #REQUIRED>
-   
+                <!ELEMENT multiplicityDepart EMPTY>
+                <!ATTLIST multiplicityDepart min CDATA #REQUIRED max CDATA #REQUIRED>
+                <!ELEMENT multiplicityArrivee EMPTY>
+                <!ATTLIST multiplicityArrivee min CDATA #REQUIRED max CDATA #REQUIRED>
+
