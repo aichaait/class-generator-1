@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "LesChoixPourGenerations",
+      "request": "launch",
+      "mainClass": "Interfaces.LesChoixPourGenerations",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
       "name": "NombreDesClasses",
       "request": "launch",
       "mainClass": "Interface.NombreDesClasses",
