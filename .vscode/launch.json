@@ -3,6 +3,41 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Interface",
+      "request": "launch",
+      "mainClass": "testing.Interface",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
+      "name": "NombreDesClass",
+      "request": "launch",
+      "mainClass": "Interfaces.NombreDesClass",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
+      "name": "LesAttribuesDeClass",
+      "request": "launch",
+      "mainClass": "Interfaces.LesAttribuesDeClass",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
+      "name": "MyPanel",
+      "request": "launch",
+      "mainClass": "testing.MyPanel",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
+      "name": "MyFrame",
+      "request": "launch",
+      "mainClass": "testing.MyFrame",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
       "name": "LesChoixPourGenerations",
       "request": "launch",
       "mainClass": "Interfaces.LesChoixPourGenerations",
