@@ -23,7 +23,7 @@ public class Interface  extends JFrame {
         userInput.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
 
-        button.setBounds(150,230,100, 30);  
+        button.setBounds(200,300,100, 30);  
         button.setBackground(new java.awt.Color(204, 204, 204));
         
         //TODO add action listener to button to pass to the next interface

@@ -21,7 +21,7 @@ public class InterfaceTrois extends JFrame{
       
         JButton button = new JButton("Next");//creating instance of JButton 
         
-        Titre.setBounds(10,10,200,30);
+        Titre.setBounds(10,10,250,30);
 
         nomAttributeLabel.setBounds(20,50,200,30);
         nomAttributeLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12));
@@ -39,13 +39,13 @@ public class InterfaceTrois extends JFrame{
         valeurAttribute.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
        
-        button.setBounds(200,200,100, 30);  
+        button.setBounds(200,300,100, 30);  
         button.setBackground(new java.awt.Color(204, 204, 204));
         
         //TODO 
         button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Interface deux = new Interface();
+                InterfaceQuatre quatre = new InterfaceQuatre();
                 dispose();
             }
 
