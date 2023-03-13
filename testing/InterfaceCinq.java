@@ -1,6 +1,10 @@
 package testing;
-import javax.swing.*; 
-import java.awt.*; 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField; 
+
+
 public class InterfaceCinq extends JFrame{  
         // JFrame this;  
         InterfaceCinq(){  
@@ -18,7 +22,7 @@ public class InterfaceCinq extends JFrame{
       
         JButton button = new JButton("Next");//creating instance of JButton 
         
-        Titre.setBounds(10,10,200,30);
+        Titre.setBounds(10,10,300,30);
 
         nomDeParametreLabel.setBounds(20,50,200,30);
         nomDeParametreLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12));
@@ -36,7 +40,7 @@ public class InterfaceCinq extends JFrame{
         //TODO 
         button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // InterfaceSix i = new InterfaceSix();
+                InterfaceSix i = new InterfaceSix();
                 dispose();
 
             }

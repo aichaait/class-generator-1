@@ -1,6 +1,11 @@
 package testing;
 
-import javax.swing.*; 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField; 
+
+
 public class InterfaceTrois extends JFrame{  
         // JFrame this;  
         InterfaceTrois(){  

@@ -1,7 +1,11 @@
 package testing;
 
-import javax.swing.*; 
-import java.awt.*; 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField; 
+
+
 public class InterfaceQuatre extends JFrame {  
         // JFrame this;  
         InterfaceQuatre(){  
@@ -72,7 +76,5 @@ public class InterfaceQuatre extends JFrame {
 
         }  
   
-public static void main(String[] args) {  
-    new InterfaceQuatre();  
-    }  
+
 }

@@ -1,8 +1,12 @@
 package testing;
+
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField; 
+
+
 public class Interface  extends JFrame {  
         // JFrame f;  
         Interface(){  
