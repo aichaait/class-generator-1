@@ -39,7 +39,7 @@
         </attributes>
         <methodes>
 
-            <methode name = "methode1" return ="Boolean">
+            <methode name = "methode1" return ="class3">
                 <param name = "param1" type = "int" />
                 <param name = "param2" type = "String" />
                 <param name = "param3" type = "float" />
