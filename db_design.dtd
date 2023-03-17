@@ -52,17 +52,17 @@
         
         <!ELEMENT attributes (attribute*)>
             <!ELEMENT attribute EMPTY>
-            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>
+            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type (int | double | String | Boolean | float | IDREFS) #REQUIRED>
 
 
         <!ELEMENT methodes (methode*)>
             <!ELEMENT methode (param*)>
-            <!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>
+            <!ATTLIST methode name CDATA #REQUIRED return (int | double | String | Boolean | float | IDREFS) #REQUIRED>
                 <!ELEMENT param EMPTY>
-                <!ATTLIST param name CDATA #REQUIRED type CDATA #REQUIRED>
+                <!ATTLIST param name CDATA #REQUIRED type (int | double | String | Boolean | float | IDREFS) #REQUIRED>
 
 
-        <!ELEMENT associations (association*)>
+        <!--
             <!ELEMENT association (classArrivee,roleDepart,roleArrivee,multiplicityDepart,multiplicityArrivee)>
             <!ATTLIST association type CDATA #REQUIRED>
                 <!ELEMENT classArrivee EMPTY>
@@ -75,4 +75,14 @@
                 <!ATTLIST multiplicityDepart min CDATA #REQUIRED max CDATA #REQUIRED>
                 <!ELEMENT multiplicityArrivee EMPTY>
                 <!ATTLIST multiplicityArrivee min CDATA #REQUIRED max CDATA #REQUIRED>
+
+
+                classArrivee,roleDepart,roleArrivee,multiplicityDepart,multiplicityArrivee sont des attributes d'element association
+
+        -->
+        <!ELEMENT associations (association*)>
+
+            <!ELEMENT association EMPTY>
+                <!ATTLIST association type (simple | aggregation | composition) #REQUIRED classArrivee IDREF #REQUIRED role CDATA #REQUIRED multiplicity CDATA #REQUIRED>
+
 

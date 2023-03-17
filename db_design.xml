@@ -25,7 +25,10 @@
 
         </methodes>
         <associations>
+            <association type="aggregation" classArrivee="class2" role="role1" multiplicity ="*"/>
+            <association type="composition" classArrivee="class3" role="role2" multiplicity ="1"/>
         </associations>
+
 
     </class>
     <class name = "class2" superClass ="class1" >
@@ -51,14 +54,8 @@
             
         </methodes>
         <associations>
-            <association type ="aggregation">
-                <classArrivee name ="class3" />
-                <roleDepart name ="derictreur" />
-                <roleArrivee name ="employee" />
-                <multiplicityDepart min ="1" max ="1" />
-                <multiplicityArrivee min ="0" max ="*" />
-            </association>
-        
+            <association type="simple" classArrivee="class3" role="role3" multiplicity ="*"/>
+            <association type="aggregation" classArrivee="class4" role="role4" multiplicity ="1"/>
         </associations>
 
     </class>
