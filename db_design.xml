@@ -39,7 +39,7 @@
         </attributes>
         <methodes>
 
-            <methode name = "methode1" return ="class3">
+            <methode name = "methode1" return ="Class3">
                 <param name = "param1" type = "int" />
                 <param name = "param2" type = "String" />
                 <param name = "param3" type = "float" />
@@ -78,6 +78,8 @@
             </methode>
             
         </methodes>
+        <associations>
+        </associations>
     </class>
     <class name = "class4" superClass ="class3" >
         <attributes>
@@ -98,6 +100,8 @@
             </methode>
             
         </methodes>
+        <associations>
+        </associations>
     </class>
 
 </classes>

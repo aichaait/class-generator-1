@@ -47,19 +47,19 @@
 <!ELEMENT classes (class+)>
 
 
-    <!ELEMENT class (attributes?, methodes?,associations?)>
+    <!ELEMENT class (attributes, methodes,associations)>
     <!ATTLIST class name ID #REQUIRED superClass IDREFS #IMPLIED>
         
         <!ELEMENT attributes (attribute*)>
             <!ELEMENT attribute EMPTY>
-            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type (int | double | String | Boolean | float | IDREFS) #REQUIRED>
+            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>
 
 
         <!ELEMENT methodes (methode*)>
             <!ELEMENT methode (param*)>
-            <!ATTLIST methode name CDATA #REQUIRED return (int | double | String | Boolean | float | IDREFS) #REQUIRED>
+            <!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>
                 <!ELEMENT param EMPTY>
-                <!ATTLIST param name CDATA #REQUIRED type (int | double | String | Boolean | float | IDREFS) #REQUIRED>
+                <!ATTLIST param name CDATA #REQUIRED type CDATA #REQUIRED>
 
 
         <!--

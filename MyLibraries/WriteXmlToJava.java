@@ -9,6 +9,7 @@ public class WriteXmlToJava {
         try{
             String className = monClass.getAttributeValue("name");
             FileWriter  JavaFile = new FileWriter(capitalize(className)+".java" );
+            JavaFile.write("import java.util.*;\n");
 
             JavaFile.write("public class "+capitalize(className));
             printExtendIfWeHaveIt(monClass, JavaFile);
@@ -159,30 +160,24 @@ public class WriteXmlToJava {
     public void printConstructorDeClass(Element monClass, FileWriter JavaFile){
        printLeNomEtLesParametresDeConstructeur(monClass, JavaFile);
        printContenueDeConstructeur(monClass, JavaFile);
+       try{
+       JavaFile.write("}");
+       }catch(Exception e){
+        System.out.println(e.getMessage());
+
+    }
 
     }
 
     public void printLeNomEtLesParametresDeConstructeur(Element monClass, FileWriter JavaFile){
+        Element extend;
         try{
-        JavaFile.write("\t"+"public "+capitalize(monClass.getAttributeValue("name"))+"(");
-            List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
-            String associationType,classDArrivee,multiplicity;
-            for (Element association : listDesAssociation) {
-                associationType = association.getAttributeValue("type");
-                classDArrivee = association.getAttributeValue("classArrivee");
-                multiplicity = association.getAttributeValue("multiplicity");
-                if(associationType.equals("compsition")){
-                    if(multiplicity.equals("1")){
-                        JavaFile.write(classDArrivee+" "+classDArrivee.toLowerCase());
-                    }else{
-                        JavaFile.write("List<"+classDArrivee+"> "+classDArrivee.toLowerCase()+"s");
-                    }
-                    if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1){
-                        JavaFile.write(",");
-                    }
-                }
-                
+
+            JavaFile.write("\t"+"public "+capitalize(monClass.getAttributeValue("name"))+"(");
+            if(!monClass.getAttribute("superClass").equals("")){
+                getLesCompositionsDeClass( JavaFile);
             }
+            getLesCompositionsDeClass(monClass, JavaFile);
             JavaFile.write(")"+"{"+"\n");
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -190,15 +185,52 @@ public class WriteXmlToJava {
         }
 
     }
+    public void getLesCompositionsDeClass(Element monClass, FileWriter JavaFile){
+        List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
+        String associationType,classDArrivee,multiplicity;
+        try{
+        for (Element association : listDesAssociation) {
+            associationType = association.getAttributeValue("type");
+            classDArrivee = association.getAttributeValue("classArrivee");
+            multiplicity = association.getAttributeValue("multiplicity");
+            if(associationType.equals("composition")){
+                if(multiplicity.equals("1")){
+
+                    JavaFile.write(capitalize(classDArrivee)+" "+classDArrivee.toLowerCase());
+                }else{
+                    JavaFile.write("List<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s");
+                }
+                if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1){
+                    JavaFile.write(",");
+                }
+            }
+            
+            
+        }
+    }catch(Exception e){
+        System.out.println(e.getMessage());
+    }
+
+
+
+            
+        }
+
+
+    
+
     public void printContenueDeConstructeur(Element monClass, FileWriter JavaFile){
         List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
         String associationType,classDArrivee,multiplicity;
         try{
+            if(listDesAssociation.size() == 0){
+                return;
+            }
             for (Element association : listDesAssociation) {
                 associationType = association.getAttributeValue("type");
                 classDArrivee = association.getAttributeValue("classArrivee");
                 multiplicity = association.getAttributeValue("multiplicity");
-                if(associationType.equals("compsition")){
+                if(associationType.equals("composition")){
                     if(multiplicity.equals("1")){
                         JavaFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+" = "+classDArrivee.toLowerCase()+";"+"\n");
                     }else{
@@ -206,9 +238,9 @@ public class WriteXmlToJava {
                     }
                 }else if(associationType.equals("aggregation")){
                     if(multiplicity.equals("1")){
-                        JavaFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+" = new "+classDArrivee+"();"+"\n");
+                        JavaFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+" = new "+capitalize(classDArrivee)+"();"+"\n");
                     }else{
-                        JavaFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+"s = new ArrayList<"+classDArrivee+">();"+"\n");
+                        JavaFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+"s = new ArrayList<"+capitalize(classDArrivee)+">();"+"\n");
                         
                     }
                 }
@@ -224,20 +256,23 @@ public class WriteXmlToJava {
     public void printLesVariableDautreClasses(Element monClass ,FileWriter JavaFile){
         List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
         String classDArrivee,multiplicity;
+        if(listDesAssociation.size() == 0){
+            return;
+        }
         for (Element association : listDesAssociation) {
             classDArrivee = association.getAttributeValue("classArrivee");
             multiplicity = association.getAttributeValue("multiplicity");
             
             if(multiplicity.equals("1")){
                 try{
-                    JavaFile.write("\t"+"private "+classDArrivee+" "+classDArrivee.toLowerCase()+";"+"\n");
+                    JavaFile.write("\t"+"private "+capitalize(classDArrivee)+" "+classDArrivee.toLowerCase()+";"+"\n");
                 }catch(Exception e){
                     System.out.println(e.getMessage());
     
                 }
             }else{
                 try{
-                    JavaFile.write("\t"+"private List<"+classDArrivee+"> "+classDArrivee.toLowerCase()+"s;"+"\n");
+                    JavaFile.write("\t"+"private List<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s;"+"\n");
                 }catch(Exception e){
                     System.out.println(e.getMessage());
 
