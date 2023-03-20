@@ -170,12 +170,17 @@ public class WriteXmlToJava {
     }
 
     public void printLeNomEtLesParametresDeConstructeur(Element monClass, FileWriter JavaFile){
-        Element extend;
         try{
 
             JavaFile.write("\t"+"public "+capitalize(monClass.getAttributeValue("name"))+"(");
             if(!monClass.getAttribute("superClass").equals("")){
-                getLesCompositionsDeClass( JavaFile);
+                for (Element parent : monClass.getParentElement().getChildren("class")) {
+                    if(parent.getAttributeValue("name").equals(monClass.getAttributeValue("superClass"))){
+                        getLesCompositionsDeClass(parent, JavaFile);
+                    }
+                }
+                    
+                
             }
             getLesCompositionsDeClass(monClass, JavaFile);
             JavaFile.write(")"+"{"+"\n");
