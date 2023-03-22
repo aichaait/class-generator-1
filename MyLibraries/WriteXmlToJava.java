@@ -167,6 +167,7 @@ public class WriteXmlToJava {
 
     }
 
+    
     }
 
     public void printLeNomEtLesParametresDeConstructeur(Element monClass, FileWriter JavaFile){
