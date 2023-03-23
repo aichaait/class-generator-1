@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "class-generator-1_eae5fa44"
+    },
+    {
+      "type": "java",
+      "name": "LesAttribuesDeClass",
+      "request": "launch",
+      "mainClass": "Interfaces.LesAttribuesDeClass",
+      "projectName": "class-generator-1_eae5fa44"
+    },
+    {
+      "type": "java",
       "name": "InterfaceSept",
       "request": "launch",
       "mainClass": "testing.InterfaceSept",
