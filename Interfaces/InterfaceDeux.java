@@ -31,7 +31,7 @@ public class InterfaceDeux extends JFrame{
             JTextField nombreAssociations = new JTextField();  
 
 
-            JButton button = new JButton("Next");//creating instance of JButton 
+            MyButton_2 button = new MyButton_2("Next");//creating instance of JButton 
 
             nomDeClassLabel.setBounds(20,50,200,30);
             nomDeClassLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12));
