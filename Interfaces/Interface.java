@@ -1,5 +1,7 @@
-package testing;
+package Interfaces;
 
+
+import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +19,7 @@ public class Interface  extends JFrame {
         JLabel Title = new JLabel("Generateur de code");
         JLabel label = new JLabel("Nombre des classes :");        
         JTextField userInput = new JTextField();  
-        JButton button=new JButton("Next");//creating instance of JButton  
+        MyButton button = new MyButton("Generer");
         Title.setBounds(100,50,250,30);
         Title.setFont(new java.awt.Font("Nirmala UI", 3, 20));
         Title.setForeground(new java.awt.Color(0, 0, 153));
@@ -28,7 +30,7 @@ public class Interface  extends JFrame {
 
 
         button.setBounds(200,300,100, 30);  
-        button.setBackground(new java.awt.Color(204, 204, 204));
+        button.setBackground(Color.BLUE);
         
         //TODO add action listener to button to pass to the next interface
         button.addActionListener(new java.awt.event.ActionListener() {

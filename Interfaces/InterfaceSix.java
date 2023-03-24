@@ -1,16 +1,22 @@
-package testing;
+package Interfaces;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField; 
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border; 
 
-public class InterfaceSix extends JFrame{  
+public class InterfaceSix extends JPanel{  
         // JFrame this;  
         InterfaceSix(){  
+            Border blackline = BorderFactory.createTitledBorder("Generateur de code");
+
         // this=new JFrame();//creating instance of JFrame  
-        this.setTitle("Generateur de code");
+        
+        setBorder(blackline);
         JLabel Titre = new JLabel("Les Associations de Classe n° 1:");
         Titre.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         Titre.setForeground(new java.awt.Color(102, 102, 102));
@@ -77,7 +83,8 @@ public class InterfaceSix extends JFrame{
         button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InterfaceSept i7 = new InterfaceSept();
-                dispose();
+                setVisible(false);
+                
 
             }
         });    
@@ -107,8 +114,16 @@ public class InterfaceSix extends JFrame{
         this.setSize(500,500);//400 width and 500 height  
         this.setLayout(null);//using no layout managers  
         this.setVisible(true);//making the frame visible  
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }  
+        public static void main(String[] args) {
+            InterfaceSix i6 = new InterfaceSix();
+            JFrame f = new JFrame();
+            f.add(i6);
+            f.setSize(500,500);//400 width and 500 height
+            f.setLayout(null);//using no layout managers
+            f.setVisible(true);//making the frame visible
+            
+        }
   
  
 }
