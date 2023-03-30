@@ -3,7 +3,12 @@
   "configurations": [
     {
       "type": "java",
-Mohamed
+      "name": "App",
+      "request": "launch",
+      "mainClass": "Interfaces.App",
+    },
+    {
+      "type": "java",
       "name": "InterfaceSix",
       "request": "launch",
       "mainClass": "Interfaces.InterfaceSix",
@@ -22,6 +27,8 @@ Mohamed
       "request": "launch",
       "mainClass": "Interfaces.index",
       "projectName": "class-generator_fa8fa219"
+    },
+    {
       "name": "Main",
       "request": "launch",
       "mainClass": "Main",
@@ -33,7 +40,6 @@ Mohamed
       "request": "launch",
       "mainClass": "Interfaces.LesAttribuesDeClass",
       "projectName": "class-generator-1_eae5fa44"
-main
     },
     {
       "type": "java",

@@ -27,6 +27,7 @@
         <associations>
             <association type="aggregation" classArrivee="class2" role="role1" multiplicity ="*"/>
             <association type="composition" classArrivee="class3" role="role2" multiplicity ="1"/>
+            
         </associations>
 
 
