@@ -1,4 +1,4 @@
-package MyLibraries;
+package MyLibraries.Convertion;
 import org.jdom2.*;
 import java.util.List;
 import java.io.FileWriter;
@@ -6,19 +6,21 @@ import java.io.FileWriter;
 
 public class WriteXmlToJava {
     // fonction generale
-    public void  printClassesFromXmlIntoJavaFile(List<Element> list){
+    public boolean  printClassesFromXmlIntoJavaFile(List<Element> list){
         try{
             for (int i = 0; i < list.size(); i++) {
                 Element monClass = (Element) list.get(i);
                 printClassFromXmlIntoJavaFile(monClass);
             }
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
+            return false;
 
         }
     }
     //depth 1 
-    public void printClassFromXmlIntoJavaFile(Element monClass){
+    public boolean printClassFromXmlIntoJavaFile(Element monClass){
         try{
             String className = monClass.getAttributeValue("name");
             FileWriter  JavaFile = new FileWriter(capitalize(className)+".java" );
@@ -35,8 +37,10 @@ public class WriteXmlToJava {
             printMethodesDeClass(monClass, JavaFile);
             JavaFile.write("}"+"\n");
             JavaFile.close();
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
+            return false;
 
         }
     }
@@ -44,18 +48,21 @@ public class WriteXmlToJava {
 
 
     // depth 2
-    public void printExtendIfWeHaveIt(Element monClass ,FileWriter JavaFile){
+    public boolean printExtendIfWeHaveIt(Element monClass ,FileWriter JavaFile){
         
         String superClass = monClass.getAttributeValue("superClass");
-        if(superClass == null){
-            return;
-        }
-        if(!superClass.equals("")){
-            try{
-                JavaFile.write(" extends "+ capitalize(superClass));
-            }catch(Exception e){
-                System.out.println(e);
+        try{
+            if(superClass == null){
+                return false;
             }
+            if(!superClass.equals("")){
+                JavaFile.write(" extends "+ capitalize(superClass));
+            }
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+
         }
     }
 

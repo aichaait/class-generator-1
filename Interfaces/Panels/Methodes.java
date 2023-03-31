@@ -1,11 +1,15 @@
-package Interfaces.Panels;
+package Panels;
 
-
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import Pieces.MyButton;
 
 public class Methodes extends JPanel{
 
-    private javax.swing.JButton jButton1;
+    private MyButton jButton1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -17,16 +21,25 @@ public class Methodes extends JPanel{
 
 
 
-    Methodes(){
+    public Methodes(){
+        //init
+        jButton1 = new MyButton("Add");
+        jComboBox2 = new JComboBox<>();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel5  = new JLabel();
+        jLabel6 = new JLabel();
+        jTextField1 = new JTextField();
+        jTextField3 = new JTextField();
+
+
         jLabel2.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel2.setText("Methodes du Classe (smiya n°1):");
+        jLabel2.setText("Methodes du Classe:");
 
         jButton1.setBackground(new java.awt.Color(92, 179, 230));
-        jButton1.setText("Next");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, java.awt.Color.blue));
 
-        jLabel5.setText("Nome Meth n°1  :");
+        jLabel5.setText("Nom  :");
 
         jLabel1.setText("Nombre Parameter :");
 
@@ -47,14 +60,14 @@ public class Methodes extends JPanel{
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(113, 113, 113))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(216, 216, 216)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -87,4 +100,3 @@ public class Methodes extends JPanel{
     }
     
 }
-

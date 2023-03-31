@@ -1,6 +1,15 @@
-package Interfaces;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
+
+import Panels.CardPanels;
+import Pieces.Footer;
+import Pieces.Header;
+import Pieces.MenuBar;
+import Pieces.SideBar;
 
 public class App extends JFrame {
  
@@ -15,9 +24,36 @@ public class App extends JFrame {
      * Initializes the JFrame components.
      */
     private void initComponents() {
+        header = new Header();
+        header.setPreferredSize(new Dimension(100,100));
+
+        myMenuBar = new MenuBar();
+        setJMenuBar(myMenuBar);
+
+        
+        
+
+        cardPanels = new CardPanels();
+        cardPanels.setPreferredSize(new Dimension(300,500));
+
+        mySideBar = new SideBar();
+        mySideBar.setBackground(Color.WHITE);
+        mySideBar.setPreferredSize(new Dimension(300,500));
+
+
+        myFooter = new Footer();
+        myFooter.nextButton.addActionListener(e-> ((CardLayout)cardPanels.getLayout()).next(cardPanels));
+
+        
+        add(cardPanels, BorderLayout.CENTER);
+        add(header, BorderLayout.NORTH);
+        add(mySideBar,BorderLayout.WEST);
+        add(myFooter,BorderLayout.SOUTH);
+
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UML Generator");
-        pack();
+        setSize(1200, 800);
     }
  
     /**
@@ -26,32 +62,22 @@ public class App extends JFrame {
      * @param args not used
      */
     public static void main(String args[]) {
-        //exception handling
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
         //create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new App().setVisible(true);
+
             }
         });
 
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    Header header;
+    MenuBar myMenuBar;
+    CardPanels cardPanels;
+    SideBar mySideBar;
+    Footer myFooter;
+    // End of variables declaration//GEN-END:variables
  
 }

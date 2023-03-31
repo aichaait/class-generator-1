@@ -1,4 +1,4 @@
-package MyLibraries;
+package MyLibraries.Convertion;
 
 public class WriteXmlToCpp {
     

@@ -7,7 +7,7 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaders;
 
-import MyLibraries.WriteXmlToJava;
+import MyLibraries.Convertion.WriteXmlToJava;
 
 class Main {
     public static void main(String[] args) {
