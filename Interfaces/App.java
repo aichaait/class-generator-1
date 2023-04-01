@@ -6,12 +6,15 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import Panels.CardPanels;
+import Panels.Methodes;
+import Panels.nombreDesClass;
 import Pieces.Footer;
 import Pieces.Header;
 import Pieces.MenuBar;
 import Pieces.SideBar;
 
 public class App extends JFrame {
+    int currentPage = 1;
  
     /**
      * Constructs a new App instance.
@@ -42,7 +45,23 @@ public class App extends JFrame {
 
 
         myFooter = new Footer();
-        myFooter.nextButton.addActionListener(e-> ((CardLayout)cardPanels.getLayout()).next(cardPanels));
+        myFooter.nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(currentPage == 1){
+                    //get the number of class from the first page
+                    int nombreDeClass = ((nombreDesClass)cardPanels.getComponents()[0]).getNombreDeClass();
+                    
+                    //print the number of class in component 2
+                    ((CardLayout)cardPanels.getLayout()).show(cardPanels, "attributes");
+                    ((Methodes)cardPanels.getComponents()[1]).getErroeField().setText("Le nombre est "+nombreDeClass);
+                     
+                }else if(currentPage == 2){
+                    ((CardLayout)cardPanels.getLayout()).show(cardPanels, "methodes");
+                
+                }
+
+            }
+    });
 
         
         add(cardPanels, BorderLayout.CENTER);

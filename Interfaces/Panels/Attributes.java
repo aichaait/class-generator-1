@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.border.Border;
+import javax.swing.SwingConstants;
 
 import Pieces.MyButton;
 
@@ -20,7 +20,7 @@ public class Attributes extends JPanel{
         }
         private void initComponents() {
 
-            titreDePage = new JLabel();
+            titreDePanel = new JLabel();
             nomLabel = new JLabel();
             typeLabel = new JLabel();
             valeurLabel = new JLabel();
@@ -28,12 +28,13 @@ public class Attributes extends JPanel{
             inputValeur = new JTextField();
             choixDesType = new JComboBox<>();
             addButton = new MyButton("Add");
+            
     
-            titreDePage.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
-            titreDePage.setText("Attributes De Class");
-            titreDePage.setMaximumSize(new java.awt.Dimension(300, 40));
-            titreDePage.setMinimumSize(new java.awt.Dimension(300, 40));
-            titreDePage.setPreferredSize(new java.awt.Dimension(300, 40));
+            titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
+            titreDePanel.setText("Attributes De Class");
+            titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
+
+            
     
             nomLabel.setText("Nom :");
     
@@ -70,7 +71,7 @@ public class Attributes extends JPanel{
                                 .addComponent(typeLabel)
                                 .addComponent(nomLabel))
                             .addGap(200, 200, 200)
-                            .addComponent(titreDePage, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(titreDePanel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(123, Short.MAX_VALUE))
                 .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -81,7 +82,7 @@ public class Attributes extends JPanel{
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(18, 18, 18)
-                    .addComponent(titreDePage)
+                    .addComponent(titreDePanel)
                     .addGap(27, 27, 27)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addComponent(nomLabel)
@@ -117,7 +118,7 @@ public class Attributes extends JPanel{
     //variables declaration
     private MyButton addButton;
     private JComboBox<String> choixDesType;
-    private JLabel titreDePage;
+    private JLabel titreDePanel;
     private JLabel nomLabel;
     private JLabel typeLabel;
     private JLabel valeurLabel;
