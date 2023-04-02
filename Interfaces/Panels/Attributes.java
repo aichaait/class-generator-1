@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
+
 import Pieces.MyButton;
 
 public class Attributes extends JPanel{
