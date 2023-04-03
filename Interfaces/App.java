@@ -5,7 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import Panels.Attributes;
 import Panels.CardPanels;
+import Panels.LesNomsDesClasses;
 import Panels.Methodes;
 import Panels.nombreDesClass;
 import Pieces.Footer;
@@ -16,16 +18,11 @@ import Pieces.SideBar;
 public class App extends JFrame {
     int currentPage = 1;
  
-    /**
-     * Constructs a new App instance.
-     */
+    
     public App() {
         initComponents();
     }
  
-    /**
-     * Initializes the JFrame components.
-     */
     private void initComponents() {
         header = new Header();
         header.setPreferredSize(new Dimension(100,100));
@@ -48,17 +45,15 @@ public class App extends JFrame {
         myFooter.nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(currentPage == 1){
-                    //get the number of class from the first page
-                    int nombreDeClass = ((nombreDesClass)cardPanels.getComponents()[0]).getNombreDeClass();
-                    
-                    //print the number of class in component 2
-                    ((CardLayout)cardPanels.getLayout()).show(cardPanels, "attributes");
-                    ((Methodes)cardPanels.getComponents()[1]).getErroeField().setText("Le nombre est "+nombreDeClass);
+                    toLesNomsDesClassesPages();
                      
                 }else if(currentPage == 2){
                     ((CardLayout)cardPanels.getLayout()).show(cardPanels, "methodes");
-                
                 }
+                else if(currentPage == 3){
+                    ((CardLayout)cardPanels.getLayout()).show(cardPanels, "attributes");
+                }
+
 
             }
     });
@@ -74,12 +69,22 @@ public class App extends JFrame {
         setTitle("UML Generator");
         setSize(1200, 800);
     }
+
+    public void toLesNomsDesClassesPages() {
+        //get the number of class from the first page
+        int nombreDeClass = ((nombreDesClass)cardPanels.getComponents()[0]).getNombreDeClass();
+        if(nombreDeClass == -1){
+            ((nombreDesClass)cardPanels.getComponents()[0]).getErrorsField().setText("Il faut donner un nombre puis clicker sur SUBMIT");
+        }else{
+                         
+            //print the number of class in component 2
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "2");
+            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Le nombre est "+nombreDeClass);
+        }
+       
+    }
  
-    /**
-     * Launches the App.
-     * 
-     * @param args not used
-     */
+    
     public static void main(String args[]) {
         //create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {

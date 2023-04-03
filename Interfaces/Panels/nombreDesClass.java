@@ -18,9 +18,12 @@ import Pieces.MyButton;
 public class nombreDesClass extends JPanel {
 
     
-    private int nombreDeClass;
-
+    private int nombreDeClass = -1;
     
+    
+    public JTextArea getErrorsField() {
+        return errorsField;
+    }
     public int getNombreDeClass() {
         return nombreDeClass;
     }
@@ -38,7 +41,7 @@ public class nombreDesClass extends JPanel {
         nombreDeclassLabel = new JLabel();
         inputNombreDeClass = new JTextField();
         jScrollPane1 = new JScrollPane();
-        errorField = new JTextArea();
+        errorsField = new JTextArea();
         submitButton = new MyButton("submit");
 
 
@@ -48,17 +51,17 @@ public class nombreDesClass extends JPanel {
 
         nombreDeclassLabel.setText("Combien Des Class Tu Veux Creer :");
 
-        errorField.setEditable(false);
-        errorField.setColumns(20);
-        errorField.setRows(5);
-        errorField.setBackground(new Color(242,242,242));
-        errorField.setBorder(null);
-        jScrollPane1.setViewportView(errorField);
+        errorsField.setEditable(false);
+        errorsField.setColumns(20);
+        errorsField.setRows(5);
+        errorsField.setBackground(new Color(242,242,242));
+        errorsField.setBorder(null);
+        jScrollPane1.setViewportView(errorsField);
 
 
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                submitButtonActionPerformed(evt);
+                submitButtonActionPerformed();
             }
         });
 
@@ -100,21 +103,21 @@ public class nombreDesClass extends JPanel {
                 .addContainerGap(170, Short.MAX_VALUE))
         );
     }
-    private void submitButtonActionPerformed(ActionEvent evt){
+    private void submitButtonActionPerformed(){
         String nombreDeClassStr = inputNombreDeClass.getText();
         if(nombreDeClassStr.equals("")){
-            errorField.setText("Veuillez Entrer Un Nombre");
+            errorsField.setText("Veuillez Entrer Un Nombre");
         }else{
             try{
                 nombreDeClass = Integer.parseInt(nombreDeClassStr);
                 if(nombreDeClass <= 0){
-                    errorField.setText("Veuillez Entrer Un Nombre Superieur A 0");
+                    errorsField.setText("Veuillez Entrer Un Nombre Superieur A 0");
                 }else{
-                    errorField.setText("Nombre Valide : click button next To Continue");
+                    errorsField.setText("Nombre Valide : click button next To Continue");
                     inputNombreDeClass.setText("");
                 }
             }catch(Exception e){
-                errorField.setText("Veuillez Entrer Un Nombre");
+                errorsField.setText("Veuillez Entrer Un Nombre");
             }
         }
     }                     
@@ -124,7 +127,7 @@ public class nombreDesClass extends JPanel {
     private JLabel titreDePanel;
     private JLabel nombreDeclassLabel;
     private JScrollPane jScrollPane1;
-    private JTextArea errorField;
+    private JTextArea errorsField;
     private JTextField inputNombreDeClass;
     private MyButton submitButton ;
     // End of variables declaration                   

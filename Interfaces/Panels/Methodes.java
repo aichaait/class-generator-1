@@ -24,8 +24,8 @@ public class Methodes extends JPanel {
 
     
   
-    public JTextArea getErroeField() {
-        return erroeField;
+    public JTextArea getErrorsField() {
+        return errorsField;
     }
 
     public Methodes() {
@@ -45,7 +45,7 @@ public class Methodes extends JPanel {
         nonRadioButton = new JRadioButton();
         addButton = new MyButton("Add");
         jScrollPane1 = new javax.swing.JScrollPane();
-        erroeField = new javax.swing.JTextArea();
+        errorsField = new javax.swing.JTextArea();
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
         titreDePanel.setText("Methodes De Class : ");
@@ -76,11 +76,11 @@ public class Methodes extends JPanel {
         buttonGroup1.add(nonRadioButton);
         nonRadioButton.setText("Non");
 
-        erroeField.setColumns(20);
-        erroeField.setRows(5);
-        erroeField.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
-        erroeField.setBackground(new Color(242,242,242));
-        jScrollPane1.setViewportView(erroeField);
+        errorsField.setColumns(20);
+        errorsField.setRows(5);
+        errorsField.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
+        errorsField.setBackground(new Color(242,242,242));
+        jScrollPane1.setViewportView(errorsField);
         
 
         GroupLayout layout = new GroupLayout(this);
@@ -156,7 +156,7 @@ public class Methodes extends JPanel {
     private JRadioButton nonRadioButton;
     private JTextField inputNom;
     private String[] listDesTypes = new String[] { "Item 1", "Item 2", "Item 3", "Item 4" };
-    private JTextArea erroeField;
+    private JTextArea errorsField;
     private JScrollPane jScrollPane1;
     // End of variables declaration                   
 }
