@@ -18,17 +18,17 @@ import Pieces.MyButton;
 public class nombreDesClass extends JPanel {
 
     
-    private int nombreDeClass = -1;
+    private int nombreDesClasses = -1;
     
     
     public JTextArea getErrorsField() {
         return errorsField;
     }
-    public int getNombreDeClass() {
-        return nombreDeClass;
+    public int getNombreDesClasses() {
+        return nombreDesClasses;
     }
-    public void setNombreDeClass(int nombreDeClass) {
-        this.nombreDeClass = nombreDeClass;
+    public void setNombreDesClasses(int nombreDesClasses) {
+        this.nombreDesClasses = nombreDesClasses;
     }
 
     
@@ -38,8 +38,8 @@ public class nombreDesClass extends JPanel {
     private void initComponents() {
 
         titreDePanel = new JLabel();
-        nombreDeclassLabel = new JLabel();
-        inputNombreDeClass = new JTextField();
+        nombreDesClassesLabel = new JLabel();
+        inputnombreDesClasses = new JTextField();
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         submitButton = new MyButton("submit");
@@ -49,7 +49,7 @@ public class nombreDesClass extends JPanel {
         titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
         titreDePanel.setText("Initialisation");
 
-        nombreDeclassLabel.setText("Combien Des Class Tu Veux Creer :");
+        nombreDesClassesLabel.setText("Combien Des Class Tu Veux Creer :");
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);
@@ -77,9 +77,9 @@ public class nombreDesClass extends JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputNombreDeClass, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputnombreDesClasses, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(nombreDeclassLabel)
+                                .addComponent(nombreDesClassesLabel)
                                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 494, GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(74, Short.MAX_VALUE))
                 .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -93,9 +93,9 @@ public class nombreDesClass extends JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(titreDePanel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
-                .addComponent(nombreDeclassLabel)
+                .addComponent(nombreDesClassesLabel)
                 .addGap(38, 38, 38)
-                .addComponent(inputNombreDeClass, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputnombreDesClasses, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96)
                 .addComponent(submitButton)
                 .addGap(26, 26, 26)
@@ -104,17 +104,17 @@ public class nombreDesClass extends JPanel {
         );
     }
     private void submitButtonActionPerformed(){
-        String nombreDeClassStr = inputNombreDeClass.getText();
-        if(nombreDeClassStr.equals("")){
+        String nombreDesClassesStr = inputnombreDesClasses.getText();
+        if(nombreDesClassesStr.equals("")){
             errorsField.setText("Veuillez Entrer Un Nombre");
         }else{
             try{
-                nombreDeClass = Integer.parseInt(nombreDeClassStr);
-                if(nombreDeClass <= 0){
+                nombreDesClasses = Integer.parseInt(nombreDesClassesStr);
+                if(nombreDesClasses <= 0){
                     errorsField.setText("Veuillez Entrer Un Nombre Superieur A 0");
                 }else{
                     errorsField.setText("Nombre Valide : click button next To Continue");
-                    inputNombreDeClass.setText("");
+                    inputnombreDesClasses.setText("");
                 }
             }catch(Exception e){
                 errorsField.setText("Veuillez Entrer Un Nombre");
@@ -125,10 +125,10 @@ public class nombreDesClass extends JPanel {
 
     // Variables declaration - do not modify                     
     private JLabel titreDePanel;
-    private JLabel nombreDeclassLabel;
+    private JLabel nombreDesClassesLabel;
     private JScrollPane jScrollPane1;
     private JTextArea errorsField;
-    private JTextField inputNombreDeClass;
+    private JTextField inputnombreDesClasses;
     private MyButton submitButton ;
     // End of variables declaration                   
 }

@@ -2,6 +2,10 @@
 package Panels;
 
 import java.awt.Color;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -21,12 +25,35 @@ import Pieces.MyButton;
 
 
 public class Methodes extends JPanel {
+    String[] listDesTypesDeRetoure = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
+    List<String> listDesTypes = new ArrayList<>(Arrays.asList(listDesTypesDeRetoure));
+    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesDeRetoure);
+
+    
 
     
   
+    public String[] getListDesTypesDeRetoure() {
+        return listDesTypesDeRetoure;
+    }
+    public void setListDesTypesDeRetoure(String[] listDesTypesDeRetoure) {
+        this.listDesTypesDeRetoure = listDesTypesDeRetoure;
+    }
     public JTextArea getErrorsField() {
         return errorsField;
     }
+    public void addType(String myType) {
+        listDesTypes.add(myType);
+        listDesTypes.toArray(listDesTypesDeRetoure);
+
+    }
+    public void addToTypes(String[] lesClasses) {
+        for (String unClass : lesClasses) {
+            model.addElement(unClass);    
+        }
+    }
+
+
 
     public Methodes() {
         initComponents();
@@ -57,7 +84,7 @@ public class Methodes extends JPanel {
         inputNom.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
 
 
-        choixDesTypes.setModel(new DefaultComboBoxModel<>(listDesTypes));
+        choixDesTypes.setModel(model);
         choixDesTypes.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),1));
         choixDesTypes.setBackground(Color.decode("#F8F8FF"));
         choixDesTypes.setForeground(Color.decode("#4A00E0"));
@@ -155,7 +182,6 @@ public class Methodes extends JPanel {
     private JRadioButton ouiRadioButton;
     private JRadioButton nonRadioButton;
     private JTextField inputNom;
-    private String[] listDesTypes = new String[] { "Item 1", "Item 2", "Item 3", "Item 4" };
     private JTextArea errorsField;
     private JScrollPane jScrollPane1;
     // End of variables declaration                   

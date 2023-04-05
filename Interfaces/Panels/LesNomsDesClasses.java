@@ -3,6 +3,10 @@ package Panels;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -16,11 +20,38 @@ import javax.swing.SwingConstants;
 import Pieces.MyButton;
 
 public class LesNomsDesClasses extends JPanel {
-
+    String nomDeClass;
+    int nombreDesClasses;
+    List<String> lesNomDesClass = new ArrayList<String>();
     
+    public List<String> getLesNomDesClass() {
+        return lesNomDesClass;
+    }
+
+    public void setLesNomDesClass(List<String> lesNomDesClass) {
+        this.lesNomDesClass = lesNomDesClass;
+    }
+
+    public String getNomDeClass() {
+        return nomDeClass;
+    }
+
+    public void setNomDeClass(String nomDeClass) {
+        this.nomDeClass = nomDeClass;
+    }
+
+    public int getNombreDesClasses() {
+        return nombreDesClasses;
+    }
+
+    public void setNombreDesClasses(int nombreDesClasses) {
+        this.nombreDesClasses = nombreDesClasses;
+    }
+
     public JTextArea getErrorsField() {
         return errorsField;
     }
+    
 
     public LesNomsDesClasses() {
         initComponents();
@@ -50,6 +81,7 @@ public class LesNomsDesClasses extends JPanel {
 
         addButton.setText("Add");
 
+        errorsField.setEditable(false);
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
@@ -96,7 +128,29 @@ public class LesNomsDesClasses extends JPanel {
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
-    }                                         
+    addButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt){
+            if(nombreDesClasses == 0){
+                errorsField.append("Done you press next to Continue\n");
+            }else{
+                nomDeClass = inputNom.getText();
+                addClass(nomDeClass);
+                nombreDesClasses--;
+            }
+            
+        }
+    });
+    }   
+    public void addClass(String nom) {
+            if(nom == null || nom.equals("")){
+                errorsField.append("il faut donner un nom\n");
+            }
+            else{
+                errorsField.append(nom+" Added\n");
+                lesNomDesClass.add(nom);
+            }
+    }
+                                          
 
 
     // Variables declaration - do not modify                     
