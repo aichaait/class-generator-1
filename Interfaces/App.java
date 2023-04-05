@@ -13,7 +13,7 @@ import Panels.Methodes;
 import Pieces.Footer;
 import Pieces.Header;
 import Pieces.MenuBar;
-import Pieces.SideBar;
+import Pieces.FilePanel;
 
 public class App extends JFrame {
     int currentPage = 1;
@@ -37,7 +37,7 @@ public class App extends JFrame {
         cardPanels = new CardPanels();
         cardPanels.setPreferredSize(new Dimension(300,500));
 
-        mySideBar = new SideBar();
+        mySideBar = new FilePanel();
         mySideBar.setBackground(Color.WHITE);
         mySideBar.setPreferredSize(new Dimension(300,500));
 
@@ -125,7 +125,7 @@ public class App extends JFrame {
     Header header;
     MenuBar myMenuBar;
     CardPanels cardPanels;
-    SideBar mySideBar;
+    FilePanel mySideBar;
     Footer myFooter;
     // End of variables declaration//GEN-END:variables
  
