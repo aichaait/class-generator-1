@@ -131,13 +131,13 @@ public class LesNomsDesClasses extends JPanel {
     addButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt){
             if(nombreDesClasses == 0){
-                errorsField.append("Done you press next to Continue\n");
+                errorsField.append("Vous fini : press Next pour continue\n");
             }else{
                 nomDeClass = inputNom.getText();
                 addClass(nomDeClass);
                 nombreDesClasses--;
             }
-            
+            inputNom.setText("");
         }
     });
     }   

@@ -11,6 +11,8 @@ public class CardPanels extends JPanel {
     private Methodes methodesPage;
     private nombreDesClass nombreDeClassPage;
     private LesNomsDesClasses nomsDesClassesPage;
+    private ParametresDesMethodes parametresDesMethodesPage;
+    private End endPage;
 
     
     //end of variables declaration
@@ -25,6 +27,9 @@ public class CardPanels extends JPanel {
         methodesPage = new Methodes();
         nombreDeClassPage = new nombreDesClass();
         nomsDesClassesPage = new LesNomsDesClasses();
+        parametresDesMethodesPage = new ParametresDesMethodes();
+        endPage = new End();
+
         setLayout(new CardLayout());
 
         
@@ -34,6 +39,8 @@ public class CardPanels extends JPanel {
         add(nomsDesClassesPage,"2");
         add(attributesPage, "3");
         add(methodesPage , "4");
+        add(parametresDesMethodesPage, "5");
+        add(endPage, "end");
 
         ((CardLayout) getLayout()).show(this, "1");
 

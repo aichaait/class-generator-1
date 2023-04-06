@@ -17,15 +17,21 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
 import Pieces.MyButton;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ParametresDesMethodes extends JPanel {
-        String[] listDesTypesParametres = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
-        List<String> listDesTypes = new ArrayList<>(Arrays.asList(listDesTypesParametres));
+        private String[] listDesTypesParametres = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
+        private String nom,type , nomDeCurrentMethode;
+        private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesParametres);
 
-        String nom,type;
+
+        
+        public String getNomDeCurrentMethode() {
+                return nomDeCurrentMethode;
+        }
+
+        public void setNomDeCurrentMethode(String nomDeCurrentMethode) {
+                this.nomDeCurrentMethode = nomDeCurrentMethode;
+        }
 
         public String getNom() {
                 return nom;
@@ -34,9 +40,10 @@ public class ParametresDesMethodes extends JPanel {
         public String getType() {
                 return type;
         }
-        public void addType(String myType) {
-                listDesTypes.add(myType);
-                listDesTypes.toArray(listDesTypesParametres);
+        public void addToTypes(String[] classArray) {
+               for (String myClass : classArray) {
+                          model.addElement(myClass);
+               }
         
         }
 
@@ -146,7 +153,7 @@ public ParametresDesMethodes() {
         if (nom.equals("")) {
             errorsField.setText("Le nom est obligatoire");
         } else {
-            errorsField.setText("");
+            errorsField.setText(type + " " + nom +" Added\n");
             inputNom.setText("");
             choixDesTypes.setSelectedIndex(0);
         }

@@ -19,9 +19,27 @@ import Pieces.MyButton;
 
 public class Attributes extends JPanel {
 
-    
+    private String nomDeCurrentClass;
 
    
+    public String getNomDeCurrentClass() {
+        return nomDeCurrentClass;
+    }
+
+
+
+    public void setNomDeCurrentClass(String nomDeCurrentClass) {
+        this.nomDeCurrentClass = nomDeCurrentClass;
+    }
+
+
+
+    public JLabel getTitreDePanel() {
+        return titreDePanel;
+    }
+
+
+
     public JTextArea getErrorsField() {
         return errorsField;
     }
@@ -46,10 +64,10 @@ public class Attributes extends JPanel {
         addButton = new MyButton("Add");
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
-        listDesTypesAttributes = new String[] { "Item 1", "Item 2", "Item 3", "Item 4" };
+        listDesTypesAttributes = new String[] { "Entier", "Reel", "Chaine", "Charactere", "Booleen" };
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
-        titreDePanel.setText("Attributes De Class: ");
+        titreDePanel.setText("Attributes De Class: "+nomDeCurrentClass);
         titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
 
         nomLabel.setText("Nom :");
@@ -76,6 +94,12 @@ public class Attributes extends JPanel {
         errorsField.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
         errorsField.setBackground(new Color(242,242,242));
         jScrollPane1.setViewportView(errorsField);
+
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed();
+            }
+        });
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -134,7 +158,25 @@ public class Attributes extends JPanel {
                 .addComponent(addButton)
                 .addGap(72, 72, 72))
         );
-    }// </editor-fold>                        
+    }
+    private void addButtonActionPerformed() {
+        String nom = inputNom.getText();
+        String type = choixDesTypes.getSelectedItem().toString();
+        String valeur = inputValeur.getText();
+        if(nom.equals("") || type.equals("")){
+            errorsField.setText("Veuillez remplir tous les champs");
+        }else{
+            if(valeur.equals("")){
+                errorsField.setText(type + " " + nom + "; Added");
+            }else{
+                errorsField.setText(type + " " + nom + " = " + valeur + "; Added");
+            }
+            inputNom.setText("");
+            inputValeur.setText("");
+            choixDesTypes.setSelectedIndex(0);
+        }
+    }
+                          
 
                                            
 

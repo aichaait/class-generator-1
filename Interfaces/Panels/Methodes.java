@@ -2,7 +2,6 @@
 package Panels;
 
 import java.awt.Color;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,14 +24,30 @@ import Pieces.MyButton;
 
 
 public class Methodes extends JPanel {
-    String[] listDesTypesDeRetoure = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
-    List<String> listDesTypes = new ArrayList<>(Arrays.asList(listDesTypesDeRetoure));
-    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesDeRetoure);
+    private String[] listDesTypesDeRetoure = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
+    private List<String> listDesTypes = new ArrayList<>(Arrays.asList(listDesTypesDeRetoure));
+    private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesDeRetoure);
+    private int hasParametres = -1;
+    private String nomDeCurrentClass = "";
+    
+    
 
     
 
     
   
+    public String getNomDeCurrentClass() {
+        return nomDeCurrentClass;
+    }
+    public void setNomDeCurrentClass(String nomDeCurrentClass) {
+        this.nomDeCurrentClass = nomDeCurrentClass;
+    }
+    public int getHasParametres() {
+        return hasParametres;
+    }
+    public JLabel getTitreDePanel() {
+        return titreDePanel;
+    }
     public String[] getListDesTypesDeRetoure() {
         return listDesTypesDeRetoure;
     }
@@ -103,11 +118,19 @@ public class Methodes extends JPanel {
         buttonGroup1.add(nonRadioButton);
         nonRadioButton.setText("Non");
 
+
+        errorsField.setEditable(false);
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
         errorsField.setBackground(new Color(242,242,242));
         jScrollPane1.setViewportView(errorsField);
+
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed();
+            }
+        });
         
 
         GroupLayout layout = new GroupLayout(this);
@@ -168,7 +191,26 @@ public class Methodes extends JPanel {
                 .addComponent(addButton)
                 .addGap(47, 47, 47))
         );
-    }                                                         
+    }      
+    private void addButtonActionPerformed(){
+        String nom = inputNom.getText();
+        String type = choixDesTypes.getSelectedItem().toString();
+        hasParametres = ouiRadioButton.isSelected() ? 1 : 0;
+        String errors = "";
+        if(nom.equals("")){
+            errors += "Nom est obligatoire";
+        }
+        if(errors.equals("")){
+            inputNom.setText("");
+            choixDesTypes.setSelectedIndex(0);
+            ouiRadioButton.setSelected(true);
+            nonRadioButton.setSelected(false);
+            errorsField.setText(nom + "Added With Type: " + type + " And Has Parametres: " + hasParametres);
+        }else{
+            errorsField.setText(errors);
+        }
+
+    }                                                   
 
 
     // Variables declaration - do not modify                     
