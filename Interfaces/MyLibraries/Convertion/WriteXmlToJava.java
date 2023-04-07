@@ -1,10 +1,40 @@
 package MyLibraries.Convertion;
-import org.jdom2.*;
-import java.util.List;
+import java.io.File;
 import java.io.FileWriter;
+import java.util.List;
+
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.input.sax.XMLReaders;
+
 
 
 public class WriteXmlToJava {
+
+
+    public void ConvertFromJava2XML(String xmlFilePath){
+            // read xml file usign jdom
+
+            SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
+            WriteXmlToJava jwrite = new WriteXmlToJava();
+            try {
+        
+                Document xmlDocument = builder.build(new File(xmlFilePath));
+                Element root = xmlDocument.getRootElement();
+                    
+        
+                List<Element> list = root.getChildren("class");
+    
+                jwrite.printClassesFromXmlIntoJavaFile(list);
+                    
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+        
+            }
+    
+        }
+        
     // fonction generale
     public boolean  printClassesFromXmlIntoJavaFile(List<Element> list){
         try{

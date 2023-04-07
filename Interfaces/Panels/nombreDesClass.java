@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Pieces.GTextField;
 import Pieces.MyButton;
 
 public class nombreDesClass extends JPanel {
@@ -39,23 +39,27 @@ public class nombreDesClass extends JPanel {
 
         titreDePanel = new JLabel();
         nombreDesClassesLabel = new JLabel();
-        inputNombreDesClasses = new JTextField();
+        inputNombreDesClasses = new GTextField(25);
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         submitButton = new MyButton("submit");
+        
 
-
-        titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
+        titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
         titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
         titreDePanel.setText("Initialisation");
 
         nombreDesClassesLabel.setText("Combien Des Class Tu Veux Creer :");
+        nombreDesClassesLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBackground(new Color(242,242,242));
         errorsField.setBorder(null);
+        errorsField.setFont(new java.awt.Font("Liberation Sans", 1, 18));
+        errorsField.setForeground(Color.RED);
         jScrollPane1.setViewportView(errorsField);
 
 
@@ -65,42 +69,40 @@ public class nombreDesClass extends JPanel {
             }
         });
 
-        GroupLayout layout = new GroupLayout(this);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(titreDePanel, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputNombreDesClasses, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(nombreDesClassesLabel)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 494, GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(74, Short.MAX_VALUE))
-                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(submitButton)
-                .addGap(167, 167, 167))
+                .addGap(20, 20, 20))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputNombreDesClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(titreDePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(350, 350, 350))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(nombreDesClassesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(300, 300, 300)))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(titreDePanel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
-                .addComponent(nombreDesClassesLabel)
-                .addGap(38, 38, 38)
-                .addComponent(inputNombreDesClasses, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+                .addComponent(titreDePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115)
+                .addComponent(nombreDesClassesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inputNombreDesClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(submitButton)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }
     private void submitButtonActionPerformed(){
@@ -129,7 +131,7 @@ public class nombreDesClass extends JPanel {
     private JLabel nombreDesClassesLabel;
     private JScrollPane jScrollPane1;
     private JTextArea errorsField;
-    private JTextField inputNombreDesClasses;
+    private GTextField inputNombreDesClasses;
     private MyButton submitButton ;
     // End of variables declaration                   
 }

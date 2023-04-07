@@ -1,9 +1,34 @@
 package MyLibraries.EcrireDansXML;
 
+import java.io.File;
+
 import org.jdom2.Document;
 import org.jdom2.Element;;
 
 public class LesFonction {
+
+    //function to create an folder if it doesn't exist
+    public void createFolder(String folderName){
+        File folder = new File(folderName);
+        if(!folder.exists()){
+            folder.mkdir();
+        }
+    }
+
+    public org.jdom2.output.XMLOutputter creerUnFichierXML(){
+        Element root = new Element("classes");
+        Document doc = new Document(root);
+        try{
+            org.jdom2.output.XMLOutputter sortie = new org.jdom2.output.XMLOutputter( org.jdom2.output.Format.getPrettyFormat());
+            sortie.output(doc, new java.io.FileOutputStream("classes.xml"));
+            return sortie;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        
+
+    }
 
     public boolean ajouterUnClass(String nom ,String superClass,Document XMLFile){
         try{

@@ -1,23 +1,36 @@
 package Pieces;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import java.util.*;
 
 public class MenuBar extends JMenuBar {
     List<String> data = new ArrayList<String>();
     public JFileChooser fileChooser;
+    JMenu apropoJMenu =  new JMenu(" Apropos ");
+    JMenu helpJMenu =  new JMenu(" Help ");
+    JMenu fileMenu = new JMenu("File  ");
+
+    
+
+    public JMenu getApropoJMenu() {
+        return apropoJMenu;
+    }
+
+    public JMenu getHelpJMenu() {
+        return helpJMenu;
+    }
+
     public MenuBar() {
         initComponents();
     }
@@ -28,7 +41,7 @@ public class MenuBar extends JMenuBar {
          // Create a file chooser
          fileChooser = new JFileChooser();
          fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
-        JMenu fileMenu = new JMenu("File  ");
+
 
         ImageIcon folderIcon = new ImageIcon(getClass().getResource("../images/folder.png"));
         JMenuItem newProjectItem = new JMenuItem("New project ", folderIcon);
@@ -41,6 +54,11 @@ public class MenuBar extends JMenuBar {
         ImageIcon openProjectIcon = new ImageIcon(getClass().getResource("../images/open.png"));
         JMenuItem openProjectItem = new JMenuItem("Open project ", openProjectIcon);
         fileMenu.add(openProjectItem);
+        openProjectItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openProjectItemActionPerformed();
+            }
+        });
 
         ImageIcon openFileIcon = new ImageIcon(getClass().getResource("../images/file.png"));
         JMenuItem openFileItem = new JMenuItem("Open file ", openFileIcon);
@@ -104,9 +122,29 @@ public class MenuBar extends JMenuBar {
             }
 
         }}});
+        
 
         add(fileMenu);
-        add(new JMenu(" Apropos "));
-        add(new JMenu(" Help "));
+        add(apropoJMenu);
+        add(helpJMenu);
+    }
+    private void openProjectItemActionPerformed() {
+    //choose a directory
+    
+            JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            chooser.setDialogTitle("Choose a folder");
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    
+            int returnValue = chooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                System.out.println("Selected folder: " + chooser.getSelectedFile().getPath());
+                FolderPanel.updateFolder(new File(chooser.getSelectedFile().getPath()));
+            }
+        
+    
+        
+
+
+
     }
 }

@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "frameDeTesting",
+      "request": "launch",
+      "mainClass": "Panels.frameDeTesting",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
+      "name": "FolderPanel",
+      "request": "launch",
+      "mainClass": "FolderPanel",
+      "projectName": "class-generator_fa8fa219"
+    },
+    {
+      "type": "java",
       "name": "App",
       "request": "launch",
       "mainClass": "App",

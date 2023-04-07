@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.event.MenuListener;
 
 import Panels.Attributes;
 import Panels.CardPanels;
@@ -12,9 +13,7 @@ import Panels.LesNomsDesClasses;
 import Panels.Methodes;
 import Panels.ParametresDesMethodes;
 import Panels.nombreDesClass;
-
-
-import Pieces.FilePanel;
+import Pieces.FolderPanel;
 import Pieces.Footer;
 import Pieces.Header;
 import Pieces.MenuBar;
@@ -43,7 +42,7 @@ public class App extends JFrame {
         cardPanels = new CardPanels();
         cardPanels.setPreferredSize(new Dimension(300,500));
 
-        mySideBar = new FilePanel();
+        mySideBar = new FolderPanel();
         mySideBar.setBackground(Color.WHITE);
         mySideBar.setPreferredSize(new Dimension(300,500));
 
@@ -99,6 +98,25 @@ public class App extends JFrame {
 
             }
     });
+    myMenuBar.getApropoJMenu().addMenuListener(new MenuListener() {
+        public void menuSelected(javax.swing.event.MenuEvent evt) {
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "apropos");
+        }
+        public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "1");
+        }
+        public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        }
+    });
+    myMenuBar.getHelpJMenu().addMenuListener(new MenuListener() {
+        public void menuSelected(javax.swing.event.MenuEvent evt) {
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "help");
+        }
+        public void menuDeselected(javax.swing.event.MenuEvent evt) {
+        }
+        public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        }
+    });
 
         
         add(cardPanels, BorderLayout.CENTER);
@@ -106,7 +124,7 @@ public class App extends JFrame {
         add(mySideBar,BorderLayout.WEST);
         add(myFooter,BorderLayout.SOUTH);
 
-
+        setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UML Generator");
         setSize(1200, 800);
@@ -167,7 +185,7 @@ public class App extends JFrame {
     Header header;
     MenuBar myMenuBar;
     CardPanels cardPanels;
-    FilePanel mySideBar;
+    FolderPanel mySideBar;
     Footer myFooter;
     // End of variables declaration//GEN-END:variables
  

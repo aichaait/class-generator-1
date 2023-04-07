@@ -1,0 +1,5 @@
+errorsField :
+    FontSize :  18
+    FontColor :  Red
+    FontFamily :  Liberation Sans
+    FontBold :  true
