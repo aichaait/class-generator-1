@@ -13,7 +13,7 @@ import org.jdom2.input.sax.XMLReaders;
 public class WriteXmlToJava {
 
 
-    public void ConvertFromJava2XML(String xmlFilePath){
+    public void ConvertFromXml2Java(String xmlFilePath){
             // read xml file usign jdom
 
             SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
