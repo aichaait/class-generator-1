@@ -13,7 +13,7 @@ import org.jdom2.input.sax.XMLReaders;
 public class WriteXmlToJava {
 
 
-    public void ConvertFromJava2XML(String xmlFilePath){
+    public void ConvertFromXml2Java(String xmlFilePath){
             // read xml file usign jdom
 
             SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
@@ -242,7 +242,7 @@ public class WriteXmlToJava {
         try{
 
             JavaFile.write("\t"+"public "+capitalize(monClass.getAttributeValue("name"))+"(");
-            getLesAggregarionsDeClass(monClass, JavaFile);
+            printLesVariablesDeSuperClass(monClass, JavaFile, true);
             JavaFile.write(")"+"{"+"\n");
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -250,46 +250,46 @@ public class WriteXmlToJava {
         }
 
     }
-    public void getLesAggregarionsDeClass(Element monClass, FileWriter JavaFile){
-        List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
-        String associationType,classDArrivee,multiplicity;
-        String superClass = monClass.getAttributeValue("superClass");
-        Element monSuperClass ;
-        try{
-            if(superClass != null){
-                for (Element classParent : monClass.getParentElement().getChildren("class")) {
-                    if (classParent.getAttributeValue("name").equals(superClass)){
-                        monSuperClass = classParent;
-                        getLesAggregarionsDeClass(monSuperClass, JavaFile);
-                        break;
-                    }
+    // public void getLesAggregarionsDeClass(Element monClass, FileWriter JavaFile){
+    //     List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
+    //     String associationType,classDArrivee,multiplicity;
+    //     String superClass = monClass.getAttributeValue("superClass");
+    //     Element monSuperClass ;
+    //     try{
+    //         if(superClass != null){
+    //             for (Element classParent : monClass.getParentElement().getChildren("class")) {
+    //                 if (classParent.getAttributeValue("name").equals(superClass)){
+    //                     monSuperClass = classParent;
+    //                     getLesAggregarionsDeClass(monSuperClass, JavaFile);
+    //                     break;
+    //                 }
                     
-                }
+    //             }
 
-            }else{
-                for (Element association : listDesAssociation) {
-                    associationType = association.getAttributeValue("type");
-                    classDArrivee = association.getAttributeValue("classArrivee");
-                    multiplicity = association.getAttributeValue("multiplicity");
-                        if(!associationType.equals("composition")){
-                            if(multiplicity.equals("1")){
+    //         }else{
+    //             for (Element association : listDesAssociation) {
+    //                 associationType = association.getAttributeValue("type");
+    //                 classDArrivee = association.getAttributeValue("classArrivee");
+    //                 multiplicity = association.getAttributeValue("multiplicity");
+    //                     if(!associationType.equals("composition")){
+    //                         if(multiplicity.equals("1")){
 
-                                JavaFile.write(capitalize(classDArrivee)+" "+classDArrivee.toLowerCase());
-                            }else{
-                                JavaFile.write("List<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s");
-                            }
-                        if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1){
-                            JavaFile.write(",");
-                            }
-                        }
+    //                             JavaFile.write(capitalize(classDArrivee)+" "+classDArrivee.toLowerCase());
+    //                         }else{
+    //                             JavaFile.write("List<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s");
+    //                         }
+    //                     if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1 ){
+    //                         JavaFile.write(",");
+    //                         }
+    //                     }
             
             
-                }
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
+    //             }
+    //         }
+    //     }catch(Exception e){
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
 
 
     
@@ -337,12 +337,12 @@ public class WriteXmlToJava {
                 for (Element classParent : monClass.getParentElement().getChildren("class")) {
                     if (classParent.getAttributeValue("name").equals(superClass)){
                         monSuperClass = classParent;
-                        printLesVariblesDeSuper(monSuperClass, JavaFile);
+                        printLesVariablesDeSuperClass(monSuperClass, JavaFile,false);
                         break;
                     }
                     
                 }
-                
+                JavaFile.write(");"+"\n");
                
 
             }
@@ -370,19 +370,23 @@ public class WriteXmlToJava {
 	}
     
     // depth 4
-    public void printLesVariblesDeSuper(Element monClass, FileWriter JavaFile){
+    public void printLesVariablesDeSuperClass(Element monClass, FileWriter JavaFile,boolean withType){
         String superClass = monClass.getAttributeValue("superClass");
         Element monSuperClass ;
+
         try{
+            //check there is a super class
             if(superClass != null){
+                //get the super class
                 for (Element classParent : monClass.getParentElement().getChildren("class")) {
                     if (classParent.getAttributeValue("name").equals(superClass)){
                         monSuperClass = classParent;
-                        printLesVariblesDeSuper(monSuperClass, JavaFile);
+                        printLesVariablesDeSuperClass(monSuperClass, JavaFile,withType);
                         break;
                     }
-                    
                 }
+            }else{
+                //print the variables of the class
                 List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
                 String associationType,classDArrivee,multiplicity;
                 for (Element association : listDesAssociation) {
@@ -390,16 +394,22 @@ public class WriteXmlToJava {
                     classDArrivee = association.getAttributeValue("classArrivee");
                     multiplicity = association.getAttributeValue("multiplicity");
                     if(!associationType.equals("composition")){
-                        if(multiplicity.equals("1")){
-                            JavaFile.write("\t"+classDArrivee.toLowerCase());
-                        }else{
-                            JavaFile.write("\t"+classDArrivee.toLowerCase()+"s"+"\n");
-                        }
-                        if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1){
-                            JavaFile.write(",");
+                        //print the variable with type in the Constructor
+                        if(withType){
+                        
+                            if(multiplicity.equals("1")){
+                                JavaFile.write(capitalize(classDArrivee)+" "+classDArrivee.toLowerCase()+",");
+                            }else{
+                                JavaFile.write("List<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s,");
                             }
+                        }else{//print the variable without type in the Super
+                            if(multiplicity.equals("1")){
+                                JavaFile.write(classDArrivee.toLowerCase()+",");
+                            }else{
+                                JavaFile.write(classDArrivee.toLowerCase()+"s,");
+                            }
+                        }
                     }
-
                 }
             }
         }catch(Exception e){
