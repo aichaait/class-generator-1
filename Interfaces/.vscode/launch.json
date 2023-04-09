@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Testing",
+            "request": "launch",
+            "mainClass": "MyLibraries.Convertion.Testing",
+            "projectName": "Interfaces_be972c30"
+        },
+        {
+            "type": "java",
             "name": "frameDeTesting",
             "request": "launch",
             "mainClass": "Panels.frameDeTesting",
