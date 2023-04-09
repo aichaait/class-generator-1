@@ -278,7 +278,7 @@ public class WriteXmlToJava {
                             }else{
                                 JavaFile.write("List<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s");
                             }
-                        if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1){
+                        if(listDesAssociation.indexOf(association) != listDesAssociation.size()-1 ){
                             JavaFile.write(",");
                             }
                         }
