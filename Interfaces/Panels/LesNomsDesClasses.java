@@ -24,7 +24,7 @@ public class LesNomsDesClasses extends JPanel {
     String nomDeClass;
     int nombreDesClasses;
     List<String> lesNomDesClass = new ArrayList<String>();
-    private DefaultComboBoxModel model =  new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel<String> model =  new DefaultComboBoxModel<String>();
     
     public List<String> getLesNomDesClass() {
         return lesNomDesClass;
@@ -82,7 +82,7 @@ public class LesNomsDesClasses extends JPanel {
 
         superClassLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         superClassLabel.setText("Super Class");
-
+        model.addElement("aucun");
         superClassChoix.setModel(model);
         superClassChoix.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
         superClassChoix.setBackground(Color.WHITE);

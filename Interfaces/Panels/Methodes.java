@@ -3,18 +3,14 @@ package Panels;
 
 import java.awt.Color;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import Pieces.GTextField;
 import Pieces.MyButton;
@@ -26,6 +22,7 @@ public class Methodes extends JPanel {
     private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesDeRetoure);
     private int hasParametres = -1;
     private String nomDeCurrentClass = "";
+    private String nomDeCurrentMethode = "";
     
     
 
@@ -33,6 +30,9 @@ public class Methodes extends JPanel {
 
     
   
+    public String getNomDeCurrentMethode() {
+        return nomDeCurrentMethode;
+    }
     public String getNomDeCurrentClass() {
         return nomDeCurrentClass;
     }
@@ -93,7 +93,7 @@ public class Methodes extends JPanel {
 
         choixDesTypes.setModel(model);
         choixDesTypes.setBackground(Color.white);
-        choixDesTypes.setForeground(Color.black);
+        choixDesTypes.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
 
         typeDeRetourLabel.setText("Type De retour");
@@ -109,8 +109,7 @@ public class Methodes extends JPanel {
         ouiRadioButton.setFont(new java.awt.Font("Liberation Sans", 1, 14));
         
         
-        nonRadioButton.setForeground(Color.decode("#4A00E0"));
-        ouiRadioButton.setForeground(Color.decode("#4A00E0"));
+        
 
         buttonGroup1.add(nonRadioButton);
         nonRadioButton.setText("Non");
@@ -139,18 +138,18 @@ public class Methodes extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(700, 700, 700)
+                        .addGap(500, 500, 500)
                         .addComponent(ouiRadioButton)
                         .addGap(140, 140, 140)
                         .addComponent(nonRadioButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(690, 690, 690)
+                        .addGap(490, 490, 490)
                         .addComponent(parametresLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(800, 800, 800)
+                        .addGap(600, 600, 600)
                         .addComponent(nomLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(750, 750, 750)
+                        .addGap(550, 550, 550)
                         .addComponent(typeDeRetourLabel)))
                 .addContainerGap(195, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -163,14 +162,14 @@ public class Methodes extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(choixDesTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))))
+                        .addGap(120, 120, 120))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titreDePanel)
-                .addGap(20, 20, 20)
+                .addGap(35, 35, 35)
                 .addComponent(nomLabel)
                 .addGap(18, 18, 18)
                 .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,11 +190,11 @@ public class Methodes extends JPanel {
         );
     }      
     private void addButtonActionPerformed(){
-        String nom = inputNom.getText();
+        nomDeCurrentMethode = inputNom.getText();
         String type = choixDesTypes.getSelectedItem().toString();
         hasParametres = ouiRadioButton.isSelected() ? 1 : 0;
         String errors = "";
-        if(nom.equals("")){
+        if(nomDeCurrentMethode.equals("")){
             errors += "Nom est obligatoire";
         }
         if(errors.equals("")){
@@ -203,7 +202,7 @@ public class Methodes extends JPanel {
             choixDesTypes.setSelectedIndex(0);
             ouiRadioButton.setSelected(true);
             nonRadioButton.setSelected(false);
-            errorsField.setText(nom + "Added With Type: " + type + " And Has Parametres: " + hasParametres);
+            errorsField.setText(nomDeCurrentMethode + "Added With Type: " + type + " And Has Parametres: " + hasParametres);
         }else{
             errorsField.setText(errors);
         }

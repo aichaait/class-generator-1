@@ -1,21 +1,17 @@
 package Panels;
 
 import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.SwingConstants;
 
+import Pieces.GTextField;
 import Pieces.MyButton;
 
 public class ParametresDesMethodes extends JPanel {
@@ -25,6 +21,10 @@ public class ParametresDesMethodes extends JPanel {
 
 
         
+        public JLabel getTitreDePanel() {
+            return titreDePanel;
+        }
+
         public String getNomDeCurrentMethode() {
                 return nomDeCurrentMethode;
         }
@@ -40,11 +40,10 @@ public class ParametresDesMethodes extends JPanel {
         public String getType() {
                 return type;
         }
-        public void addToTypes(String[] classArray) {
-               for (String myClass : classArray) {
-                          model.addElement(myClass);
-               }
-        
+        public void addToTypes(String[] lesClasses) {
+            for (String unClass : lesClasses) {
+                model.addElement(unClass);    
+            }
         }
 
 public ParametresDesMethodes() {
@@ -55,37 +54,32 @@ public ParametresDesMethodes() {
 
         titreDePanel = new JLabel();
         nomLabel = new JLabel();
-        inputNom = new JTextField();
+        inputNom = new GTextField(25);
         typeLabel = new JLabel();
         addButton = new MyButton("Add");
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         choixDesTypes = new JComboBox<>();
 
-        titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
-        titreDePanel.setText("Ajouter Parametres : ");
-        titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
+        titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
+        titreDePanel.setText("Ajouter Parametres de : "+nomDeCurrentMethode);
 
-        nomLabel.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        nomLabel.setText("Nom : ");
+        nomLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
+        nomLabel.setText("Nom");
 
-        inputNom.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
-
-
-        typeLabel.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        typeLabel.setText("Type :");
+        typeLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
+        typeLabel.setText("Type");
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);
         errorsField.setRows(5);
-        errorsField.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
         errorsField.setBackground(new Color(242,242,242));
+        errorsField.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         jScrollPane1.setViewportView(errorsField);
 
         choixDesTypes.setModel(new DefaultComboBoxModel<>(listDesTypesParametres));
-        choixDesTypes.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),1));
-        choixDesTypes.setBackground(Color.decode("#F8F8FF"));
-        choixDesTypes.setForeground(Color.decode("#4A00E0"));
+        choixDesTypes.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
+        choixDesTypes.setBackground(Color.WHITE);
 
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt){
@@ -94,57 +88,49 @@ public ParametresDesMethodes() {
         });
 
 
-        GroupLayout layout = new GroupLayout(this);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(addButton)
-                                .addGap(115, 115, 115))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(82, 82, 82)
-                                                .addComponent(titreDePanel, GroupLayout.PREFERRED_SIZE, 422,
-                                                        GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(21, 21, 21)
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(typeLabel)
-                                                        .addComponent(nomLabel))
-                                                .addGap(94, 94, 94)
-                                                .addGroup(
-                                                        layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(inputNom, GroupLayout.DEFAULT_SIZE, 181,
-                                                                        Short.MAX_VALUE)
-                                                                .addComponent(choixDesTypes, 0, GroupLayout.DEFAULT_SIZE,
-                                                                        Short.MAX_VALUE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(31, 31, 31)
-                                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 409,
-                                                        GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(96, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addButton)
+                .addGap(75, 75, 75))
+            .addComponent(titreDePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(575, 575, 575)
+                        .addComponent(nomLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(575, 575, 575)
+                        .addComponent(typeLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(450, 450, 450)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputNom, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(choixDesTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(titreDePanel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(nomLabel)
-                                        .addComponent(inputNom, GroupLayout.PREFERRED_SIZE, 35,
-                                                GroupLayout.PREFERRED_SIZE))
-                                .addGap(110, 110, 110)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(typeLabel)
-                                        .addComponent(choixDesTypes, GroupLayout.PREFERRED_SIZE, 35,
-                                                GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                                .addComponent(addButton)
-                                .addGap(44, 44, 44)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titreDePanel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(nomLabel)
+                .addGap(18, 18, 18)
+                .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(typeLabel)
+                .addGap(33, 33, 33)
+                .addComponent(choixDesTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addComponent(addButton)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
     }
 
     private void addButtonActionPerformed() {
@@ -171,6 +157,6 @@ public ParametresDesMethodes() {
     private JLabel typeLabel;
     private JScrollPane jScrollPane1;
     private JTextArea errorsField;
-    private JTextField inputNom;
+    private GTextField inputNom;
     // End of variables declaration
 }

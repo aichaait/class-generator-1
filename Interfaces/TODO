@@ -3,3 +3,8 @@ errorsField :
     FontColor :  Red
     FontFamily :  Liberation Sans
     FontBold :  true
+
+
+BUGS:
+-----
+    Constructor variables are not working properly need to fix the  "," problem.
