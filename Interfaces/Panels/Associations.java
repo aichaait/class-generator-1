@@ -5,8 +5,8 @@ import javax.swing.DefaultComboBoxModel;
 import Pieces.GTextField;
 import Pieces.MyButton;
 
-public class AssociationsPage extends javax.swing.JPanel {
-    DefaultComboBoxModel<String> model =  new DefaultComboBoxModel<String>();
+public class Associations extends javax.swing.JPanel {
+    DefaultComboBoxModel<String> model =  new DefaultComboBoxModel<String>(new String[]{"t","r"});
 
     public void addToClasses(String[] classArray) {
         for (String myClass : classArray) {
@@ -15,7 +15,12 @@ public class AssociationsPage extends javax.swing.JPanel {
     }
         
    
-    public AssociationsPage() {
+    public javax.swing.JLabel getTitreDePanel() {
+        return titreDePanel;
+    }
+
+
+    public Associations() {
         initComponents();
     }
 
@@ -42,6 +47,7 @@ public class AssociationsPage extends javax.swing.JPanel {
 
         errorField.setColumns(20);
         errorField.setRows(5);
+        errorField.setEditable(false);
         jScrollPane1.setViewportView(errorField);
 
         
@@ -147,7 +153,20 @@ public class AssociationsPage extends javax.swing.JPanel {
     }// </editor-fold>                        
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        String type,multiplicy,role,classDarrivee;
+        type = choixDeType.getSelectedItem().toString();
+        multiplicy = etoileButton.isSelected() ? "*" : "1";
+        role = inputRole.getText();
+        classDarrivee = choixDeClassDarrivee.getSelectedItem().toString();
+
+        if(role.equals("")){
+            errorField.setText("Remplir touts les champs");
+        }else{
+            errorField.setText("type: "+type+"\n multiplicity: "+multiplicy+"\nrole: "+role+"\nClass D'arrivee: "+classDarrivee);
+        }
+        
+
+
     }                                        
                                             
 

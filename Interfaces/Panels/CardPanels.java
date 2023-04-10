@@ -12,6 +12,7 @@ public class CardPanels extends JPanel {
     private nombreDesClass nombreDeClassPage;
     private LesNomsDesClasses nomsDesClassesPage;
     private ParametresDesMethodes parametresDesMethodesPage;
+    private Associations associationsPage;
     private End endPage;
     private Apropos aproposPage;
     private Help helpPage;
@@ -30,6 +31,7 @@ public class CardPanels extends JPanel {
         nombreDeClassPage = new nombreDesClass();
         nomsDesClassesPage = new LesNomsDesClasses();
         parametresDesMethodesPage = new ParametresDesMethodes();
+        associationsPage = new Associations();
         endPage = new End();
         aproposPage = new Apropos();
         helpPage = new Help();
@@ -42,8 +44,10 @@ public class CardPanels extends JPanel {
         add(nombreDeClassPage, "1");
         add(nomsDesClassesPage,"2");
         add(attributesPage, "3");
-        add(methodesPage , "4");
-        add(parametresDesMethodesPage, "5");
+        add(associationsPage,"4");
+        add(methodesPage , "5");
+        add(parametresDesMethodesPage, "6");
+        
         add(endPage, "end");
         add(aproposPage, "apropos");
         add(helpPage, "help");

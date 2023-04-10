@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.event.MenuListener;
 
-import Panels.AssociationsPage;
+import Panels.Associations;
 import Panels.Attributes;
 import Panels.CardPanels;
 import Panels.LesNomsDesClasses;
@@ -95,15 +95,20 @@ public class App extends JFrame {
         }
         else if(currentPage == 3){
             dansAttributesPage();
-        }else if(currentPage == 4){
+        }else if (currentPage == 4){
+            dansAssociationsPage();
+        }
+        else if(currentPage == 5){
            dansMethodesPage();
-        }else if(currentPage == 5){
+        }else if(currentPage == 6){
             dansParametresDesMethodesPage();
         }
+        
         else if(currentPage == -1){
            dispose();               
         }
     }
+
 
     private void dansLeNombreDesClassesPage(int nombreDesClasses) {
         //get the number of class from the first page
@@ -128,9 +133,9 @@ public class App extends JFrame {
             String[] classesArray = new String[classes.size()];
             classesArray = classes.toArray(classesArray);
             //add the names of classes to the types used in Methodes and parameters
-            ((Methodes)cardPanels.getComponents()[3]).addToTypes(classesArray);
-            ((ParametresDesMethodes)cardPanels.getComponents()[4]).addToTypes(classesArray);
-            ((AssociationsPage)cardPanels.getComponents()[5]).addToClasses(classesArray);
+            ((Methodes)cardPanels.getComponents()[4]).addToTypes(classesArray);
+            ((ParametresDesMethodes)cardPanels.getComponents()[5]).addToTypes(classesArray);
+            // ((AssociationsPage)cardPanels.getComponents()[5]).addToClasses(classesArray);
 
 
             //set up the next page
@@ -148,29 +153,51 @@ public class App extends JFrame {
     }
     private void dansAttributesPage(){
          //we need to get the attributes of the current class
-         nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
-         ((Methodes)cardPanels.getComponents()[3]).getTitreDePanel().setText("Methodes De Class : "+nomDeCurrentClass);
-         //now we need to show the Methodes page for the current class
-         ((CardLayout)cardPanels.getLayout()).show(cardPanels, "4");
+        try{
+            nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
+            ((Associations)cardPanels.getComponents()[3]).getTitreDePanel().setText("Associations De Class : "+nomDeCurrentClass);
+            //now we need to show the Associations page for the current class
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "4");
          currentPage++;
+        }catch(Exception e){
+            ((Attributes)cardPanels.getComponents()[2]).getErrorsField().setText("Error: "+e.getMessage());
+
+        }
+         
      
+    }
+
+    private void dansAssociationsPage(){
+        try{
+            nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
+        }catch(Exception e){
+            ((Attributes)cardPanels.getComponents()[2]).getErrorsField().setText("Error: "+e.getMessage());
+
+        }
+        ((Methodes)cardPanels.getComponent(4)).getTitreDePanel().setText("Methodes De Class : "+nomDeCurrentClass);
+        ((CardLayout)cardPanels.getLayout()).show(cardPanels,"5");
+        currentPage++;
     }
     private void dansMethodesPage(){
         nombreDesClasses = ((nombreDesClass)cardPanels.getComponents()[0]).getNombreDesClasses();
-        currentClass++;
-        int hasParametres = ((Methodes)cardPanels.getComponents()[3]).getHasParametres();
+        int hasParametres = ((Methodes)cardPanels.getComponents()[4]).getHasParametres();
         if(hasParametres == 1){//if the methode has parametres we go to parameteres page
             //set the name of the current methode 
             myFooter.nextButton.setText("Back to Methodes");
-            ((ParametresDesMethodes)cardPanels.getComponents()[4]).getTitreDePanel().setText("Parametres De Methode : "+((Methodes)cardPanels.getComponents()[3]).getNomDeCurrentMethode());
-            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "5");
+            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres De Methode : "+((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode());
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "6");
             currentPage++;
         }else if (hasParametres == 0){
-            if(currentClass < nombreDesClasses){
-                nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
-                ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
-                ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
-                currentPage--;
+            if(currentClass < nombreDesClasses-1){
+                try{
+                    nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(++currentClass);
+                    ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
+                    ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
+                }catch(Exception e){
+                    ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText("Error: "+e.getMessage());
+                }
+                
+                currentPage = 3;
             }else{
                 //after we end with all the classes, we need to go back to the first page and reset the count of the
                 currentClass = 0;
@@ -179,14 +206,14 @@ public class App extends JFrame {
                 myFooter.nextButton.setText("Finish");
             }
         }else{
-            ((Methodes)cardPanels.getComponents()[3]).getErrorsField().setText("Error: hasParametres is not 0 or 1");
+            ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText("Error: hasParametres is not 0 or 1");
         }
     }
     private void dansParametresDesMethodesPage(){
         //were in the parametres page
         //we get back to methodes page
         myFooter.nextButton.setText("Next");
-        ((CardLayout)cardPanels.getLayout()).show(cardPanels, "4");
+        ((CardLayout)cardPanels.getLayout()).show(cardPanels, "5");
         currentPage--;
     }
 
