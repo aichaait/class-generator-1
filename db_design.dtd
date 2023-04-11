@@ -1,0 +1,88 @@
+<!--
+    symboles : 
+        lt : <
+        gt : >
+        amp : &
+        apos : '
+        quot : "
+        
+
+    <!ENTITY nom "valeur">
+    
+    <!ELEMENT NOM_ELEMENT (type)>
+    type :
+        #PCDATA : Texte
+        EMPTY : Vide
+        ANY : Tout
+        (type1, type2, ...) : Liste de types
+        (type1 | type2 | ...) : Choix de types
+
+    Quantificateur :
+        ? : 0 ou 1
+        + : 1 ou plus 
+        * : 0 ou plus
+
+
+    <!ATTLIST Nom_Elément Attribut Type Obligation Valeur-par-défaut>
+
+    Obligation :
+        #REQUIRED : Obligatoire
+        #IMPLIED : Optionnel
+        #FIXED : Valeur fixe
+        #PCDATA : Texte
+
+
+    type of attribute :
+        CDATA : Texte
+        ID : Identifiant unique
+        IDREF : Référence à un identifiant
+        IDREFS : Référence à plusieurs identifiants
+        ENTITY : Référence à une entité
+
+    
+    -->
+
+
+
+<!ELEMENT classes (class+)>
+
+
+    <!ELEMENT class (attributes, methodes,associations)>
+    <!ATTLIST class name ID #REQUIRED superClass IDREFS #IMPLIED>
+        
+        <!ELEMENT attributes (attribute*)>
+            <!ELEMENT attribute EMPTY>
+            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>
+
+
+        <!ELEMENT methodes (methode*)>
+            <!ELEMENT methode (param*)>
+            <!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>
+                <!ELEMENT param EMPTY>
+                <!ATTLIST param name CDATA #REQUIRED type CDATA #REQUIRED>
+
+
+        <!--
+            <!ELEMENT association (classArrivee,roleDepart,roleArrivee,multiplicityDepart,multiplicityArrivee)>
+            <!ATTLIST association type CDATA #REQUIRED>
+                <!ELEMENT classArrivee EMPTY>
+                <!ATTLIST classArrivee name IDREF #REQUIRED>
+                <!ELEMENT roleDepart EMPTY>
+                <!ATTLIST roleDepart name CDATA #REQUIRED>
+                <!ELEMENT roleArrivee EMPTY>
+                <!ATTLIST roleArrivee name CDATA #REQUIRED>
+                <!ELEMENT multiplicityDepart EMPTY>
+                <!ATTLIST multiplicityDepart min CDATA #REQUIRED max CDATA #REQUIRED>
+                <!ELEMENT multiplicityArrivee EMPTY>
+                <!ATTLIST multiplicityArrivee min CDATA #REQUIRED max CDATA #REQUIRED>
+
+
+                classArrivee,roleDepart,roleArrivee,multiplicityDepart,multiplicityArrivee sont des attributes d'element association
+
+        -->
+        <!ELEMENT associations (association*)>
+
+            <!ELEMENT association EMPTY>
+                <!ATTLIST association type (simple | aggregation | composition) #REQUIRED classArrivee IDREF #REQUIRED role CDATA #REQUIRED multiplicity CDATA #REQUIRED>
+
+
