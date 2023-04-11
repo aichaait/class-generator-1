@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 public class frameDeTesting {
     public static void main(String[] args) {
         JFrame f = new JFrame("Testing");
-        f.add(new AssociationsPage());
+        f.add(new Associations());
 
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
