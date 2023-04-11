@@ -9,7 +9,8 @@ public class Class2 extends Class1 {
 	private List<Class3> class3s;
 	private Class4 class4;
 	public Class2(List<Class2> class2s,){
-		super(		this.class3s = class3s;
+		super(class2s,);
+		this.class3s = class3s;
 		this.class4 = class4;
 	}
 	public int getAttribute4(){

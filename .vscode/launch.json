@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Panels.Main",
+      "projectName": "class-generator-3_c5a166c3"
+    },
+    {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "App",
+      "projectName": "class-generator-3_c5a166c3"
+    },
+    {
+      "type": "java",
       "name": "Testing",
       "request": "launch",
       "mainClass": "MyLibraries.Convertion.Testing",

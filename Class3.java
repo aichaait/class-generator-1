@@ -7,8 +7,8 @@ public class Class3 extends Class2 {
 	private double attribute4 = 3.00003;
 
 	public Class3(List<Class2> class2s,){
-		super(	class3s
-,	class4	}
+		super(class2s,);
+	}
 	public int getAttribute1(){
 		return this.attribute1;
 	}

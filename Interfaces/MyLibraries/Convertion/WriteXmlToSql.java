@@ -197,3 +197,4 @@ public class WriteXmlToSql {
 		return inputString.replace(inputString.charAt(0), capitalFirstLetter);
 	}
 }
+
