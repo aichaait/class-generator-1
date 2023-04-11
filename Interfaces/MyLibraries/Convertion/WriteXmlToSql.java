@@ -132,9 +132,9 @@ public class WriteXmlToSql {
             List<Element> listDesAssociations = monClass.getChildren("associations").get(0).getChildren("association");
             String classDArrivee,typeassociation;
             String className = monClass.getAttributeValue("name");
-            if(listDesAssociations.size() == 0){
-                return false;
-            }
+            /*if(listDesAssociations.size() == 0){
+                return ;
+            }*/
             for (Element association : listDesAssociations) {
                 classDArrivee = association.getAttributeValue("classArrivee");
                 typeassociation = association.getAttributeValue("type");
