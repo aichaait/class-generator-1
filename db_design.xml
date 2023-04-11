@@ -102,6 +102,9 @@
             
         </methodes>
         <associations>
+         <association type = "simple" classArrivee= "class2" role="tyata" multiplicity="1"/>
+          <association type = "aggregation" classArrivee= "class3" role="tyata" multiplicity="1"/>
+           <association type = "composition" classArrivee= "class4" role="tyata" multiplicity="1"/>
         </associations>
     </class>
 
