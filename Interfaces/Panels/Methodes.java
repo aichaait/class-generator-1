@@ -20,7 +20,7 @@ import Pieces.MyButton;
 public class Methodes extends JPanel {
     private String[] listDesTypesDeRetoure = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
     private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesDeRetoure);
-    private int hasParametres = -1;
+    private int hasParametres = 0;
     private String nomDeCurrentClass = "";
     private String nomDeCurrentMethode = "";
     
@@ -30,6 +30,9 @@ public class Methodes extends JPanel {
 
     
   
+    public MyButton getAddButton() {
+        return addButton;
+    }
     public String getNomDeCurrentMethode() {
         return nomDeCurrentMethode;
     }
@@ -107,6 +110,7 @@ public class Methodes extends JPanel {
         buttonGroup1.add(ouiRadioButton);
         ouiRadioButton.setText("Oui");
         ouiRadioButton.setFont(new java.awt.Font("Liberation Sans", 1, 14));
+        ouiRadioButton.setSelected(false);
         
         
         
@@ -114,6 +118,7 @@ public class Methodes extends JPanel {
         buttonGroup1.add(nonRadioButton);
         nonRadioButton.setText("Non");
         nonRadioButton.setFont(new java.awt.Font("Liberation Sans", 1, 14));
+        nonRadioButton.setSelected(true);
 
 
         errorsField.setEditable(false);
@@ -200,8 +205,8 @@ public class Methodes extends JPanel {
         if(errors.equals("")){
             inputNom.setText("");
             choixDesTypes.setSelectedIndex(0);
-            ouiRadioButton.setSelected(true);
-            nonRadioButton.setSelected(false);
+            ouiRadioButton.setSelected(false);
+            nonRadioButton.setSelected(true);
             errorsField.setText(nomDeCurrentMethode + "Added With Type: " + type + " And Has Parametres: " + hasParametres);
         }else{
             errorsField.setText(errors);

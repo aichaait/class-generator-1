@@ -6,7 +6,7 @@ import Pieces.GTextField;
 import Pieces.MyButton;
 
 public class Associations extends javax.swing.JPanel {
-    DefaultComboBoxModel<String> model =  new DefaultComboBoxModel<String>(new String[]{"t","r"});
+    DefaultComboBoxModel<String> model =  new DefaultComboBoxModel<String>();
 
     public void addToClasses(String[] classArray) {
         for (String myClass : classArray) {
@@ -25,6 +25,11 @@ public class Associations extends javax.swing.JPanel {
     }
 
                          
+    public MyButton getAddButton() {
+        return addButton;
+    }
+
+
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -70,8 +75,6 @@ public class Associations extends javax.swing.JPanel {
 
         roleLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         roleLabel.setText("Role");
-
-        inputRole.setText("inputRole");
 
         multiplicityLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         multiplicityLabel.setText("Multiplicity");
@@ -169,6 +172,32 @@ public class Associations extends javax.swing.JPanel {
 
     }                                        
                                             
+
+
+    public javax.swing.JComboBox<String> getChoixDeType() {
+        return choixDeType;
+    }
+
+
+    public javax.swing.JComboBox<String> getChoixDeClassDarrivee() {
+        return choixDeClassDarrivee;
+    }
+
+
+    public javax.swing.JRadioButton getEtoileButton() {
+        return etoileButton;
+    }
+
+
+    public javax.swing.JTextArea getErrorField() {
+        return errorField;
+    }
+
+
+    public GTextField getInputRole() {
+        return inputRole;
+    }
+
 
 
     // Variables declaration - do not modify                     

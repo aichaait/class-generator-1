@@ -24,6 +24,12 @@ public class Attributes extends JPanel {
 
 
 
+    public MyButton getAddButton() {
+        return addButton;
+    }
+
+
+
     public void setNomDeCurrentClass(String nomDeCurrentClass) {
         this.nomDeCurrentClass = nomDeCurrentClass;
     }
@@ -32,6 +38,24 @@ public class Attributes extends JPanel {
 
     public JLabel getTitreDePanel() {
         return titreDePanel;
+    }
+
+
+
+    public JComboBox<String> getChoixDesTypes() {
+        return choixDesTypes;
+    }
+
+
+
+    public GTextField getInputNom() {
+        return inputNom;
+    }
+
+
+
+    public GTextField getInputValeur() {
+        return inputValeur;
     }
 
 
@@ -96,11 +120,11 @@ public class Attributes extends JPanel {
         errorsField.setFont(new java.awt.Font("Liberation Sans", 0, 18));
         jScrollPane1.setViewportView(errorsField);
 
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed();
-            }
-        });
+        // addButton.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         addButtonActionPerformed();
+        //     }
+        // });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,23 +181,7 @@ public class Attributes extends JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }        
-    private void addButtonActionPerformed() {
-        String nom = inputNom.getText();
-        String type = choixDesTypes.getSelectedItem().toString();
-        String valeur = inputValeur.getText();
-        if(nom.equals("") || type.equals("")){
-            errorsField.setText("Veuillez remplir tous les champs");
-        }else{
-            if(valeur.equals("")){
-                errorsField.setText(type + " " + nom + "; Added");
-            }else{
-                errorsField.setText(type + " " + nom + " = " + valeur + "; Added");
-            }
-            inputNom.setText("");
-            inputValeur.setText("");
-            choixDesTypes.setSelectedIndex(0);
-        }
-    }
+    
                           
 
                                            

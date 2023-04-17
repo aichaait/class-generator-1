@@ -92,6 +92,7 @@ public class LesNomsDesClasses extends JPanel {
 
         nomLabel.setFont(new Font("Liberation Sans", 1, 18)); // NOI18N
         nomLabel.setText("donner le nom de class : ");
+        inputNom.setHorizontalAlignment(SwingConstants.CENTER);
 
         inputNom.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
 
@@ -183,7 +184,11 @@ public class LesNomsDesClasses extends JPanel {
                 lesNomDesClass.add(nom);
                 model.addElement(nom);
             }else{
-                errorsField.append(nom+" Added et Super Class est");
+                errorsField.append(nom+" Added et Super Class est "+superClass);
+                lesNomDesClass.add(nom);
+
+                model.addElement(nom);
+
                 
             }
     }

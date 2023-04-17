@@ -25,6 +25,7 @@ import Pieces.FolderPanel;
 import Pieces.Footer;
 import Pieces.Header;
 import Pieces.MenuBar;
+import Pieces.MyButton;
 import MyLibraries.EcrireDansXML.*;;
 
 public class App extends JFrame {
@@ -39,6 +40,7 @@ public class App extends JFrame {
     private Element racine = new Element("classes");
     private Document doc = new Document(racine); 
     private LesFonctionDeXML Writer = new LesFonctionDeXML();
+    private Element elementClass;
 
  
     
@@ -47,6 +49,7 @@ public class App extends JFrame {
     }
  
     private void initComponents() {
+
         header = new Header();
         header.setPreferredSize(new Dimension(100,100));
 
@@ -58,12 +61,60 @@ public class App extends JFrame {
 
         cardPanels = new CardPanels();
         cardPanels.setPreferredSize(new Dimension(300,500));
-        ((LesNomsDesClasses)cardPanels.getComponents()[1]).getAddButton().addActionListener(new ActionListener() {
+
+        MyButton nomDesClassAddButton = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getAddButton();
+        MyButton attributesAddButton = ((Attributes)cardPanels.getComponents()[2]).getAddButton();
+        MyButton associationsAddButton = ((Associations)cardPanels.getComponents()[3]).getAddButton();
+        MyButton methodesAddButton = ((Methodes)cardPanels.getComponents()[4]).getAddButton();
+        MyButton parametresAddButton = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getAddButton();
+
+
+        nomDesClassAddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nomDeCurrentClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getInputNom().getText();
                 String nomDeSuperClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getSuperClassChoix().getSelectedItem().toString();
                 Writer.ajouterUnClass(nomDeCurrentClass,nomDeSuperClass , doc);
+            }
+        });
+        attributesAddButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String nom = ((Attributes)cardPanels.getComponents()[2]).getInputNom().getText();
+                String type = ((Attributes)cardPanels.getComponents()[2]).getChoixDesTypes().getSelectedItem().toString();
+                String valeur = ((Attributes)cardPanels.getComponents()[2]).getInputValeur().getText();
+                
+                if(nom.equals("") || type.equals("")){
+                    ((Attributes)cardPanels.getComponents()[2]).getErrorsField().setText("Veuillez remplir tous les champs");
+                }else{
+                    elementClass = Writer.findClass(nomDeCurrentClass, doc);
+                    Writer.ajouterUnAttributte(nom, type, valeur, elementClass);
+                    ((Attributes)cardPanels.getComponents()[2]).getInputNom().setText("");
+                    ((Attributes)cardPanels.getComponents()[2]).getInputValeur().setText("");
+                    ((Attributes)cardPanels.getComponents()[2]).getChoixDesTypes().setSelectedIndex(0);
+                }
+        
+            }
+        });
+        associationsAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String type,multiplicy,role,classDarrivee;
+                type = ((Associations)cardPanels.getComponents()[3]).getChoixDeType().getSelectedItem().toString();
+                multiplicy = ((Associations)cardPanels.getComponents()[3]).getEtoileButton().isSelected() ? "*" : "1";
+                role = ((Associations)cardPanels.getComponents()[3]).getInputRole().getText();
+                classDarrivee = ((Associations)cardPanels.getComponents()[3]).getChoixDeClassDarrivee().getSelectedItem().toString();
+
+                if(role.equals("")){
+                    ((Associations)cardPanels.getComponents()[3]).getErrorField().setText("Remplir touts les champs");
+                }else{
+                    Writer.ajouterUnAssociation(classDarrivee, type, multiplicy, role, elementClass);
+                }
+        
+            }
+        });
+        methodesAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
             }
         });
 
@@ -118,9 +169,10 @@ public class App extends JFrame {
             dansLesNomsDesClassesPage(nombreDesClasses);
         }
         else if(currentPage == 3){
-            affiche();
             dansAttributesPage();
         }else if (currentPage == 4){
+            affiche();
+
             dansAssociationsPage();
         }
         else if(currentPage == 5){
@@ -160,8 +212,7 @@ public class App extends JFrame {
             //add the names of classes to the types used in Methodes and parameters
             ((Methodes)cardPanels.getComponents()[4]).addToTypes(classesArray);
             ((ParametresDesMethodes)cardPanels.getComponents()[5]).addToTypes(classesArray);
-            // ((AssociationsPage)cardPanels.getComponents()[5]).addToClasses(classesArray);
-
+            ((Associations)cardPanels.getComponents()[3]).addToClasses(classesArray);
 
             //set up the next page
             nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
@@ -213,9 +264,14 @@ public class App extends JFrame {
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "6");
             currentPage++;
         }else if (hasParametres == 0){
+            String nomDeCurrentMethode = ((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode();
             if(currentClass < nombreDesClasses-1){
                 try{
-                    nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(++currentClass);
+                    if(!nomDeCurrentMethode.equals("")){
+                        currentClass++;
+                    }
+
+                    nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
                     ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
                     ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
                 }catch(Exception e){

@@ -21,6 +21,10 @@ public class ParametresDesMethodes extends JPanel {
 
 
         
+        public MyButton getAddButton() {
+            return addButton;
+        }
+
         public JLabel getTitreDePanel() {
             return titreDePanel;
         }
@@ -77,7 +81,7 @@ public ParametresDesMethodes() {
         errorsField.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         jScrollPane1.setViewportView(errorsField);
 
-        choixDesTypes.setModel(new DefaultComboBoxModel<>(listDesTypesParametres));
+        choixDesTypes.setModel(model);
         choixDesTypes.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         choixDesTypes.setBackground(Color.WHITE);
 

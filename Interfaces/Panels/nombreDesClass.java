@@ -52,6 +52,8 @@ public class nombreDesClass extends JPanel {
         nombreDesClassesLabel.setText("Combien Des Class Tu Veux Creer :");
         nombreDesClassesLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
+        inputNombreDesClasses.setHorizontalAlignment(SwingConstants.CENTER);
+
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);

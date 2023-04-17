@@ -30,12 +30,30 @@ public class LesFonctionDeXML {
         
 
     }
+    public Element findClass(String name,Document doc){
+        try{
+            Element root = doc.getRootElement();
+            for (Element monClass : root.getChildren("class")) {
+                if(name.equals(monClass.getAttributeValue("name"))){
+                    return monClass;
+                }
+                
+            }
+            return null;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        
+    }
 
     public boolean ajouterUnClass(String nom ,String superClass,Document XMLFile){
         try{
             Element myClass = new Element("class");
             Attribute name =  new Attribute("name", nom);
             myClass.setAttribute(name);
+            myClass.addContent(new Element("attributes"));
+            myClass.addContent(new Element("associations"));
             if(!superClass.equals("aucun")){
                 Attribute superC =  new Attribute("superClass", superClass);
                 myClass.setAttribute(superC);
@@ -51,10 +69,13 @@ public class LesFonctionDeXML {
     public boolean ajouterUnAttributte(String nom ,String type,String valeur,Element monClass){
         try {
             Element monAttribute = new Element("attribute");
-            monAttribute.setAttribute("name", nom);
-            monAttribute.setAttribute("type", type);
+            Attribute typeAttribute = new Attribute("type", type);
+            Attribute name = new Attribute("name", nom);
+            monAttribute.setAttribute(name);
+            monAttribute.setAttribute(typeAttribute);
             if(valeur != null) {
-                monAttribute.setAttribute("value", valeur);
+                Attribute value = new Attribute("value", valeur);
+                monAttribute.setAttribute(value);
             }
             monClass.getChild("attributes").addContent(monAttribute);
         return true;
@@ -93,10 +114,14 @@ public class LesFonctionDeXML {
     public boolean ajouterUnAssociation(String classDarrivee ,String type,String multiplicity,String role,Element monClass){
         try {
             Element monAssociation = new Element("association");
-            monAssociation.setAttribute("type", type);
-            monAssociation.setAttribute("class", classDarrivee);
-            monAssociation.setAttribute("role", role);
-            monAssociation.setAttribute("multiplicity", multiplicity);
+            Attribute attType = new Attribute("type", type);
+            Attribute attClassDarrivee = new Attribute("class", classDarrivee);
+            Attribute attRole = new Attribute("role", role);
+            Attribute attMultiplicity = new Attribute("multiplicity", multiplicity);
+            monAssociation.setAttribute(attType);
+            monAssociation.setAttribute(attClassDarrivee);
+            monAssociation.setAttribute(attMultiplicity);
+            monAssociation.setAttribute(attRole);
             monClass.getChild("associations").addContent(monAssociation);
             return true;
         }catch(Exception e){
