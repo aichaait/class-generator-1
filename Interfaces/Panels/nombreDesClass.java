@@ -49,15 +49,12 @@ public class nombreDesClass extends JPanel {
     //     titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
     //     titreDePanel.setText("salam");
 
-        nombreDesClassesLabel.setText("Nombre de classes :");
+        nombreDesClassesLabel.setText("Nombre de classes");
         nombreDesClassesLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-<<<<<<< HEAD
 
         inputNombreDesClasses.setHorizontalAlignment(SwingConstants.CENTER);
 
-=======
         nombreDesClassesLabel.setForeground(new java.awt.Color(66, 70, 137));
->>>>>>> d3ce5b2a6762eb653c891e013e2af020d21e8181
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);
@@ -94,7 +91,7 @@ public class nombreDesClass extends JPanel {
                             .addGap(350, 350, 350))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(nombreDesClassesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(300, 300, 300)))))
+                            .addGap(250, 250, 250)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
