@@ -2,10 +2,11 @@ package MyLibraries.EcrireDansXML;
 
 import java.io.File;
 
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;;
 
-public class LesFonction {
+public class LesFonctionDeXML {
 
     //function to create an folder if it doesn't exist
     public void createFolder(String folderName){
@@ -33,8 +34,12 @@ public class LesFonction {
     public boolean ajouterUnClass(String nom ,String superClass,Document XMLFile){
         try{
             Element myClass = new Element("class");
-            myClass.setAttribute("name", nom);
-            myClass.setAttribute("superClass", superClass);
+            Attribute name =  new Attribute("name", nom);
+            myClass.setAttribute(name);
+            if(!superClass.equals("aucun")){
+                Attribute superC =  new Attribute("superClass", superClass);
+                myClass.setAttribute(superC);
+            }
             XMLFile.getRootElement().addContent(myClass);
             return true;
         }catch(Exception e){

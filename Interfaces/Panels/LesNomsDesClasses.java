@@ -21,9 +21,9 @@ import Pieces.GTextField;
 import Pieces.MyButton;
 
 public class LesNomsDesClasses extends JPanel {
-    String nomDeClass;
-    int nombreDesClasses;
-    List<String> lesNomDesClass = new ArrayList<String>();
+    private String nomDeClass,nomDeSuperClass;
+    private int nombreDesClasses;
+    private List<String> lesNomDesClass = new ArrayList<String>();
     private DefaultComboBoxModel<String> model =  new DefaultComboBoxModel<String>();
     
     public List<String> getLesNomDesClass() {
@@ -36,6 +36,21 @@ public class LesNomsDesClasses extends JPanel {
 
     public String getNomDeClass() {
         return nomDeClass;
+    }
+    public javax.swing.JComboBox<String> getSuperClassChoix() {
+        return superClassChoix;
+    }
+
+    public JTextField getInputNom() {
+        return inputNom;
+    }
+
+    public String getNomDeSuperClass() {
+        return nomDeSuperClass;
+    }
+
+    public MyButton getAddButton() {
+        return addButton;
     }
 
     public void setNomDeClass(String nomDeClass) {
@@ -68,7 +83,7 @@ public class LesNomsDesClasses extends JPanel {
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         superClassLabel = new javax.swing.JLabel();
-        superClassChoix = new javax.swing.JComboBox<>();
+        superClassChoix = new javax.swing.JComboBox<String>();
 
         titreDePanel.setFont(new Font("Liberation Serif", 1, 48)); // NOI18N
         titreDePanel.setText("Les Noms Des Classes");
@@ -150,21 +165,26 @@ public class LesNomsDesClasses extends JPanel {
                 errorsField.append("Vous fini : press Next pour continue\n");
             }else{
                 nomDeClass = inputNom.getText();
-                addClass(nomDeClass);
+                nomDeSuperClass = superClassChoix.getSelectedItem().toString();
+                addClass(nomDeClass,nomDeSuperClass);
                 nombreDesClasses--;
             }
             inputNom.setText("");
         }
     });
     }   
-    public void addClass(String nom) {
+    public void addClass(String nom,String superClass) {
             if(nom == null || nom.equals("")){
                 errorsField.append("il faut donner un nom\n");
             }
-            else{
+            else if(superClass.equals("aucun")) {
+
                 errorsField.append(nom+" Added\n");
                 lesNomDesClass.add(nom);
                 model.addElement(nom);
+            }else{
+                errorsField.append(nom+" Added et Super Class est");
+                
             }
     }
                                           

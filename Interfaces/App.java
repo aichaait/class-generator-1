@@ -2,10 +2,17 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.event.MenuListener;
+
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 import Panels.Associations;
 import Panels.Attributes;
@@ -18,12 +25,21 @@ import Pieces.FolderPanel;
 import Pieces.Footer;
 import Pieces.Header;
 import Pieces.MenuBar;
+import MyLibraries.EcrireDansXML.*;;
 
 public class App extends JFrame {
-    int currentPage = 1;
-    int nombreDesClasses = -1;
-    int currentClass = 0;
+    public Document getDoc() {
+        return doc;
+    }
+
+    private int currentPage = 1;
+    private int nombreDesClasses = -1;
+    private int currentClass = 0;
     private String nomDeCurrentClass;
+    private Element racine = new Element("classes");
+    private Document doc = new Document(racine); 
+    private LesFonctionDeXML Writer = new LesFonctionDeXML();
+
  
     
     public App() {
@@ -42,6 +58,14 @@ public class App extends JFrame {
 
         cardPanels = new CardPanels();
         cardPanels.setPreferredSize(new Dimension(300,500));
+        ((LesNomsDesClasses)cardPanels.getComponents()[1]).getAddButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nomDeCurrentClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getInputNom().getText();
+                String nomDeSuperClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getSuperClassChoix().getSelectedItem().toString();
+                Writer.ajouterUnClass(nomDeCurrentClass,nomDeSuperClass , doc);
+            }
+        });
 
         mySideBar = new FolderPanel();
         mySideBar.setBackground(Color.WHITE);
@@ -94,6 +118,7 @@ public class App extends JFrame {
             dansLesNomsDesClassesPage(nombreDesClasses);
         }
         else if(currentPage == 3){
+            affiche();
             dansAttributesPage();
         }else if (currentPage == 4){
             dansAssociationsPage();
@@ -217,7 +242,16 @@ public class App extends JFrame {
         currentPage--;
     }
 
-
+    public void affiche(){
+    try{
+        //On utilise ici un affichage classique avec getPrettyFormat()
+        XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+        sortie.output(doc, System.out);
+    }
+    catch (java.io.IOException e){
+        System.out.println("Error: ");
+    }
+    }
     
  
     

@@ -21,11 +21,9 @@ public class Header extends JPanel {
         initComponents();
     }
     private void initComponents() {
-        // TODO
        
         setLayout(new BorderLayout(400,0));
         setPreferredSize(new Dimension(25,25));
-        setBackground(Color.CYAN);
 
         img = new ImageIcon(getClass().getResource("../images/logo.png"),"logo");
         picLabel = new JLabel();
@@ -52,8 +50,8 @@ public class Header extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         int w = getWidth(), h = getHeight();
-        Color color1 = Color.decode("#8E2DE2");
-        Color color2 = Color.decode("#4A00E0");
+        Color color1 = Color.decode("#2394dc");
+        Color color2 = Color.decode("#DC6B23");
         GradientPaint gp = new GradientPaint(0, 0, color1, w, h, color2);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
