@@ -158,7 +158,7 @@ public class App extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UML Generator");
-        setSize(1200, 800);
+        setSize(1200, 750);
     }
     private void nextButtonActionPerformed(){
         if(currentPage == 1){

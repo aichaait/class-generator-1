@@ -45,8 +45,8 @@ public class MyButton extends JButton {
         this.color2 = color2;
     }
 
-    private Color color1 = Color.decode("#8E2DE2");
-    private Color color2 = Color.decode("#4A00E0");
+    private Color color1 = Color.decode("#33cccc");
+    private Color color2 = Color.decode("#9966ff");
     private final Timer timer;
     private final Timer timerPressed;
     private float alpha = 0.3f;
