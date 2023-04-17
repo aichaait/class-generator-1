@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "frametest",
+      "request": "launch",
+      "mainClass": "Panels.frametest",
+      "projectName": "class-generator_5c10eb51"
+    },
+    {
+      "type": "java",
       "name": "App",
       "request": "launch",
       "mainClass": "App",

@@ -43,25 +43,29 @@ public class nombreDesClass extends JPanel {
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         submitButton = new MyButton("submit");
-        
+        setBackground(new java.awt.Color(179, 179, 255));
 
-        titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
-        titreDePanel.setText("Initialisation");
+    //     titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N
+    //     titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
+    //     titreDePanel.setText("salam");
 
-        nombreDesClassesLabel.setText("Combien Des Class Tu Veux Creer :");
+        nombreDesClassesLabel.setText("Nombre de classes :");
         nombreDesClassesLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+<<<<<<< HEAD
 
         inputNombreDesClasses.setHorizontalAlignment(SwingConstants.CENTER);
 
+=======
+        nombreDesClassesLabel.setForeground(new java.awt.Color(66, 70, 137));
+>>>>>>> d3ce5b2a6762eb653c891e013e2af020d21e8181
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBackground(new Color(242,242,242));
         errorsField.setBorder(null);
-        errorsField.setFont(new java.awt.Font("Liberation Sans", 1, 18));
-        errorsField.setForeground(Color.RED);
+        errorsField.setFont(new java.awt.Font("Liberation Sans", 1, 12));
+        //errorsField.setForeground(Color.RED);
         jScrollPane1.setViewportView(errorsField);
 
 
@@ -110,18 +114,18 @@ public class nombreDesClass extends JPanel {
     private void submitButtonActionPerformed(){
         String nombreDesClassesStr = inputNombreDesClasses.getText();
         if(nombreDesClassesStr.equals("")){
-            errorsField.setText("Veuillez Entrer Un Nombre");
+            errorsField.setText("Veuillez vous donner un nombre");
         }else{
             try{
                 nombreDesClasses = Integer.parseInt(nombreDesClassesStr);
                 if(nombreDesClasses <= 0){
-                    errorsField.setText("Veuillez Entrer Un Nombre Superieur A 0");
+                    errorsField.setText("Veuillez vous donner un nombre superieur à 0");
                 }else{
-                    errorsField.setText("Nombre Valide : click button next To Continue");
+                    errorsField.setText("Nombre valide\nNext pour continue");
                     inputNombreDesClasses.setText("");
                 }
             }catch(Exception e){
-                errorsField.setText("Veuillez Entrer Un Nombre");
+                errorsField.setText("Veuillez vous donner un nombre valide");
             }
         }
         inputNombreDesClasses.setText("");

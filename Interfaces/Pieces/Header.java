@@ -26,10 +26,10 @@ public class Header extends JPanel {
         setLayout(new BorderLayout(400,0));
         setPreferredSize(new Dimension(25,25));
 
-        img = new ImageIcon(getClass().getResource("../images/web-programming.png"),"logo");
+        img = new ImageIcon(getClass().getResource("../images/sprint.png"),"logo");
        // picLabel = new JLabel();
         //resize the image
-        reSizedImg =  img.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        reSizedImg =  img.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         
        // picLabel.setIcon(new ImageIcon(reSizedImg));
 

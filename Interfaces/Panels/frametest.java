@@ -1,4 +1,4 @@
-package Panels;
+/*package Panels;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
@@ -39,4 +39,20 @@ class Main {
 
     }
 
-}
+}*/
+/* 
+package Panels;
+
+import javax.swing.JFrame;
+
+public class frametest extends JFrame{
+    frametest(){
+        startpage p = new startpage();
+        setVisible(true);        add(p);
+        setSize(500, 400);
+    }
+        
+    public static void main(String[] args) {
+        new frametest();
+    }
+}*/

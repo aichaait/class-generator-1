@@ -12,6 +12,7 @@ public class Footer extends JPanel {
     public Footer(){
         setLayout(new FlowLayout(FlowLayout.RIGHT));
         add(nextButton);
+        setBackground(new java.awt.Color(179, 179, 255));
     }
     
 }
