@@ -89,12 +89,12 @@ public class LesNomsDesClasses extends JPanel {
 
 
         titreDePanel.setFont(new Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setText("Les Noms Des Classes");
+        titreDePanel.setText("Les noms du classes");
         titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
 
 
         nomLabel.setFont(new Font("Liberation Sans", 1, 18)); // NOI18N
-        nomLabel.setText("donner le nom de class : ");
+        nomLabel.setText("Nom du classe : ");
         inputNom.setHorizontalAlignment(SwingConstants.CENTER);
 
         inputNom.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));
@@ -166,7 +166,7 @@ public class LesNomsDesClasses extends JPanel {
     addButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt){
             if(nombreDesClasses == 0){
-                errorsField.append("Vous fini : press Next pour continue\n");
+                errorsField.append("Vous fini, press Next pour continue\n");
             }else{
                 nomDeClass = inputNom.getText();
                 nomDeSuperClass = superClassChoix.getSelectedItem().toString();
@@ -187,7 +187,7 @@ public class LesNomsDesClasses extends JPanel {
                 lesNomDesClass.add(nom);
                 model.addElement(nom);
             }else{
-                errorsField.append(nom+" Added et Super Class est "+superClass);
+                errorsField.append(nom+" Added,le Super Class est "+superClass);
                 lesNomDesClass.add(nom);
 
                 model.addElement(nom);

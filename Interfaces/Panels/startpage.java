@@ -1,7 +1,7 @@
 package Panels;
 
 import java.io.File;
-
+import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
@@ -45,6 +45,45 @@ public class startpage extends javax.swing.JPanel {
         jLabel4.setText("New Project");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                newProjectItemActionPerformed();
+            }
+
+            private void newProjectItemActionPerformed() {
+                int i=0; 
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showOpenDialog(startpage.this);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    String projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project";
+                    File projectFolder = new File(projectPath);
+                    while(projectFolder.exists()){
+                        projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project"+(i++);
+                        projectFolder = new File(projectPath);
+
+
+                    }
+                    if (!projectFolder.exists()) {
+                        projectFolder.mkdir();
+                        File DGFolder = new File(projectPath + File.separator + "DiagrammeDesClasses");
+                        DGFolder.mkdir();
+                        File javaFolder = new File(projectPath + File.separator + "javaclasses");
+                        javaFolder.mkdir();
+                        File cppFolder = new File(projectPath + File.separator + "cppclasses");
+                        cppFolder.mkdir();
+                        File sqlFolder = new File(projectPath + File.separator + "SQLrequete");
+                        sqlFolder.mkdir();
+                        FolderPanel.updateFolder(projectFolder );
+                        JOptionPane.showMessageDialog(startpage.this, "Folders created successfully");
+                    } else {
+                        JOptionPane.showMessageDialog(startpage.this, "Project folder already exists");
+                    }
+                }
+            }
+
+        });
         
        
 
