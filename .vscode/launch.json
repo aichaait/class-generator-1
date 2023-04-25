@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "App",
+      "projectName": "class-generator-1_9b8360b5"
+    },
+    {
+      "type": "java",
       "name": "frameDeTesting",
       "request": "launch",
       "mainClass": "Panels.frameDeTesting",
