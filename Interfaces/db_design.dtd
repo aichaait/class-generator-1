@@ -56,10 +56,11 @@
 
 
         <!ELEMENT methodes (methode*)>
-            <!ELEMENT methode (param*)>
+            <!ELEMENT methode (parametres)>
             <!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>
-                <!ELEMENT param EMPTY>
-                <!ATTLIST param name CDATA #REQUIRED type CDATA #REQUIRED>
+                <!ELEMENT parametres (parametre*)>
+                    <!ELEMENT parametre EMPTY>
+                    <!ATTLIST parametre name CDATA #REQUIRED type CDATA #REQUIRED>
 
 
         <!--

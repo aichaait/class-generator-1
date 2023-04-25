@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.MenuListener;
 
+import org.jdom2.DocType;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
@@ -33,6 +34,7 @@ import Pieces.Header;
 import Pieces.MenuBar;
 import Pieces.MyButton;
 import MyLibraries.EcrireDansXML.*;
+import MyLibraries.Convertion.*;
 
 public class App extends JFrame {
     public Document getDoc() {
@@ -49,6 +51,7 @@ public class App extends JFrame {
     private Element elementClass;
     private String nomDeCurrentMethode;
     private String GlobalprojectPath;
+    private WriteXmlToJava writeXmlToJava = new WriteXmlToJava();
 
  
     
@@ -64,7 +67,9 @@ public class App extends JFrame {
         myMenuBar = new MenuBar();
         setJMenuBar(myMenuBar);
 
-        
+        DocType dtype = new DocType("classes", "DG.dtd");
+        doc.setDocType(dtype);
+
         
 
         cardPanels = new CardPanels();
@@ -285,11 +290,16 @@ public class App extends JFrame {
             affiche();
             System.out.println(GlobalprojectPath+"/DiagrammeDesClasses/DG.xml");
             enregistre(GlobalprojectPath+"/DiagrammeDesClasses/DG.xml");
+            Writer.createDTDFile(GlobalprojectPath+"/DiagrammeDesClasses");
+
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
             myFooter.nextButton.setText("Next");
             myFooter.nextButton.setVisible(false);
             currentPage = 1;
             doc.getRootElement().removeChildren("class");
+            writeXmlToJava.ConvertFromJava2XML(GlobalprojectPath);
+            FolderPanel.updateFolder(new File(GlobalprojectPath) );
+
 
         }
     }

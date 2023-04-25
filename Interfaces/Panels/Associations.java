@@ -71,7 +71,7 @@ public class Associations extends javax.swing.JPanel {
         typeLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         typeLabel.setText("Type");
 
-        choixDeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregation", "Composition", "Association Simple" }));
+        choixDeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "aggregation", "composition", "simple" }));
         choixDeType.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
 
         classDarrivee.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N

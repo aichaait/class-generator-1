@@ -19,13 +19,13 @@ public class WriteXmlToJava {
             SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
             try {
         
-                Document xmlDocument = builder.build(new File(xmlFilePath));
+                Document xmlDocument = builder.build(new File(xmlFilePath+"/DiagrammeDesClasses/"+"DG.xml"));
                 Element root = xmlDocument.getRootElement();
                     
         
                 List<Element> list = root.getChildren("class");
     
-                printClassesFromXmlIntoJavaFile(list);
+                printClassesFromXmlIntoJavaFile(list, xmlFilePath);
                     
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -35,11 +35,11 @@ public class WriteXmlToJava {
         }
         
     // fonction generale
-    private boolean  printClassesFromXmlIntoJavaFile(List<Element> list){
+    private boolean  printClassesFromXmlIntoJavaFile(List<Element> list,String path){
         try{
             for (int i = 0; i < list.size(); i++) {
                 Element monClass = (Element) list.get(i);
-                printClassFromXmlIntoJavaFile(monClass);
+                printClassFromXmlIntoJavaFile(monClass, path);
             }
             return true;
         }catch(Exception e){
@@ -49,10 +49,10 @@ public class WriteXmlToJava {
         }
     }
     //depth 1 
-    private boolean printClassFromXmlIntoJavaFile(Element monClass){
+    private boolean printClassFromXmlIntoJavaFile(Element monClass,String path){
         try{
             String className = monClass.getAttributeValue("name");
-            FileWriter  JavaFile = new FileWriter(capitalize(className)+".java" );
+            FileWriter  JavaFile = new FileWriter(path+"/javaclasses/"+capitalize(className)+".java" );
             JavaFile.write("import java.util.*;\n");
 
             JavaFile.write("public class "+capitalize(className));

@@ -1,6 +1,8 @@
 package MyLibraries.EcrireDansXML;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import org.jdom2.Attribute;
 import org.jdom2.Document;
@@ -8,28 +10,41 @@ import org.jdom2.Element;;
 
 public class LesFonctionDeXML {
 
-    //function to create an folder if it doesn't exist
-    public void createFolder(String folderName){
-        File folder = new File(folderName);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
-    }
+    public void createDTDFile(String path) {
+        try {
+          File file = new File(path+"/DG.dtd");
+          if (!file.exists()) {
+            file.createNewFile();
+          }
+      
+          FileWriter writer = new FileWriter(file);
+          writer.write("<!ELEMENT classes (class+)>");
 
-    public org.jdom2.output.XMLOutputter creerUnFichierXML(){
-        Element root = new Element("classes");
-        Document doc = new Document(root);
-        try{
-            org.jdom2.output.XMLOutputter sortie = new org.jdom2.output.XMLOutputter( org.jdom2.output.Format.getPrettyFormat());
-            sortie.output(doc, new java.io.FileOutputStream("classes.xml"));
-            return sortie;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-        
 
-    }
+          writer.write("\n<!ELEMENT class (attributes, methodes,associations)>");
+          writer.write("\n<!ATTLIST class name ID #REQUIRED superClass IDREFS #IMPLIED>");
+              
+          writer.write("\n<!ELEMENT attributes (attribute*)>");
+          writer.write("\n<!ELEMENT attribute EMPTY>");
+          writer.write("\n<!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>");
+      
+      
+          writer.write("\n<!ELEMENT methodes (methode*)>");
+          writer.write("\n<!ELEMENT methode (parametres)>");
+          writer.write("\n<!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>");
+          writer.write("\n<!ELEMENT parametres (parametre*)>");
+          writer.write("\n<!ELEMENT parametre EMPTY>");
+          writer.write("\n<!ATTLIST parametre name CDATA #REQUIRED type CDATA #REQUIRED>");
+          writer.write("\n<!ELEMENT associations (association*)>");
+
+          writer.write("\n<!ELEMENT association EMPTY>");
+          writer.write("\n<!ATTLIST association type (simple | aggregation | composition) #REQUIRED classArrivee IDREF #REQUIRED role CDATA #REQUIRED multiplicity CDATA #REQUIRED>");
+          writer.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    
     public Element findClass(String name,Document doc){
         try{
             Element root = doc.getRootElement();
@@ -68,8 +83,9 @@ public class LesFonctionDeXML {
             Attribute name =  new Attribute("name", nom);
             myClass.setAttribute(name);
             myClass.addContent(new Element("attributes"));
-            myClass.addContent(new Element("associations"));
             myClass.addContent(new Element("methodes"));
+
+            myClass.addContent(new Element("associations"));
 
 
             if(!superClass.equals("aucun")){
@@ -87,6 +103,17 @@ public class LesFonctionDeXML {
     public boolean ajouterUnAttributte(String nom ,String type,String valeur,Element monClass){
         try {
             Element monAttribute = new Element("attribute");
+            if(type.equals("Entier")){
+                type = "int";
+            }else if(type.equals("Chaine")){
+                type = "String";
+            }else if(type.equals("Booleen")){
+                type = "boolean";
+            }else if(type.equals("Reel")){
+                type = "double";
+            }else if(type.equals("Charactere")){
+                type = "char";
+            }
             Attribute typeAttribute = new Attribute("type", type);
             Attribute name = new Attribute("name", nom);
             monAttribute.setAttribute(name);
@@ -107,7 +134,18 @@ public class LesFonctionDeXML {
         try {
             Element maMethod = new Element("methode");
             Attribute name = new Attribute("name", nom);
-            Attribute typeAttribute = new Attribute("type", typeDeRetoure);
+            if(typeDeRetoure.equals("Entier")){
+                typeDeRetoure = "int";
+            }else if(typeDeRetoure.equals("Chaine")){
+                typeDeRetoure = "String";
+            }else if(typeDeRetoure.equals("Booleen")){
+                typeDeRetoure = "boolean";
+            }else if(typeDeRetoure.equals("Reel")){
+                typeDeRetoure = "double";
+            }else if(typeDeRetoure.equals("Charactere")){
+                typeDeRetoure = "char";
+            }
+            Attribute typeAttribute = new Attribute("return", typeDeRetoure);
             maMethod.addContent(new Element("parametres"));
 
             maMethod.setAttribute(name);
@@ -124,6 +162,17 @@ public class LesFonctionDeXML {
         try {
             Element monParametre = new Element("parametre");
             Attribute name = new Attribute("name", nom);
+            if(type.equals("Entier")){
+                type = "int";
+            }else if(type.equals("Chaine")){
+                type = "String";
+            }else if(type.equals("Booleen")){
+                type = "boolean";
+            }else if(type.equals("Reel")){
+                type = "double";
+            }else if(type.equals("Charactere")){
+                type = "char";
+            }
             Attribute typeAttribute = new Attribute("type", type);
 
             monParametre.setAttribute(name);
@@ -147,7 +196,7 @@ public class LesFonctionDeXML {
         try {
             Element monAssociation = new Element("association");
             Attribute attType = new Attribute("type", type);
-            Attribute attClassDarrivee = new Attribute("class", classDarrivee);
+            Attribute attClassDarrivee = new Attribute("classArrivee", classDarrivee);
             Attribute attRole = new Attribute("role", role);
             Attribute attMultiplicity = new Attribute("multiplicity", multiplicity);
             monAssociation.setAttribute(attType);

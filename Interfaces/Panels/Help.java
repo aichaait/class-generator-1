@@ -24,6 +24,7 @@ public class Help extends JPanel {
         titreDePanel.setForeground(new Color(0, 0, 0));
 
         titreDePanel.setBackground(new java.awt.Color(204, 217, 255));
+        titreDePanel.setEditable(false);
 
         // create a scroll pane and add the text area to it
        // JScrollPane scrollPane = new JScrollPane(titreDePanel);
@@ -36,8 +37,8 @@ public class Help extends JPanel {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setOpaque(false);
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-        //scrollPane.getHorizontalScrollBar().setOpaque(false);
-        scrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+        // scrollPane.getHorizontalScrollBar().setOpaque(false);
+        // scrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
 
 
 
