@@ -2,28 +2,31 @@ package Panels;
 
 import java.io.File;
 
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 import javax.swing.filechooser.FileSystemView;
 
 import Pieces.FolderPanel;
 
 
 
-public class StartPage extends javax.swing.JPanel {
+public class StartPage extends JPanel {
 
     public StartPage() {
         initComponents();
     }
 
                            
-    public javax.swing.JLabel getNewProjectLabel() {
+    public JLabel getNewProjectLabel() {
         return newProjectLabel;
     }
 
 
-    public javax.swing.JLabel getOpenProjectLabel() {
+    public JLabel getOpenProjectLabel() {
         return openProjectLabel;
     }
 
@@ -33,13 +36,13 @@ public class StartPage extends javax.swing.JPanel {
         ImageIcon folderIcon = new ImageIcon(getClass().getResource("../images/folder.png"));
         ImageIcon openProjectIcon = new ImageIcon(getClass().getResource("../images/open.png"));
 
-        titreDePage = new javax.swing.JLabel();
-        sousTitre = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        newProjectLabel = new javax.swing.JLabel(folderIcon);
-        openProjectLabel = new javax.swing.JLabel(openProjectIcon);
-        //newProjectLabel = new javax.swing.JLabel(folderIcon);
-        //openProjectLabel = new javax.swing.JLabel(openProjectIcon);
+        titreDePage = new JLabel();
+        sousTitre = new JLabel();
+        jLabel3 = new JLabel();
+        newProjectLabel = new JLabel(folderIcon);
+        openProjectLabel = new JLabel(openProjectIcon);
+        //newProjectLabel = new JLabel(folderIcon);
+        //openProjectLabel = new JLabel(openProjectIcon);
         
         titreDePage.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         titreDePage.setForeground(new java.awt.Color(102, 102, 102));
@@ -69,39 +72,39 @@ public class StartPage extends javax.swing.JPanel {
 
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(titreDePage))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sousTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sousTitre, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(openProjectLabel)
                                     .addComponent(newProjectLabel))))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(titreDePage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sousTitre)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newProjectLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(openProjectLabel)
                 .addContainerGap(125, Short.MAX_VALUE))
         );
@@ -124,10 +127,10 @@ public class StartPage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JLabel titreDePage;
-    private javax.swing.JLabel sousTitre;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel newProjectLabel;
-    private javax.swing.JLabel openProjectLabel;
+    private JLabel titreDePage;
+    private JLabel sousTitre;
+    private JLabel jLabel3;
+    private JLabel newProjectLabel;
+    private JLabel openProjectLabel;
     // End of variables declaration                   
 }
