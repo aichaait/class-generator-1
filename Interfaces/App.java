@@ -2,12 +2,17 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.event.MenuListener;
 
 import org.jdom2.Document;
@@ -21,6 +26,7 @@ import Panels.CardPanels;
 import Panels.LesNomsDesClasses;
 import Panels.Methodes;
 import Panels.ParametresDesMethodes;
+import Panels.StartPage;
 import Panels.nombreDesClass;
 import Pieces.FolderPanel;
 import Pieces.Footer;
@@ -69,6 +75,8 @@ public class App extends JFrame {
         MyButton associationsAddButton = ((Associations)cardPanels.getComponents()[3]).getAddButton();
         MyButton methodesAddButton = ((Methodes)cardPanels.getComponents()[4]).getAddButton();
         MyButton parametresAddButton = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getAddButton();
+        JLabel newProjectLabel = ((StartPage)cardPanels.getComponents()[9]).getNewProjectLabel();
+
 
 
         nomDesClassAddButton.addActionListener(new ActionListener() {
@@ -162,6 +170,50 @@ public class App extends JFrame {
         
             }
         });
+        newProjectLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                newProjectItemActionPerformed();
+            }
+
+            private void newProjectItemActionPerformed() {
+                int i=0; 
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showOpenDialog(((StartPage)cardPanels.getComponents()[9]));
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    String projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project";
+                    File projectFolder = new File(projectPath);
+                    while(projectFolder.exists()){
+                        projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project"+(i++);
+                        projectFolder = new File(projectPath);
+
+
+                    }
+                    if (!projectFolder.exists()) {
+                        projectFolder.mkdir();
+                        File DGFolder = new File(projectPath + File.separator + "DiagrammeDesClasses");
+                        DGFolder.mkdir();
+                        File javaFolder = new File(projectPath + File.separator + "javaclasses");
+                        javaFolder.mkdir();
+                        File cppFolder = new File(projectPath + File.separator + "cppclasses");
+                        cppFolder.mkdir();
+                        File sqlFolder = new File(projectPath + File.separator + "SQLrequete");
+                        sqlFolder.mkdir();
+                        FolderPanel.updateFolder(projectFolder );
+                        JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Folders created successfully");
+                        myFooter.nextButton.setVisible(true);
+                        ((CardLayout)cardPanels.getLayout()).show(cardPanels, "1");
+
+
+                    } else {
+                        JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Project folder already exists");
+                    }
+                }
+            }
+
+        });
+        
 
         mySideBar = new FolderPanel();
         mySideBar.setBackground(Color.WHITE);

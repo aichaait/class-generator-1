@@ -16,7 +16,7 @@ public class CardPanels extends JPanel {
     private End endPage;
     private Apropos aproposPage;
     private Help helpPage;
-    private startpage start;
+    private StartPage start;
 
     
     //end of variables declaration
@@ -36,7 +36,7 @@ public class CardPanels extends JPanel {
         endPage = new End();
         aproposPage = new Apropos();
         helpPage = new Help();
-        start = new startpage();
+        start = new StartPage();
 
         setLayout(new CardLayout());
 
