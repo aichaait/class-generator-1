@@ -28,8 +28,26 @@ public class Methodes extends JPanel {
 
     
 
-    
+    public void setNomDeCurrentMethode(String nomDeCurrentMethode) {
+        this.nomDeCurrentMethode = nomDeCurrentMethode;
+    }
+
+    public void setHasParametres(int hasParametres) {
+        this.hasParametres = hasParametres;
+    }
   
+    public JComboBox<String> getChoixDesTypes() {
+        return choixDesTypes;
+    }
+    public JRadioButton getOuiRadioButton() {
+        return ouiRadioButton;
+    }
+    public JRadioButton getNonRadioButton() {
+        return nonRadioButton;
+    }
+    public GTextField getInputNom() {
+        return inputNom;
+    }
     public MyButton getAddButton() {
         return addButton;
     }
@@ -85,6 +103,9 @@ public class Methodes extends JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         errorsField = new javax.swing.JTextArea();
 
+        setBackground(new java.awt.Color(179, 179, 255));
+
+
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
         titreDePanel.setText("Methodes De Class : ");
 
@@ -125,6 +146,8 @@ public class Methodes extends JPanel {
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBackground(new Color(242,242,242));
+        errorsField.setFont(new java.awt.Font("Liberation Sans", 1, 12));
+
         jScrollPane1.setViewportView(errorsField);
 
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -194,24 +217,8 @@ public class Methodes extends JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }      
+    
     private void addButtonActionPerformed(){
-        nomDeCurrentMethode = inputNom.getText();
-        String type = choixDesTypes.getSelectedItem().toString();
-        hasParametres = ouiRadioButton.isSelected() ? 1 : 0;
-        String errors = "";
-        if(nomDeCurrentMethode.equals("")){
-            errors += "Nom est obligatoire";
-        }
-        if(errors.equals("")){
-            inputNom.setText("");
-            choixDesTypes.setSelectedIndex(0);
-            ouiRadioButton.setSelected(false);
-            nonRadioButton.setSelected(true);
-            errorsField.setText(nomDeCurrentMethode + "Added With Type: " + type + " And Has Parametres: " + hasParametres);
-        }else{
-            errorsField.setText(errors);
-        }
-
     }                                                   
 
 

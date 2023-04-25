@@ -46,6 +46,21 @@ public class LesFonctionDeXML {
         }
         
     }
+    public Element findMethode(String nameDeMethode,Element monClass,Document doc){
+        try{
+            for (Element maMethode : monClass.getChildren("methodes")) {
+                if(nameDeMethode.equals(monClass.getAttributeValue("name"))){
+                    return maMethode;
+                }
+                
+            }
+            return null;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }        
+
+    }
 
     public boolean ajouterUnClass(String nom ,String superClass,Document XMLFile){
         try{
@@ -54,6 +69,9 @@ public class LesFonctionDeXML {
             myClass.setAttribute(name);
             myClass.addContent(new Element("attributes"));
             myClass.addContent(new Element("associations"));
+            myClass.addContent(new Element("methodes"));
+
+
             if(!superClass.equals("aucun")){
                 Attribute superC =  new Attribute("superClass", superClass);
                 myClass.setAttribute(superC);
@@ -87,10 +105,14 @@ public class LesFonctionDeXML {
     }
     public boolean ajouterUneMethode(String nom ,String typeDeRetoure,Element monClass){
         try {
-            Element monMethod = new Element("methode");
-            monMethod.setAttribute("name", nom);
-            monMethod.setAttribute("return", typeDeRetoure);
-            monClass.getChild("methodes").addContent(monMethod);
+            Element maMethod = new Element("methode");
+            Attribute name = new Attribute("name", nom);
+            Attribute typeAttribute = new Attribute("type", typeDeRetoure);
+            maMethod.addContent(new Element("parametres"));
+
+            maMethod.setAttribute(name);
+            maMethod.setAttribute(typeAttribute);
+            monClass.getChild("methodes").addContent(maMethod);
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -98,12 +120,22 @@ public class LesFonctionDeXML {
         }
 
     }
-    public boolean ajouterUnParametreDeMethode(String nom ,String type,Element maMethode){
+    public boolean ajouterUnParametreDeMethode(String nom ,String type,String nomDeMethode,Element monClass){
         try {
             Element monParametre = new Element("parametre");
-            monParametre.setAttribute("name", nom);
-            monParametre.setAttribute("type", type);
-            maMethode.addContent(monParametre);    
+            Attribute name = new Attribute("name", nom);
+            Attribute typeAttribute = new Attribute("type", type);
+
+            monParametre.setAttribute(name);
+            monParametre.setAttribute(typeAttribute);
+            for (Element maMethode : monClass.getChild("methodes").getChildren("methode")) {
+                if(nomDeMethode.equals(maMethode.getAttributeValue("name"))){
+                    maMethode.getChild("parametres").addContent(monParametre);
+                }
+                
+            }
+                
+            
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());

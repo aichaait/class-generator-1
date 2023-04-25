@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -26,7 +27,7 @@ import Pieces.Footer;
 import Pieces.Header;
 import Pieces.MenuBar;
 import Pieces.MyButton;
-import MyLibraries.EcrireDansXML.*;;
+import MyLibraries.EcrireDansXML.*;
 
 public class App extends JFrame {
     public Document getDoc() {
@@ -41,6 +42,7 @@ public class App extends JFrame {
     private Document doc = new Document(racine); 
     private LesFonctionDeXML Writer = new LesFonctionDeXML();
     private Element elementClass;
+    private String nomDeCurrentMethode;
 
  
     
@@ -107,6 +109,8 @@ public class App extends JFrame {
                 if(role.equals("")){
                     ((Associations)cardPanels.getComponents()[3]).getErrorField().setText("Remplir touts les champs");
                 }else{
+                    elementClass = Writer.findClass(nomDeCurrentClass, doc);
+
                     Writer.ajouterUnAssociation(classDarrivee, type, multiplicy, role, elementClass);
                 }
         
@@ -114,7 +118,48 @@ public class App extends JFrame {
         });
         methodesAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
+                nomDeCurrentMethode = ((Methodes)cardPanels.getComponents()[4]).getInputNom().getText();
+                ((Methodes)cardPanels.getComponents()[4]).setNomDeCurrentMethode(nomDeCurrentMethode);
+                ((Methodes)cardPanels.getComponents()[4]).setHasParametres(((Methodes)cardPanels.getComponents()[4]).getOuiRadioButton().isSelected() ? 1 : 0);
 
+                String type = ((Methodes)cardPanels.getComponents()[4]).getChoixDesTypes().getSelectedItem().toString();
+                String errors = "";
+                if(nomDeCurrentMethode.equals("")){
+                    errors += "Nom est obligatoire";
+                }
+                if(errors.equals("")){
+                    ((Methodes)cardPanels.getComponents()[4]).getInputNom().setText("");
+                    ((Methodes)cardPanels.getComponents()[4]).getChoixDesTypes().setSelectedIndex(0);
+                    ((Methodes)cardPanels.getComponents()[4]).getOuiRadioButton().setSelected(false);
+                    ((Methodes)cardPanels.getComponents()[4]).getNonRadioButton().setSelected(true);
+                    elementClass = Writer.findClass(nomDeCurrentClass, doc);
+
+                    Writer.ajouterUneMethode(nomDeCurrentMethode, type, elementClass);
+                }else{
+                    ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText(errors);
+                }
+        
+        
+
+            }
+        });
+        parametresAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                nomDeCurrentMethode = ((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode();
+                System.out.println("name: "+nomDeCurrentMethode);
+                String nom = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getInputNom().getText();
+                String type = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getChoixDesTypes().getSelectedItem().toString();
+                if (nom.equals("")) {
+                    ((ParametresDesMethodes)cardPanels.getComponents()[5]).getErrorsField().setText("Le nom est obligatoire");
+                } else {
+                    ((ParametresDesMethodes)cardPanels.getComponents()[5]).getErrorsField().setText(type + " " + nom +" Added\n");
+                    ((ParametresDesMethodes)cardPanels.getComponents()[5]).getInputNom().setText("");
+                    ((ParametresDesMethodes)cardPanels.getComponents()[5]).getChoixDesTypes().setSelectedIndex(0);
+                    elementClass = Writer.findClass(nomDeCurrentClass, doc);
+
+                    Writer.ajouterUnParametreDeMethode(nom, type, nomDeCurrentMethode, elementClass);
+                }
+        
             }
         });
 
@@ -171,7 +216,6 @@ public class App extends JFrame {
         else if(currentPage == 3){
             dansAttributesPage();
         }else if (currentPage == 4){
-            affiche();
 
             dansAssociationsPage();
         }
@@ -182,7 +226,10 @@ public class App extends JFrame {
         }
         
         else if(currentPage == -1){
-           dispose();               
+            affiche();
+            enregistre("test.xml");
+
+           System.exit(0);               
         }
     }
 
@@ -215,11 +262,15 @@ public class App extends JFrame {
             ((Associations)cardPanels.getComponents()[3]).addToClasses(classesArray);
 
             //set up the next page
+            try{
             nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
             ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
             //pass to next page
             this.currentPage++;
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
+            }catch(Exception e){
+                System.out.println("Error: "+e.getMessage());
+            }
         }
         else{
             ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Rester "+nombreDesClasses+" classes pour ajouter\n");
@@ -257,21 +308,20 @@ public class App extends JFrame {
     private void dansMethodesPage(){
         nombreDesClasses = ((nombreDesClass)cardPanels.getComponents()[0]).getNombreDesClasses();
         int hasParametres = ((Methodes)cardPanels.getComponents()[4]).getHasParametres();
+        String nomDeCurrentMethode = ((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode();
+
         if(hasParametres == 1){//if the methode has parametres we go to parameteres page
             //set the name of the current methode 
             myFooter.nextButton.setText("Back to Methodes");
-            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres De Methode : "+((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode());
+            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres De Methode : "+nomDeCurrentMethode);
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "6");
             currentPage++;
         }else if (hasParametres == 0){
-            String nomDeCurrentMethode = ((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode();
             if(currentClass < nombreDesClasses-1){
                 try{
-                    if(!nomDeCurrentMethode.equals("")){
-                        currentClass++;
-                    }
+                    
 
-                    nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
+                    nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(++currentClass);
                     ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
                     ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
                 }catch(Exception e){
@@ -305,8 +355,19 @@ public class App extends JFrame {
         sortie.output(doc, System.out);
     }
     catch (java.io.IOException e){
-        System.out.println("Error: ");
+        System.out.println("Error: "+e.getMessage());
     }
+    }
+    public void enregistre(String fichier){
+        try
+            {
+                //On utilise ici un affichage classique avec getPrettyFormat()
+                XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+                //Remarquez qu'il suffit simplement de créer une instance de FileOutputStream
+                //avec en argument le nom du fichier pour effectuer la sérialisation.
+                sortie.output(doc, new FileOutputStream(fichier));
+            }
+        catch (java.io.IOException e){}
     }
     
  

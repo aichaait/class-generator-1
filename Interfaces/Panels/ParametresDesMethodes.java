@@ -64,6 +64,7 @@ public ParametresDesMethodes() {
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         choixDesTypes = new JComboBox<>();
+        setBackground(new java.awt.Color(179, 179, 255));
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
         titreDePanel.setText("Ajouter Parametres de : "+nomDeCurrentMethode);
@@ -78,7 +79,7 @@ public ParametresDesMethodes() {
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBackground(new Color(242,242,242));
-        errorsField.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
+        errorsField.setFont(new java.awt.Font("Liberation Serif", 1, 12)); // NOI18N
         jScrollPane1.setViewportView(errorsField);
 
         choixDesTypes.setModel(model);
@@ -135,6 +136,18 @@ public ParametresDesMethodes() {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+    }
+
+    public JComboBox<String> getChoixDesTypes() {
+        return choixDesTypes;
+    }
+
+    public JTextArea getErrorsField() {
+        return errorsField;
+    }
+
+    public GTextField getInputNom() {
+        return inputNom;
     }
 
     private void addButtonActionPerformed() {

@@ -13,6 +13,8 @@ public class End extends JPanel {
     JLabel titreDePanel;
     public End() {
         initComponents();
+        setBackground(new java.awt.Color(179, 179, 255));
+
     }
     private void initComponents() {
         titreDePanel = new JLabel();

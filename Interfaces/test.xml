@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+  <class name="a">
+    <attributes />
+    <associations />
+    <methodes>
+      <methode name="s" type="Entier">
+        <parametres>
+          <parametre name="q" type="Entier" />
+        </parametres>
+      </methode>
+      <methode name="e" type="Entier">
+        <parametres />
+      </methode>
+    </methodes>
+  </class>
+</classes>

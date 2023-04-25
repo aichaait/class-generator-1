@@ -16,6 +16,8 @@ public class Help extends JPanel {
     JTextArea titreDePanel;
     public Help() {
         initComponents();
+        setBackground(new java.awt.Color(179, 179, 255));
+
     }
     private void initComponents() {
         titreDePanel = new JTextArea();

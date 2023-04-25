@@ -47,13 +47,19 @@ public class Associations extends javax.swing.JPanel {
         etoileButton = new javax.swing.JRadioButton();
         unButton = new javax.swing.JRadioButton();
 
+        setBackground(new java.awt.Color(179, 179, 255));
+
+
         titreDePanel.setFont(new java.awt.Font("Liberation Sans", 1, 48)); // NOI18N
         titreDePanel.setText("Associations De Class : ");
 
         errorField.setColumns(20);
         errorField.setRows(5);
         errorField.setEditable(false);
+        errorField.setFont(new java.awt.Font("Liberation Sans", 1, 12));
+
         jScrollPane1.setViewportView(errorField);
+
 
         
         addButton.addActionListener(new java.awt.event.ActionListener() {

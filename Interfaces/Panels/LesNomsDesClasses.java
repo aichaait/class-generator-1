@@ -85,6 +85,9 @@ public class LesNomsDesClasses extends JPanel {
         superClassLabel = new javax.swing.JLabel();
         superClassChoix = new javax.swing.JComboBox<String>();
 
+        setBackground(new java.awt.Color(179, 179, 255));
+
+
         titreDePanel.setFont(new Font("Liberation Serif", 1, 48)); // NOI18N
         titreDePanel.setText("Les Noms Des Classes");
         titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,8 +113,8 @@ public class LesNomsDesClasses extends JPanel {
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBackground(new Color(242,242,242));
-        errorsField.setFont(new Font("Liberation Sans", 1, 18)); // NOI18N
-        errorsField.setForeground(Color.RED);
+        errorsField.setFont(new java.awt.Font("Liberation Sans", 1, 12));
+        // errorsField.setForeground(Color.RED);
         jScrollPane1.setViewportView(errorsField);
 
 

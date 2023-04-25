@@ -84,6 +84,9 @@ public class Attributes extends JPanel {
         addButton = new MyButton("Add");
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
+
+        setBackground(new java.awt.Color(179, 179, 255));
+
         listDesTypesAttributes = new String[] { "Entier", "Reel", "Chaine", "Charactere", "Booleen" };
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
@@ -116,8 +119,8 @@ public class Attributes extends JPanel {
         errorsField.setColumns(20);
         errorsField.setRows(5);
         errorsField.setBackground(new Color(242,242,242));
-        errorsField.setForeground(Color.red);
-        errorsField.setFont(new java.awt.Font("Liberation Sans", 0, 18));
+        // errorsField.setForeground(Color.red);
+        errorsField.setFont(new java.awt.Font("Liberation Sans", 1, 12));
         jScrollPane1.setViewportView(errorsField);
 
         // addButton.addActionListener(new java.awt.event.ActionListener() {
