@@ -158,12 +158,13 @@ public class App extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UML Generator");
-        setSize(1200, 800);
+        setSize(1200, 750);
     }
     private void nextButtonActionPerformed(){
         if(currentPage == 1){
             nombreDesClasses = ((nombreDesClass)cardPanels.getComponents()[0]).getNombreDesClasses();
             dansLeNombreDesClassesPage(nombreDesClasses);
+    
         }else if(currentPage == 2){
             nombreDesClasses = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getNombreDesClasses();
             dansLesNomsDesClassesPage(nombreDesClasses);
@@ -316,7 +317,7 @@ public class App extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new App().setVisible(true);
-
+                
             }
         });
 

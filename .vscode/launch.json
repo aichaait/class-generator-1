@@ -3,6 +3,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "frameDeTesting",
+      "request": "launch",
+      "mainClass": "Panels.frameDeTesting",
+      "projectName": "class-generator_dcff9600"
+    },
+    {
+      "type": "java",
+      "name": "arber",
+      "request": "launch",
+      "mainClass": "Panels.arber",
+      "projectName": "class-generator_dcff9600"
+    },
+    {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "App",
+      "projectName": "class-generator_dcff9600"
+    },
+    {
+      "type": "java",
       "name": "frametest",
       "request": "launch",
       "mainClass": "Panels.frametest",
