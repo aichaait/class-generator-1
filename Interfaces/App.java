@@ -48,6 +48,7 @@ public class App extends JFrame {
     private LesFonctionDeXML Writer = new LesFonctionDeXML();
     private Element elementClass;
     private String nomDeCurrentMethode;
+    private String GlobalprojectPath;
 
  
     
@@ -182,10 +183,13 @@ public class App extends JFrame {
                 int result = fileChooser.showOpenDialog(((StartPage)cardPanels.getComponents()[9]));
                 if (result == JFileChooser.APPROVE_OPTION) {
                     String projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project";
+                    GlobalprojectPath = projectPath;
                     File projectFolder = new File(projectPath);
                     while(projectFolder.exists()){
                         projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project"+(i++);
                         projectFolder = new File(projectPath);
+                        GlobalprojectPath = projectPath;
+
 
 
                     }
@@ -279,9 +283,14 @@ public class App extends JFrame {
         
         else if(currentPage == -1){
             affiche();
-            enregistre("test.xml");
+            System.out.println(GlobalprojectPath+"/DiagrammeDesClasses/DG.xml");
+            enregistre(GlobalprojectPath+"/DiagrammeDesClasses/DG.xml");
+            ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+            myFooter.nextButton.setText("Next");
+            myFooter.nextButton.setVisible(false);
+            currentPage = 1;
+            doc.getRootElement().removeChildren("class");
 
-           System.exit(0);               
         }
     }
 
