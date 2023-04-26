@@ -13,13 +13,13 @@ import org.jdom2.Document;
 public class WriteXmlToSql {
 
 
-    public void ConvertFromXML2Sql(String xmlFilePath){
+    public void ConvertFromXML2Sql(String Path){
         SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
         try {
 
-            Document xmlDocument = builder.build(new File(xmlFilePath));
+            Document xmlDocument = builder.build(new File(Path+"/DiagrammeDesClasses/"+"DG.xml"));
             Element root = xmlDocument.getRootElement();
-            FileWriter SqlFile = new FileWriter("file.SQL");
+            FileWriter SqlFile = new FileWriter(Path+"/SQLrequete/file.SQL");
             
 
             List<Element> list = root.getChildren("class");

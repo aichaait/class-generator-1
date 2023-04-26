@@ -53,6 +53,7 @@ public class App extends JFrame {
     private String nomDeCurrentMethode;
     private String GlobalprojectPath;
     private WriteXmlToJava writeXmlToJava = new WriteXmlToJava();
+    private WriteXmlToSql writeXmlToSql = new WriteXmlToSql();
 
  
     
@@ -268,6 +269,7 @@ public class App extends JFrame {
             currentPage = 1;
             doc.getRootElement().removeChildren("class");
             writeXmlToJava.ConvertFromJava2XML(GlobalprojectPath);
+            writeXmlToSql.ConvertFromXML2Sql(GlobalprojectPath);
             FolderPanel.updateFolder(new File(GlobalprojectPath) );
 
 
