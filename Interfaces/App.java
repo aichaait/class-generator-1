@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.event.MenuListener;
 
@@ -81,6 +82,7 @@ public class App extends JFrame {
         MyButton methodesAddButton = ((Methodes)cardPanels.getComponents()[4]).getAddButton();
         MyButton parametresAddButton = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getAddButton();
         JLabel newProjectLabel = ((StartPage)cardPanels.getComponents()[9]).getNewProjectLabel();
+        JMenuItem newProjectItem = myMenuBar.getNewProjectItem();
 
 
 
@@ -181,46 +183,14 @@ public class App extends JFrame {
                 newProjectItemActionPerformed();
             }
 
-            private void newProjectItemActionPerformed() {
-                int i=0; 
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int result = fileChooser.showOpenDialog(((StartPage)cardPanels.getComponents()[9]));
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    String projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project";
-                    GlobalprojectPath = projectPath;
-                    File projectFolder = new File(projectPath);
-                    while(projectFolder.exists()){
-                        projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project"+(i++);
-                        projectFolder = new File(projectPath);
-                        GlobalprojectPath = projectPath;
-
-
-
-                    }
-                    if (!projectFolder.exists()) {
-                        projectFolder.mkdir();
-                        File DGFolder = new File(projectPath + File.separator + "DiagrammeDesClasses");
-                        DGFolder.mkdir();
-                        File javaFolder = new File(projectPath + File.separator + "javaclasses");
-                        javaFolder.mkdir();
-                        File cppFolder = new File(projectPath + File.separator + "cppclasses");
-                        cppFolder.mkdir();
-                        File sqlFolder = new File(projectPath + File.separator + "SQLrequete");
-                        sqlFolder.mkdir();
-                        FolderPanel.updateFolder(projectFolder );
-                        JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Folders created successfully");
-                        myFooter.nextButton.setVisible(true);
-                        ((CardLayout)cardPanels.getLayout()).show(cardPanels, "1");
-
-
-                    } else {
-                        JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Project folder already exists");
-                    }
-                }
-            }
-
         });
+        newProjectItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newProjectItemActionPerformed();
+            }
+        });
+        
         
 
         mySideBar = new FolderPanel();
@@ -439,6 +409,44 @@ public class App extends JFrame {
                 sortie.output(doc, new FileOutputStream(fichier));
             }
         catch (java.io.IOException e){}
+    }
+    private void newProjectItemActionPerformed() {
+        int i=1; 
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = fileChooser.showOpenDialog(((StartPage)cardPanels.getComponents()[9]));
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project";
+            GlobalprojectPath = projectPath;
+            File projectFolder = new File(projectPath);
+            while(projectFolder.exists()){
+                projectPath = fileChooser.getSelectedFile().getAbsolutePath() + File.separator + "project-"+(i++);
+                projectFolder = new File(projectPath);
+                GlobalprojectPath = projectPath;
+
+
+
+            }
+            if (!projectFolder.exists()) {
+                projectFolder.mkdir();
+                File DGFolder = new File(projectPath + File.separator + "DiagrammeDesClasses");
+                DGFolder.mkdir();
+                File javaFolder = new File(projectPath + File.separator + "javaclasses");
+                javaFolder.mkdir();
+                File cppFolder = new File(projectPath + File.separator + "cppclasses");
+                cppFolder.mkdir();
+                File sqlFolder = new File(projectPath + File.separator + "SQLrequete");
+                sqlFolder.mkdir();
+                FolderPanel.updateFolder(projectFolder );
+                JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Folders created successfully");
+                myFooter.nextButton.setVisible(true);
+                ((CardLayout)cardPanels.getLayout()).show(cardPanels, "1");
+
+
+            } else {
+                JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Project folder already exists");
+            }
+        }
     }
     
  

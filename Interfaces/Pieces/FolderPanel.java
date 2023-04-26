@@ -12,7 +12,7 @@ public class FolderPanel extends JPanel {
         setLayout(new BorderLayout());
 
         // Create a root node for the JTree
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Root");
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(".");
 
         // Create a JTree component with the root node
         fileTree = new JTree(rootNode);

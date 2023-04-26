@@ -20,8 +20,13 @@ public class MenuBar extends JMenuBar {
     JMenu apropoJMenu =  new JMenu(" Apropos ");
     JMenu helpJMenu =  new JMenu(" Help ");
     JMenu fileMenu = new JMenu("File  ");
+    JMenuItem newProjectItem;
 
     
+
+    public JMenuItem getNewProjectItem() {
+        return newProjectItem;
+    }
 
     public JMenu getApropoJMenu() {
         return apropoJMenu;
@@ -44,7 +49,7 @@ public class MenuBar extends JMenuBar {
 
 
         ImageIcon folderIcon = new ImageIcon(getClass().getResource("../images/folder.png"));
-        JMenuItem newProjectItem = new JMenuItem("New project ", folderIcon);
+        newProjectItem = new JMenuItem("New project ", folderIcon);
         fileMenu.add(newProjectItem);
 
         ImageIcon openProjectIcon = new ImageIcon(getClass().getResource("../images/open.png"));

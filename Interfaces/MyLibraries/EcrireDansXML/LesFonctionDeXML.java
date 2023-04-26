@@ -134,7 +134,10 @@ public class LesFonctionDeXML {
         try {
             Element maMethod = new Element("methode");
             Attribute name = new Attribute("name", nom);
-            if(typeDeRetoure.equals("Entier")){
+            if(typeDeRetoure.equals("Aucun")){
+                typeDeRetoure = "void";
+            }
+            else if(typeDeRetoure.equals("Entier")){
                 typeDeRetoure = "int";
             }else if(typeDeRetoure.equals("Chaine")){
                 typeDeRetoure = "String";

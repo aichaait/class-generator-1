@@ -109,10 +109,13 @@ public class WriteXmlToJava {
             String value  = monAtributte.getAttributeValue("value");
             try{
                 if(!value.equals("")){
-                    if(!type.equals("String")){
-                        JavaFile.write("\t"+"private "+type+" "+name+" = "+value+";"+"\n"+"\n");
-                    }else{
+                    if(type.equals("String")){
                         JavaFile.write("\t"+"private "+type+" "+name+" = \""+value+"\";"+"\n"+"\n");
+                        
+                    }else if(type.equals("char")){
+                        JavaFile.write("\t"+"private "+type+" "+name+" = '"+value+"';"+"\n"+"\n");
+                    }else{
+                        JavaFile.write("\t"+"private "+type+" "+name+" = "+value+";"+"\n"+"\n");
                     }
                 }else{
                     JavaFile.write("\t"+"private "+type+" "+name+";"+"\n"+"\n");
@@ -214,7 +217,7 @@ public class WriteXmlToJava {
 
 
     private void printLesParametres(Element maMethode, FileWriter JavaFile){
-        List<Element> listDesParametres = maMethode.getChildren("param");
+        List<Element> listDesParametres = maMethode.getChildren("parametres").get(0).getChildren("parametre");
         for (int i = 0; i < listDesParametres.size(); i++) {
             Element monParametre = (Element) listDesParametres.get(i);
             String name = monParametre.getAttributeValue("name");

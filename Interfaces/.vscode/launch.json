@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FolderPanel",
+            "request": "launch",
+            "mainClass": "Pieces.FolderPanel",
+            "projectName": "Interfaces_be972c30"
+        },
+        {
+            "type": "java",
             "name": "Testing",
             "request": "launch",
             "mainClass": "MyLibraries.Convertion.Testing",

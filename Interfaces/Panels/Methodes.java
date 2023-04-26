@@ -18,7 +18,7 @@ import Pieces.MyButton;
 
 
 public class Methodes extends JPanel {
-    private String[] listDesTypesDeRetoure = new String[] { "Entier", "Reel", "Chaine", "Charactere" };
+    private String[] listDesTypesDeRetoure = new String[] { "Aucun","Entier", "Reel", "Chaine", "Charactere","Boolean" };
     private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(listDesTypesDeRetoure);
     private int hasParametres = 0;
     private String nomDeCurrentClass = "";
