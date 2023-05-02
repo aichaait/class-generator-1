@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -70,6 +71,15 @@ public class App extends JFrame {
     }
  
     private void initComponents() {
+        
+        try {
+            setIconImage(ImageIO.read(new File("images/sprint.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("problem in the logo");
+
+        }
+        
 
         header = new Header();
         header.setPreferredSize(new Dimension(100,100));
