@@ -17,6 +17,7 @@ public class CardPanels extends JPanel {
     private Apropos aproposPage;
     private Help helpPage;
     private StartPage start;
+    private DispalyPanel displayPage;
 
     
     //end of variables declaration
@@ -37,6 +38,7 @@ public class CardPanels extends JPanel {
         aproposPage = new Apropos();
         helpPage = new Help();
         start = new StartPage();
+        displayPage = new DispalyPanel();
 
         setLayout(new CardLayout());
 
@@ -55,6 +57,7 @@ public class CardPanels extends JPanel {
         add(aproposPage, "apropos");
         add(helpPage, "help");
         add(start,"welcome");
+        add(displayPage,"display");
         ((CardLayout) getLayout()).show(this, "welcome");
         
 

@@ -8,6 +8,10 @@ import java.io.File;
 public class FolderPanel extends JPanel {
     private static JTree fileTree;
 
+    public static JTree getFileTree() {
+        return fileTree;
+    }
+
     public FolderPanel() {
         setLayout(new BorderLayout());
 
@@ -23,6 +27,7 @@ public class FolderPanel extends JPanel {
 
         // Set the preferred size of the panel
         setPreferredSize(new Dimension(200, 200));
+        
     }
 
     // Method to update the JTree with the contents of a folder
@@ -62,20 +67,20 @@ public class FolderPanel extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
-        // Create a JFrame to hold the FolderPanel
-        JFrame frame = new JFrame("FolderPanel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // public static void main(String[] args) {
+    //     // Create a JFrame to hold the FolderPanel
+    //     JFrame frame = new JFrame("FolderPanel");
+    //     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create a FolderPanel and add it to the JFrame
-        FolderPanel folderPanel = new FolderPanel();
-        frame.getContentPane().add(folderPanel, BorderLayout.CENTER);
+    //     // Create a FolderPanel and add it to the JFrame
+    //     FolderPanel folderPanel = new FolderPanel();
+    //     frame.getContentPane().add(folderPanel, BorderLayout.CENTER);
 
-        // Display the window
-        frame.pack();
-        frame.setVisible(true);
+    //     // Display the window
+    //     frame.pack();
+    //     frame.setVisible(true);
 
-        // Update the FolderPanel with the contents of the current folder
-        folderPanel.updateFolder(new File("/home/bssayla/Downloads/class-generator"));
-    }
+    //     // Update the FolderPanel with the contents of the current folder
+    //     folderPanel.updateFolder(new File("/home/bssayla/Downloads/class-generator"));
+    // }
 }

@@ -1,16 +1,10 @@
 package Panels;
 
-import java.io.File;
-
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
-import javax.swing.filechooser.FileSystemView;
-
-import Pieces.FolderPanel;
 
 
 
@@ -64,13 +58,7 @@ public class StartPage extends JPanel {
         openProjectLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         openProjectLabel.setForeground(new java.awt.Color(0, 102, 204));
         openProjectLabel.setText("Open Project");
-        openProjectLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                openProjectItemActionPerformed();
-            }
-
-        });
+        
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -110,20 +98,7 @@ public class StartPage extends JPanel {
         );
     }// </editor-fold>                        
 
-    private void openProjectItemActionPerformed() {
-        //choose a directory
-        
-                JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                chooser.setDialogTitle("Choose a folder");
-                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        
-                int returnValue = chooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    System.out.println("Selected folder: " + chooser.getSelectedFile().getPath());
-                    FolderPanel.updateFolder(new File(chooser.getSelectedFile().getPath()));
-                }
-    
-        }                      
+                        
 
 
     // Variables declaration - do not modify                     

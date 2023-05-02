@@ -16,12 +16,12 @@ public class WriteXmlToCpp {
         WriteXmlToCpp jwrite = new WriteXmlToCpp();
         try {
     
-            Document xmlDocument = builder.build(new File(xmlFilePath));
+            Document xmlDocument = builder.build(new File(xmlFilePath+"/DiagrammeDesClasses/"+"DG.xml"));
             Element root = xmlDocument.getRootElement();
                 
             List<Element> list = root.getChildren("class");
 
-            jwrite.printClassesFromXmlIntoCppFile(list);
+            jwrite.printClassesFromXmlIntoCppFile(list,xmlFilePath);
                 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -29,11 +29,11 @@ public class WriteXmlToCpp {
         }
 
     }
-    public boolean  printClassesFromXmlIntoCppFile(List<Element> list){
+    public boolean  printClassesFromXmlIntoCppFile(List<Element> list,String path){
         try{
             for (int i = 0; i < list.size(); i++) {
                 Element monClass = (Element) list.get(i);
-                printClassFromXmlIntoCppFile(monClass);
+                printClassFromXmlIntoCppFile(monClass,path);
             }
             return true;
         }catch(Exception e){
@@ -43,25 +43,35 @@ public class WriteXmlToCpp {
         }
     }
     //depth 1
-    private boolean printClassFromXmlIntoCppFile(Element monClass) {
+    private boolean printClassFromXmlIntoCppFile(Element monClass,String path) {
         try{
             String className = monClass.getAttributeValue("name");
-            FileWriter  JavaFile = new FileWriter(capitalize(className)+".cpp" );
-            JavaFile.write("#include <iostream>\n");
+            FileWriter  CppFile = new FileWriter(path+"/cppclasses/"+capitalize(className)+".cpp" );
+            String superClass = monClass.getAttributeValue("superClass");
 
-            JavaFile.write("class "+capitalize(className));
-            printExtendIfWeHaveIt(monClass, JavaFile);
+            CppFile.write("#include <iostream>\n");
+
+
+            if(superClass == null){
+                System.out.println("done");
+            }else if(!superClass.equals("")){
+                CppFile.write("#include <"+capitalize(superClass)+".cpp>\n");
+            }
+            CppFile.write("class "+capitalize(className));
+
+            printExtendIfWeHaveIt(monClass, CppFile);//done
         
-            JavaFile.write(" {"+"\n");
-            JavaFile.write("\t"+"private :\n");
-            printAttributesDeClass(monClass, JavaFile);
-           // printLesVariableDautreClasses(monClass, JavaFile);
-            JavaFile.write("\t"+"public:\n");
-            printConstructorDeClass(monClass, JavaFile);
-            printGettersAndSetters(monClass, JavaFile);
-            printMethodesDeClass(monClass, JavaFile);
-            JavaFile.write("}\";"+"\n");
-            JavaFile.close();
+            CppFile.write(" {"+"\n");
+            CppFile.write("\t"+"private :\n");
+            //done
+            printAttributesDeClass(monClass, CppFile);
+            printLesVariableDautreClasses(monClass, CppFile);
+            CppFile.write("\t"+"public:\n");
+            printConstructorDeClass(monClass, CppFile);
+            printGettersAndSetters(monClass, CppFile);//done
+            printMethodesDeClass(monClass, CppFile);//done
+            CppFile.write("}\";"+"\n");
+            CppFile.close();
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -70,14 +80,14 @@ public class WriteXmlToCpp {
         }
     }
      // depth 2
-    private boolean printExtendIfWeHaveIt(Element monClass, FileWriter JavaFile) {
+    private boolean printExtendIfWeHaveIt(Element monClass, FileWriter CppFile) {
         String superClass = monClass.getAttributeValue("superClass");
         try{
             if(superClass == null){
                 return false;
             }
             if(!superClass.equals("")){
-                JavaFile.write(": public "+ capitalize(superClass));
+                CppFile.write(": public "+ capitalize(superClass));
             }
             return true;
         }catch(Exception e){
@@ -86,7 +96,7 @@ public class WriteXmlToCpp {
 
         }
     } 
-    private void printAttributesDeClass(Element monClass, FileWriter JavaFile) {
+    private void printAttributesDeClass(Element monClass, FileWriter CppFile) {
         List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         for (int i = 0; i < listDesAtributtes.size(); i++) {
             Element monAtributte = (Element) listDesAtributtes.get(i);
@@ -95,13 +105,16 @@ public class WriteXmlToCpp {
             String value  = monAtributte.getAttributeValue("value");
             try{
                 if(!value.equals("")){
-                    if(!type.equals("String")){
-                        JavaFile.write("\t"+type+" "+name+" = "+value+";"+"\n"+"\n");
+                    if(type.equals("String")){
+                        CppFile.write("\t\t"+type+" "+name+" = \""+value+"\";"+"\n"+"\n");
+                        
+                    }else if(type.equals("char")){
+                        CppFile.write("\t\t"+type+" "+name+" = '"+value+"';"+"\n"+"\n");
                     }else{
-                        JavaFile.write("\t"+type+" "+name+" = \""+value+"\";"+"\n"+"\n");
+                        CppFile.write("\t\t"+type+" "+name+" = "+value+";"+"\n"+"\n");
                     }
                 }else{
-                    JavaFile.write("\t"+type+" "+name+";"+"\n"+"\n");
+                    CppFile.write("\t\t"+type+" "+name+";"+"\n"+"\n");
                 }
             }catch(Exception e){
                 System.out.println(e.getMessage());
@@ -109,7 +122,7 @@ public class WriteXmlToCpp {
             }
         }
     }
-    private void printGettersAndSetters(Element monClass, FileWriter JavaFile) { 
+    private void printGettersAndSetters(Element monClass, FileWriter CppFile) { 
         List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         
         for (int i = 0; i < listDesAtributtes.size(); i++) {
@@ -117,45 +130,70 @@ public class WriteXmlToCpp {
             String name = monAtributte.getAttributeValue("name");
             String type = monAtributte.getAttributeValue("type");
             try{
-                JavaFile.write("\t"+type+" get"+capitalize(name)+"()"+"{"+"\n");
-                JavaFile.write("\t"+"\t"+"return "+"this."+name+";"+"\n");
-                JavaFile.write("\t"+"}"+"\n");
-                JavaFile.write("\t"+"void set"+capitalize(name)+"("+type+" "+name+"){"+"\n");
-                JavaFile.write("\t"+"\t"+"this."+name+" = "+name+";"+"\n");
-                JavaFile.write("\t"+"}"+"\n");
+                CppFile.write("\t"+type+" get"+capitalize(name)+"()"+"{"+"\n");
+                CppFile.write("\t"+"\t"+"return "+"this."+name+";"+"\n");
+                CppFile.write("\t"+"}"+"\n");
+                CppFile.write("\t"+"void set"+capitalize(name)+"("+type+" "+name+"){"+"\n");
+                CppFile.write("\t"+"\t"+"this."+name+" = "+name+";"+"\n");
+                CppFile.write("\t"+"}"+"\n");
             }catch(Exception e){
                 System.out.println(e.getMessage());
 
             }
         }
     }
-    private void printConstructorDeClass(Element monClass, FileWriter JavaFile) {
-        printLeNomEtLesParametresDeConstructeur(monClass, JavaFile);
-        printSuperInConstructor(monClass, JavaFile);
-        printContenueDeConstructeur(monClass, JavaFile);
+    private void printConstructorDeClass(Element monClass, FileWriter CppFile) {
+        printLeNomEtLesParametresDeConstructeur(monClass, CppFile);
+        printSuperInConstructor(monClass, CppFile);
+        printContenueDeConstructeur(monClass, CppFile);
         try{
-        JavaFile.write("\t"+"}"+"\n");
+        CppFile.write("\t"+"}"+"\n");
         }catch(Exception e){
          System.out.println(e.getMessage());
         }
     }
-    /*private void printLesVariableDautreClasses(Element monClass, FileWriter javaFile) {
+    private void printLesVariableDautreClasses(Element monClass, FileWriter CppFile) {
+        List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
+        String classDArrivee,multiplicity;
+        if(listDesAssociation.size() == 0){
+            return;
+        }
+        for (Element association : listDesAssociation) {
+            classDArrivee = association.getAttributeValue("classArrivee");
+            multiplicity = association.getAttributeValue("multiplicity");
+            
+            if(multiplicity.equals("1")){
+                try{
+                    CppFile.write("\t\t"+capitalize(classDArrivee)+" "+classDArrivee.toLowerCase()+";"+"\n");
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+    
+                }
+            }else{
+                try{
+                    CppFile.write("\t\tvector<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s;"+"\n");
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+
+                }
+            }
+        }
     }
-    */
-    private void printMethodesDeClass(Element monClass, FileWriter JavaFile) {
+    
+    private void printMethodesDeClass(Element monClass, FileWriter CppFile) {
         List<Element> listDesMethodes = monClass.getChildren("methodes").get(0).getChildren("methode");
         for (int i = 0; i < listDesMethodes.size(); i++) {
             Element maMethode = (Element) listDesMethodes.get(i);
             String name = maMethode.getAttributeValue("name");
             String type = maMethode.getAttributeValue("return");
             try{
-                JavaFile.write("\t"+type+" "+name+"(");
+                CppFile.write("\t"+type+" "+name+"(");
 
-                printLesParametres(maMethode, JavaFile);
+                printLesParametres(maMethode, CppFile);
                 
-                JavaFile.write(")"+"{"+"\n");
-                JavaFile.write("\t"+"\t"+"//Ecrit ici"+"\n"+"\n");
-                JavaFile.write("\t"+"}"+"\n");
+                CppFile.write(")"+"{"+"\n");
+                CppFile.write("\t"+"\t"+"//Ecrit ici"+"\n"+"\n");
+                CppFile.write("\t"+"}"+"\n");
             }catch(Exception e){
                 System.out.println(e.getMessage());
 
@@ -163,16 +201,16 @@ public class WriteXmlToCpp {
         }
     }
 
-   private void printLesParametres(Element maMethode, FileWriter JavaFile) {
+   private void printLesParametres(Element maMethode, FileWriter CppFile) {
     List<Element> listDesParametres = maMethode.getChildren("param");
     for (int i = 0; i < listDesParametres.size(); i++) {
         Element monParametre = (Element) listDesParametres.get(i);
         String name = monParametre.getAttributeValue("name");
         String type = monParametre.getAttributeValue("type");
         try{
-            JavaFile.write(type+" "+name);
+            CppFile.write(type+" "+name);
             if(i != listDesParametres.size()-1){
-                JavaFile.write(",");
+                CppFile.write(",");
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -182,14 +220,119 @@ public class WriteXmlToCpp {
 
     }
     //composant du constructeur 
-    private void printContenueDeConstructeur(Element monClass, FileWriter JavaFile) {
+    private void printLeNomEtLesParametresDeConstructeur(Element monClass, FileWriter CppFile) {
+        try{
+            CppFile.write("\t\t"+capitalize(monClass.getAttributeValue("name"))+"(");
+            printLesVariablesDeSuperClass(monClass, CppFile, true);
+            CppFile.write(")"+"{"+"\n");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+
+        }
     }
-    private void printLeNomEtLesParametresDeConstructeur(Element monClass, FileWriter JavaFile) {
+    
+    private void printContenueDeConstructeur(Element monClass, FileWriter CppFile) {
+        List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
+        String associationType,classDArrivee,multiplicity;
+        try{
+            if(listDesAssociation.size() == 0){
+                return;
+            }
+            for (Element association : listDesAssociation) {
+                associationType = association.getAttributeValue("type");
+                classDArrivee = association.getAttributeValue("classArrivee");
+                multiplicity = association.getAttributeValue("multiplicity");
+                if(!associationType.equals("composition")){
+                    if(multiplicity.equals("1")){
+                        CppFile.write("\t"+"\t"+"this->"+classDArrivee.toLowerCase()+" = "+classDArrivee.toLowerCase()+";"+"\n");
+                    }else{
+                        CppFile.write("\t"+"\t"+"this->"+classDArrivee.toLowerCase()+"s = "+classDArrivee.toLowerCase()+"s;"+"\n");
+                    }
+                }else{
+                    if(multiplicity.equals("1")){
+                        CppFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+" = new "+capitalize(classDArrivee)+"();"+"\n");
+                    }else{
+                        CppFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+"s = new vector<"+capitalize(classDArrivee)+">();"+"\n");
+                        
+                    }
+                }
+                
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+
+        }
     }
-    private void printSuperInConstructor(Element monClass, FileWriter JavaFile) {
+    
+    private void printSuperInConstructor(Element monClass, FileWriter CppFile) {
+        String superClass = monClass.getAttributeValue("superClass"),className= monClass.getAttributeValue("name");
+        Element monSuperClass ;
+        try{
+            if(superClass != null){
+                CppFile.write("\t\tsuper::"+capitalize(className)+"(");
+                for (Element classParent : monClass.getParentElement().getChildren("class")) {
+                    if (classParent.getAttributeValue("name").equals(superClass)){
+                        monSuperClass = classParent;
+                        printLesVariablesDeSuperClass(monSuperClass, CppFile,false);
+                        break;
+                    }
+                    
+                }
+                CppFile.write(");"+"\n");
+               
+
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
    
+    private void printLesVariablesDeSuperClass(Element monClass, FileWriter CppFile, boolean withType) {
+        String superClass = monClass.getAttributeValue("superClass");
+        Element monSuperClass ;
 
+        try{
+            //check there is a super class
+            if(superClass != null){
+                //get the super class
+                for (Element classParent : monClass.getParentElement().getChildren("class")) {
+                    if (classParent.getAttributeValue("name").equals(superClass)){
+                        monSuperClass = classParent;
+                        printLesVariablesDeSuperClass(monSuperClass, CppFile,withType);
+                        break;
+                    }
+                }
+            }else{
+                //print the variables of the class
+                List<Element> listDesAssociation = monClass.getChildren("associations").get(0).getChildren("association");
+                String associationType,classDArrivee,multiplicity;
+                for (Element association : listDesAssociation) {
+                    associationType = association.getAttributeValue("type");
+                    classDArrivee = association.getAttributeValue("classArrivee");
+                    multiplicity = association.getAttributeValue("multiplicity");
+                    if(!associationType.equals("composition")){
+                        //print the variable with type in the Constructor
+                        if(withType){
+                        
+                            if(multiplicity.equals("1")){
+                                CppFile.write(capitalize(classDArrivee)+" "+classDArrivee.toLowerCase()+",");
+                            }else{
+                                CppFile.write("vector<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s,");
+                            }
+                        }else{//print the variable without type in the Super
+                            if(multiplicity.equals("1")){
+                                CppFile.write(classDArrivee.toLowerCase()+",");
+                            }else{
+                                CppFile.write(classDArrivee.toLowerCase()+"s,");
+                            }
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 
     private String capitalize(String inputString) {

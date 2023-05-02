@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -13,7 +16,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTree;
 import javax.swing.event.MenuListener;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.tree.TreePath;
 
 import org.jdom2.DocType;
 import org.jdom2.Document;
@@ -24,6 +30,7 @@ import org.jdom2.output.XMLOutputter;
 import Panels.Associations;
 import Panels.Attributes;
 import Panels.CardPanels;
+import Panels.DispalyPanel;
 import Panels.LesNomsDesClasses;
 import Panels.Methodes;
 import Panels.ParametresDesMethodes;
@@ -54,6 +61,7 @@ public class App extends JFrame {
     private String GlobalprojectPath;
     private WriteXmlToJava writeXmlToJava = new WriteXmlToJava();
     private WriteXmlToSql writeXmlToSql = new WriteXmlToSql();
+    private WriteXmlToCpp writeXmlToCpp = new WriteXmlToCpp();
 
  
     
@@ -77,6 +85,18 @@ public class App extends JFrame {
         cardPanels = new CardPanels();
         cardPanels.setPreferredSize(new Dimension(300,500));
 
+        mySideBar = new FolderPanel();
+        mySideBar.setBackground(Color.WHITE);
+        mySideBar.setPreferredSize(new Dimension(300,500));
+
+
+        myFooter = new Footer();
+        myFooter.nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed();
+            }
+        });
+
         MyButton nomDesClassAddButton = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getAddButton();
         MyButton attributesAddButton = ((Attributes)cardPanels.getComponents()[2]).getAddButton();
         MyButton associationsAddButton = ((Associations)cardPanels.getComponents()[3]).getAddButton();
@@ -84,6 +104,10 @@ public class App extends JFrame {
         MyButton parametresAddButton = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getAddButton();
         JLabel newProjectLabel = ((StartPage)cardPanels.getComponents()[9]).getNewProjectLabel();
         JMenuItem newProjectItem = myMenuBar.getNewProjectItem();
+        JLabel openProjectLabel = ((StartPage)cardPanels.getComponents()[9]).getOpenProjectLabel();
+        JMenuItem openProjectItem = myMenuBar.getOpenProjectItem();
+
+        JTree fileTree = FolderPanel.getFileTree();
 
 
 
@@ -91,8 +115,11 @@ public class App extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nomDeCurrentClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getInputNom().getText();
-                String nomDeSuperClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getSuperClassChoix().getSelectedItem().toString();
-                Writer.ajouterUnClass(nomDeCurrentClass,nomDeSuperClass , doc);
+                if(((LesNomsDesClasses)cardPanels.getComponents()[1]).isValidClassName(nomDeCurrentClass)){
+                    String nomDeSuperClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getSuperClassChoix().getSelectedItem().toString();
+                    Writer.ajouterUnClass(nomDeCurrentClass,nomDeSuperClass , doc);
+                }
+               
             }
         });
         attributesAddButton.addActionListener(new ActionListener() {
@@ -191,20 +218,88 @@ public class App extends JFrame {
                 newProjectItemActionPerformed();
             }
         });
-        
-        
+        openProjectLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                openProjectItemActionPerformed();
+            }
+            
 
-        mySideBar = new FolderPanel();
-        mySideBar.setBackground(Color.WHITE);
-        mySideBar.setPreferredSize(new Dimension(300,500));
-
-
-        myFooter = new Footer();
-        myFooter.nextButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonActionPerformed();
+        });
+        openProjectItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openProjectItemActionPerformed();
             }
         });
+        fileTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                
+                
+                try {
+                    // Get the node that was clicked
+                    TreePath path = fileTree.getSelectionPath();
+                
+                    // Create a new path starting from the third element in the original path
+                    Object[] newPath = new Object[path.getPathCount() - 2];
+                    ((DispalyPanel)cardPanels.getComponents()[10]).getTextArea().setText("");
+                    for (int i = 2; i < path.getPathCount(); i++) {
+                        newPath[i - 2] = path.getPathComponent(i);
+                    }
+                    TreePath newTreePath = new TreePath(newPath);
+                    String pathString = newTreePath.toString();
+                    //java.lang.IllegalArgumentException error
+                    if(pathString.equals("[.]")){
+                        ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+                        return;
+                    }
+
+
+                    if (pathString.equals("")) {
+                        System.out.println("No path selected");
+                        // ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+                    }
+
+                    // Replace the square brackets and commas with forward slashes
+                    pathString = pathString.replace("[", "").replace("]", "").replace(", ", "/");
+
+                    // Print the path string
+                    File file = new File(GlobalprojectPath+"/"+pathString);
+                    if (file.isDirectory()) {
+                        // ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+                        return;
+                    }
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String line = null;
+                    while ((line = reader.readLine()) != null) {
+                        ((DispalyPanel)cardPanels.getComponents()[10]).getTextArea().append(line + "\n");
+                    }
+                    reader.close();
+                    ((CardLayout)cardPanels.getLayout()).show(cardPanels, "display");
+                }catch (java.lang.IllegalArgumentException ex) {
+                    // ex.printStackTrace();
+                    System.out.println("1");
+
+                    // ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+                }catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    System.out.println("2");
+                    
+                        // ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+
+                }catch(java.lang.NegativeArraySizeException ex){
+                    System.out.println("3");
+                    // ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+                }
+                
+               
+
+            }
+        });
+        
+        
+
+      
         myMenuBar.getApropoJMenu().addMenuListener(new MenuListener() {
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 ((CardLayout)cardPanels.getLayout()).show(cardPanels, "apropos");
@@ -270,6 +365,7 @@ public class App extends JFrame {
             doc.getRootElement().removeChildren("class");
             writeXmlToJava.ConvertFromJava2XML(GlobalprojectPath);
             writeXmlToSql.ConvertFromXML2Sql(GlobalprojectPath);
+            writeXmlToCpp.ConvertFromXML2Cpp(GlobalprojectPath);
             FolderPanel.updateFolder(new File(GlobalprojectPath) );
 
 
@@ -437,7 +533,7 @@ public class App extends JFrame {
                 javaFolder.mkdir();
                 File cppFolder = new File(projectPath + File.separator + "cppclasses");
                 cppFolder.mkdir();
-                File sqlFolder = new File(projectPath + File.separator + "SQLrequete");
+                File sqlFolder = new File(projectPath + File.separator + "SQLrequetes");
                 sqlFolder.mkdir();
                 FolderPanel.updateFolder(projectFolder );
                 JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Folders created successfully");
@@ -450,6 +546,22 @@ public class App extends JFrame {
             }
         }
     }
+    private void openProjectItemActionPerformed() {
+        //choose a directory
+        
+                JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                chooser.setDialogTitle("Choose a folder");
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+                int returnValue = chooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("Selected folder: " + chooser.getSelectedFile().getPath());
+                    FolderPanel.updateFolder(new File(chooser.getSelectedFile().getPath()));
+                    GlobalprojectPath = chooser.getSelectedFile().getAbsolutePath();
+                }
+    
+        }  
+    
     
  
     

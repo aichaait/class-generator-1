@@ -169,9 +169,16 @@ public class LesNomsDesClasses extends JPanel {
                 errorsField.append("Vous fini, press Next pour continue\n");
             }else{
                 nomDeClass = inputNom.getText();
-                nomDeSuperClass = superClassChoix.getSelectedItem().toString();
-                addClass(nomDeClass,nomDeSuperClass);
-                nombreDesClasses--;
+                if(isValidClassName(nomDeClass)){
+                    nomDeSuperClass = superClassChoix.getSelectedItem().toString();
+                    addClass(nomDeClass,nomDeSuperClass);
+                    nombreDesClasses--;
+                }
+                else{
+                    errorsField.setText("Le nom est invalid donner un autre nom\n ");
+
+                }
+                
             }
             inputNom.setText("");
         }
@@ -194,6 +201,23 @@ public class LesNomsDesClasses extends JPanel {
 
                 
             }
+    }
+    public boolean isValidClassName(String className) {
+        if (className == null || className.isEmpty()) {
+            return false;
+        }
+        
+        if (!Character.isJavaIdentifierStart(className.charAt(0))) {
+            return false;
+        }
+        
+        for (int i = 1; i < className.length(); i++) {
+            if (!Character.isJavaIdentifierPart(className.charAt(i))) {
+                return false;
+            }
+        }
+        
+        return true;
     }
                                           
 

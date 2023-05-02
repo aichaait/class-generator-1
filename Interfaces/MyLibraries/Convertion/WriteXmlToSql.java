@@ -19,7 +19,7 @@ public class WriteXmlToSql {
 
             Document xmlDocument = builder.build(new File(Path+"/DiagrammeDesClasses/"+"DG.xml"));
             Element root = xmlDocument.getRootElement();
-            FileWriter SqlFile = new FileWriter(Path+"/SQLrequete/file.SQL");
+            FileWriter SqlFile = new FileWriter(Path+"/SQLrequetes/file.SQL");
             
 
             List<Element> list = root.getChildren("class");
