@@ -1,6 +1,7 @@
 package MyLibraries.Convertion;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -47,16 +48,7 @@ public class WriteXmlToCpp {
         try{
             String className = monClass.getAttributeValue("name");
             FileWriter  CppFile = new FileWriter(path+"/cppclasses/"+capitalize(className)+".cpp" );
-            String superClass = monClass.getAttributeValue("superClass");
-
-            CppFile.write("#include <iostream>\n");
-
-
-            if(superClass == null){
-                System.out.println("done");
-            }else if(!superClass.equals("")){
-                CppFile.write("#include <"+capitalize(superClass)+".cpp>\n");
-            }
+            printIncludes(monClass, CppFile);
             CppFile.write("class "+capitalize(className));
 
             printExtendIfWeHaveIt(monClass, CppFile);//done
@@ -70,7 +62,7 @@ public class WriteXmlToCpp {
             printConstructorDeClass(monClass, CppFile);
             printGettersAndSetters(monClass, CppFile);//done
             printMethodesDeClass(monClass, CppFile);//done
-            CppFile.write("}\";"+"\n");
+            CppFile.write("};\n");
             CppFile.close();
             return true;
         }catch(Exception e){
@@ -80,6 +72,30 @@ public class WriteXmlToCpp {
         }
     }
      // depth 2
+     private void printIncludes(Element monClass ,FileWriter CppFile){
+        String superClass = monClass.getAttributeValue("superClass");
+
+            try {
+                CppFile.write("#include <iostream>\n");
+                CppFile.write("#include <list>\n");
+                CppFile.write("#include <string>\n");
+
+
+                if(superClass == null){
+                    System.out.println("done");
+                }else if(!superClass.equals("")){
+                    CppFile.write("#include \""+capitalize(superClass)+".cpp\"\n");
+                }
+                for (Element association : monClass.getChild("associations").getChildren("association")) {
+                    CppFile.write("#include \""+association.getAttributeValue("classArrivee")+".cpp\"\n");
+                    
+                }
+                CppFile.write("using namespace std;\n");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+     }
     private boolean printExtendIfWeHaveIt(Element monClass, FileWriter CppFile) {
         String superClass = monClass.getAttributeValue("superClass");
         try{
@@ -104,6 +120,9 @@ public class WriteXmlToCpp {
             String type = monAtributte.getAttributeValue("type");
             String value  = monAtributte.getAttributeValue("value");
             try{
+                if(type.equals("boolean")){
+                    type = "bool";
+                }
                 if(!value.equals("")){
                     if(type.equals("String")){
                         CppFile.write("\t\t"+type+" "+name+" = \""+value+"\";"+"\n"+"\n");
@@ -130,11 +149,14 @@ public class WriteXmlToCpp {
             String name = monAtributte.getAttributeValue("name");
             String type = monAtributte.getAttributeValue("type");
             try{
+                if(type.equals("boolean")){
+                    type = "bool";
+                }
                 CppFile.write("\t"+type+" get"+capitalize(name)+"()"+"{"+"\n");
-                CppFile.write("\t"+"\t"+"return "+"this."+name+";"+"\n");
+                CppFile.write("\t"+"\t"+"return "+name+";"+"\n");
                 CppFile.write("\t"+"}"+"\n");
-                CppFile.write("\t"+"void set"+capitalize(name)+"("+type+" "+name+"){"+"\n");
-                CppFile.write("\t"+"\t"+"this."+name+" = "+name+";"+"\n");
+                CppFile.write("\t"+"void set"+capitalize(name)+"("+type+" My"+name+"){"+"\n");
+                CppFile.write("\t"+"\t"+name+" = My"+name+";"+"\n");
                 CppFile.write("\t"+"}"+"\n");
             }catch(Exception e){
                 System.out.println(e.getMessage());
@@ -171,7 +193,7 @@ public class WriteXmlToCpp {
                 }
             }else{
                 try{
-                    CppFile.write("\t\tvector<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s;"+"\n");
+                    CppFile.write("\t\tlist<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s;"+"\n");
                 }catch(Exception e){
                     System.out.println(e.getMessage());
 
@@ -187,6 +209,9 @@ public class WriteXmlToCpp {
             String name = maMethode.getAttributeValue("name");
             String type = maMethode.getAttributeValue("return");
             try{
+                if(type.equals("boolean")){
+                    type = "bool";
+                }
                 CppFile.write("\t"+type+" "+name+"(");
 
                 printLesParametres(maMethode, CppFile);
@@ -208,6 +233,9 @@ public class WriteXmlToCpp {
         String name = monParametre.getAttributeValue("name");
         String type = monParametre.getAttributeValue("type");
         try{
+            if(type.equals("boolean")){
+                type = "bool";
+            }
             CppFile.write(type+" "+name);
             if(i != listDesParametres.size()-1){
                 CppFile.write(",");
@@ -250,9 +278,9 @@ public class WriteXmlToCpp {
                     }
                 }else{
                     if(multiplicity.equals("1")){
-                        CppFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+" = new "+capitalize(classDArrivee)+"();"+"\n");
+                        CppFile.write("\t"+"\t"+"this->"+classDArrivee.toLowerCase()+" = new "+capitalize(classDArrivee)+"();"+"\n");
                     }else{
-                        CppFile.write("\t"+"\t"+"this."+classDArrivee.toLowerCase()+"s = new vector<"+capitalize(classDArrivee)+">();"+"\n");
+                        CppFile.write("\t"+"\t"+"this->"+classDArrivee.toLowerCase()+"s = new list<"+capitalize(classDArrivee)+">();"+"\n");
                         
                     }
                 }
@@ -269,7 +297,7 @@ public class WriteXmlToCpp {
         Element monSuperClass ;
         try{
             if(superClass != null){
-                CppFile.write("\t\tsuper::"+capitalize(className)+"(");
+                CppFile.write("\t\t"+capitalize(superClass)+"::"+capitalize(className)+"(");
                 for (Element classParent : monClass.getParentElement().getChildren("class")) {
                     if (classParent.getAttributeValue("name").equals(superClass)){
                         monSuperClass = classParent;
@@ -317,7 +345,7 @@ public class WriteXmlToCpp {
                             if(multiplicity.equals("1")){
                                 CppFile.write(capitalize(classDArrivee)+" "+classDArrivee.toLowerCase()+",");
                             }else{
-                                CppFile.write("vector<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s,");
+                                CppFile.write("list<"+capitalize(classDArrivee)+"> "+classDArrivee.toLowerCase()+"s,");
                             }
                         }else{//print the variable without type in the Super
                             if(multiplicity.equals("1")){

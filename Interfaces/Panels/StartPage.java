@@ -73,7 +73,7 @@ public class StartPage extends JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sousTitre, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sousTitre, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)

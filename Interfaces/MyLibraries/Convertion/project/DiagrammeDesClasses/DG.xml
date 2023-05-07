@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE classes SYSTEM "DG.dtd">
+<classes>
+  <class name="A">
+    <attributes>
+      <attribute name="a" type="int" value="" />
+    </attributes>
+    <methodes>
+      <methode name="ma" return="String">
+        <parametres>
+          <parametre name="e" type="int" />
+        </parametres>
+      </methode>
+      <methode name="ma2" return="void">
+        <parametres />
+      </methode>
+    </methodes>
+    <associations />
+  </class>
+  <class name="B" superClass="A">
+    <attributes>
+      <attribute name="b" type="char" value="" />
+    </attributes>
+    <methodes />
+    <associations>
+      <association type="composition" classArrivee="C" multiplicity="*" role="lesC" />
+    </associations>
+  </class>
+  <class name="C">
+    <attributes>
+      <attribute name="c" type="boolean" value="" />
+    </attributes>
+    <methodes />
+    <associations />
+  </class>
+  <class name="F">
+    <attributes />
+    <methodes />
+    <associations />
+  </class>
+</classes>

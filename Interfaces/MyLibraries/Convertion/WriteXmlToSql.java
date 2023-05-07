@@ -26,6 +26,7 @@ public class WriteXmlToSql {
 
             printTablesFromXmlIntoSqlFile(list,SqlFile);
             printLesVariableDautreTables(list,SqlFile);
+            printExtendIfWeHaveIt(list,SqlFile);
             SqlFile.close();
             
         } catch (Exception e) {
@@ -71,16 +72,18 @@ public class WriteXmlToSql {
         
     
     
-    private boolean printExtendIfWeHaveIt(Element monClass ,FileWriter JavaFile){
-        
-        String superClass = monClass.getAttributeValue("superClass");
-        String className = monClass.getAttributeValue("name");
+    private boolean printExtendIfWeHaveIt(List<Element> listDesClasses ,FileWriter JavaFile){
         try{
-            if(superClass == null){
-                return false;
-            }
-            if(!superClass.equals("")){
-                JavaFile.write("ALTER TABLE "+capitalize(className)+" ADD CONSTRAINT FK_CHILD FOREIGN KEY (ID) REFERENCES " +capitalize(superClass)+"(ID); \n");
+            for (Element monClass : listDesClasses) {
+                String superClass = monClass.getAttributeValue("superClass");
+                String className = monClass.getAttributeValue("name");
+            
+                    if(superClass == null){
+                        continue;
+                    }
+                    if(!superClass.equals("")){
+                        JavaFile.write("ALTER TABLE "+capitalize(className)+" ADD CONSTRAINT FK_CHILD FOREIGN KEY (ID) REFERENCES " +capitalize(superClass)+"(ID); \n");
+                    }
             }
             return true;
         }catch(Exception e){
@@ -88,6 +91,7 @@ public class WriteXmlToSql {
             return false;
 
         }
+            
     }
 
     private void printleschampduTable(Element monClass, FileWriter JavaFile) {
@@ -100,19 +104,16 @@ public class WriteXmlToSql {
             try{
                 if(type.equals("String")){
                     JavaFile.write("\t" +name+" "+ "VARCHAR(50) ");
-                    if(i<listDesAtributtes.size()-1){ JavaFile.write(",  \n");} 
-                }if(type.equals("int")){
+                }else if(type.equals("int") || type.equals("boolean")){
                     JavaFile.write("\t" +name+" "+ "INT ");
-                    if(i<listDesAtributtes.size()-1){ JavaFile.write(",  \n");} 
-                }
-                if(type.equals("Char")){
+                }else if(type.equals("char")){
                     JavaFile.write("\t" +name+" "+ "CHAR ");
-                    if(i<listDesAtributtes.size()-1){ JavaFile.write(",  \n");} 
+                }else if(type.equals("double")){  
+                    JavaFile.write("\t" +name+" "+ "FLOAT ");
                 }
-                if(type.equals("double")){  
-                JavaFile.write("\t" +name+" "+ "FLOAT ");
-                if(i<listDesAtributtes.size()-1){ JavaFile.write(",  \n");} 
-                }
+                if(i<listDesAtributtes.size()-1){
+                    JavaFile.write(",  \n");
+                    } 
             }catch(Exception e){
 
             }

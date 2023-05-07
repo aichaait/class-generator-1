@@ -125,7 +125,8 @@ public class App extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nomDeCurrentClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getInputNom().getText();
-                if(((LesNomsDesClasses)cardPanels.getComponents()[1]).isValidClassName(nomDeCurrentClass)){
+                int nombreDesClasseshere = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getNombreDesClasses();
+                if(((LesNomsDesClasses)cardPanels.getComponents()[1]).isValidClassName(nomDeCurrentClass) && nombreDesClasseshere != 0 ){
                     String nomDeSuperClass = ((LesNomsDesClasses)cardPanels.getComponents()[1]).getSuperClassChoix().getSelectedItem().toString();
                     Writer.ajouterUnClass(nomDeCurrentClass,nomDeSuperClass , doc);
                 }

@@ -1,0 +1,15 @@
+<!ELEMENT classes (class+)>
+    <!ELEMENT class (attributes, methodes,associations)>
+    <!ATTLIST class name ID #REQUIRED superClass IDREFS #IMPLIED>
+        <!ELEMENT attributes (attribute*)>
+            <!ELEMENT attribute EMPTY>
+            <!ATTLIST attribute name CDATA #REQUIRED value CDATA #IMPLIED type CDATA #REQUIRED>
+        <!ELEMENT methodes (methode*)>
+            <!ELEMENT methode (parametres)>
+            <!ATTLIST methode name CDATA #REQUIRED return CDATA #REQUIRED>
+        <!ELEMENT parametres (parametre*)>
+            <!ELEMENT parametre EMPTY>
+            <!ATTLIST parametre name CDATA #REQUIRED type CDATA #REQUIRED>
+        <!ELEMENT associations (association*)>
+            <!ELEMENT association EMPTY>
+            <!ATTLIST association type (simple | aggregation | composition) #REQUIRED classArrivee IDREF #REQUIRED role CDATA #REQUIRED multiplicity CDATA #REQUIRED>
