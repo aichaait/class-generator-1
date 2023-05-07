@@ -71,7 +71,7 @@ public class Associations extends javax.swing.JPanel {
         typeLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         typeLabel.setText("Type");
 
-        choixDeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "aggregation", "composition", "simple" }));
+        choixDeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "aucun","aggregation", "composition", "simple" }));
         choixDeType.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
 
         classDarrivee.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
@@ -167,6 +167,9 @@ public class Associations extends javax.swing.JPanel {
         multiplicy = etoileButton.isSelected() ? "*" : "1";
         role = inputRole.getText();
         classDarrivee = choixDeClassDarrivee.getSelectedItem().toString();
+        //reset all
+        choixDeType.setSelectedIndex(0);
+        choixDeClassDarrivee.setSelectedIndex(0);
 
         if(role.equals("")){
             errorField.setText("Remplir touts les champs");

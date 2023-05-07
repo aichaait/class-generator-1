@@ -181,6 +181,7 @@ public class LesNomsDesClasses extends JPanel {
                 
             }
             inputNom.setText("");
+            superClassChoix.setSelectedIndex(0);
         }
     });
     }   
