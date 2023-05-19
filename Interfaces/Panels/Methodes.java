@@ -99,7 +99,7 @@ public class Methodes extends JPanel {
         parametresLabel = new JLabel();
         ouiRadioButton = new JRadioButton();
         nonRadioButton = new JRadioButton();
-        addButton = new MyButton("Add");
+        addButton = new MyButton("Ajouter");
         jScrollPane1 = new javax.swing.JScrollPane();
         errorsField = new javax.swing.JTextArea();
 

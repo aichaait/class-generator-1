@@ -73,7 +73,7 @@ public class App extends JFrame {
     private void initComponents() {
         
         try {
-            setIconImage(ImageIO.read(new File("images/sprint.png")));
+            setIconImage(ImageIO.read(new File("Interfaces/images/sprint.png")));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("problem in the logo");
@@ -370,7 +370,7 @@ public class App extends JFrame {
             Writer.createDTDFile(GlobalprojectPath+"/DiagrammeDesClasses");
 
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
-            myFooter.nextButton.setText("Next");
+            myFooter.nextButton.setText("Suivant");
             myFooter.nextButton.setVisible(false);
             currentPage = 1;
             doc.getRootElement().removeChildren("class");
@@ -462,7 +462,7 @@ public class App extends JFrame {
 
         if(hasParametres == 1){//if the methode has parametres we go to parameteres page
             //set the name of the current methode 
-            myFooter.nextButton.setText("Back to Methodes");
+            myFooter.nextButton.setText("Retour aux methodes");
             ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres De Methode : "+nomDeCurrentMethode);
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "6");
             currentPage++;
@@ -484,7 +484,7 @@ public class App extends JFrame {
                 currentClass = 0;
                 ((CardLayout)cardPanels.getLayout()).show(cardPanels, "end");
                 currentPage = -1;
-                myFooter.nextButton.setText("Finish");
+                myFooter.nextButton.setText("Terminer");
             }
         }else{
             ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText("Error: hasParametres is not 0 or 1");
@@ -493,7 +493,7 @@ public class App extends JFrame {
     private void dansParametresDesMethodesPage(){
         //were in the parametres page
         //we get back to methodes page
-        myFooter.nextButton.setText("Next");
+        myFooter.nextButton.setText("Suivant");
         ((CardLayout)cardPanels.getLayout()).show(cardPanels, "5");
         currentPage--;
     }

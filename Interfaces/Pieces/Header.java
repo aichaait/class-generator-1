@@ -26,8 +26,10 @@ public class Header extends JPanel {
         setLayout(new BorderLayout(400,0));
         setPreferredSize(new Dimension(25,25));
 
-        img = new ImageIcon(getClass().getResource("../images/sprint.png"),"logo");
-       // picLabel = new JLabel();
+        img = new ImageIcon("Interfaces/images/sprint.png");
+
+       
+        // picLabel = new JLabel();
         //resize the image
         reSizedImg =  img.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         

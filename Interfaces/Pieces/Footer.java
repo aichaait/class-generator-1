@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public class Footer extends JPanel {
 
-    public MyButton nextButton = new MyButton("Next");
+    public MyButton nextButton = new MyButton("Suivant");
     
 
 

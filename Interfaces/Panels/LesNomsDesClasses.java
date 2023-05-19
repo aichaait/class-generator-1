@@ -79,7 +79,7 @@ public class LesNomsDesClasses extends JPanel {
         titreDePanel = new JLabel();
         nomLabel = new JLabel();
         inputNom = new GTextField(25);
-        addButton = new MyButton("Add");
+        addButton = new MyButton("Ajouter");
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         superClassLabel = new javax.swing.JLabel();
@@ -107,7 +107,7 @@ public class LesNomsDesClasses extends JPanel {
         superClassChoix.setBackground(Color.WHITE);
         superClassChoix.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
-        addButton.setText("Add");
+        addButton.setText("Ajouter");
 
         errorsField.setEditable(false);
         errorsField.setColumns(20);
@@ -191,11 +191,11 @@ public class LesNomsDesClasses extends JPanel {
             }
             else if(superClass.equals("aucun")) {
 
-                errorsField.append(nom+" Added\n");
+                errorsField.append("Ajouter "+nom+"\n");
                 lesNomDesClass.add(nom);
                 model.addElement(nom);
             }else{
-                errorsField.append(nom+" Added,le Super Class est "+superClass);
+                errorsField.append("Ajouter "+nom+",le Super Class est "+superClass+"\n");
                 lesNomDesClass.add(nom);
 
                 model.addElement(nom);

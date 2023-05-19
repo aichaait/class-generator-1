@@ -60,7 +60,7 @@ public ParametresDesMethodes() {
         nomLabel = new JLabel();
         inputNom = new GTextField(25);
         typeLabel = new JLabel();
-        addButton = new MyButton("Add");
+        addButton = new MyButton("Ajouter");
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
         choixDesTypes = new JComboBox<>();
@@ -156,7 +156,7 @@ public ParametresDesMethodes() {
         if (nom.equals("")) {
             errorsField.setText("Le nom est obligatoire");
         } else {
-            errorsField.setText(type + " " + nom +" Added\n");
+            errorsField.setText("Ajouter "+type + " " + nom +"\n");
             inputNom.setText("");
             choixDesTypes.setSelectedIndex(0);
         }

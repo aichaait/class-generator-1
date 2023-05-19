@@ -81,7 +81,7 @@ public class Attributes extends JPanel {
         inputNom = new GTextField(25);
         inputValeur = new GTextField(25);
         choixDesTypes = new JComboBox<>();
-        addButton = new MyButton("Add");
+        addButton = new MyButton("Ajouter");
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
 

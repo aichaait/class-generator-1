@@ -40,16 +40,16 @@ public class StartPage extends JPanel {
         
         titreDePage.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         titreDePage.setForeground(new java.awt.Color(102, 102, 102));
-        titreDePage.setText("WELCOME  TO UML2CODE");
+        titreDePage.setText("BIENVENUE SUR UML2CODE");
 
         sousTitre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         sousTitre.setForeground(new java.awt.Color(102, 102, 102));
         sousTitre.setText("Emulateur de code ");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        jLabel3.setText("Start");
+        jLabel3.setText("Debuter");
          
-        newProjectLabel.setText("New Project");
+        newProjectLabel.setText("Nouveau projet");
         newProjectLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         newProjectLabel.setForeground(new java.awt.Color(0, 102, 204));
         
@@ -57,7 +57,7 @@ public class StartPage extends JPanel {
 
         openProjectLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         openProjectLabel.setForeground(new java.awt.Color(0, 102, 204));
-        openProjectLabel.setText("Open Project");
+        openProjectLabel.setText("Ouvrir un projet");
         
 
         GroupLayout layout = new GroupLayout(this);
@@ -72,7 +72,7 @@ public class StartPage extends JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                             .addComponent(sousTitre, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)

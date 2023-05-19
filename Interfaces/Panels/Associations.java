@@ -36,7 +36,7 @@ public class Associations extends javax.swing.JPanel {
         titreDePanel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         errorField = new javax.swing.JTextArea();
-        addButton = new MyButton("Add");
+        addButton = new MyButton("Ajouter");
         typeLabel = new javax.swing.JLabel();
         choixDeType = new javax.swing.JComboBox<>();
         classDarrivee = new javax.swing.JLabel();

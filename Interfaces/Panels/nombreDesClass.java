@@ -41,7 +41,7 @@ public class nombreDesClass extends JPanel {
         inputNombreDesClasses = new GTextField(25);
         jScrollPane1 = new JScrollPane();
         errorsField = new JTextArea();
-        submitButton = new MyButton("submit");
+        submitButton = new MyButton("soumettre");
         setBackground(new java.awt.Color(179, 179, 255));
 
     //     titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 30)); // NOI18N

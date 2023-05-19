@@ -67,20 +67,5 @@ public class FolderPanel extends JPanel {
         }
     }
 
-    // public static void main(String[] args) {
-    //     // Create a JFrame to hold the FolderPanel
-    //     JFrame frame = new JFrame("FolderPanel");
-    //     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    //     // Create a FolderPanel and add it to the JFrame
-    //     FolderPanel folderPanel = new FolderPanel();
-    //     frame.getContentPane().add(folderPanel, BorderLayout.CENTER);
-
-    //     // Display the window
-    //     frame.pack();
-    //     frame.setVisible(true);
-
-    //     // Update the FolderPanel with the contents of the current folder
-    //     folderPanel.updateFolder(new File("/home/bssayla/Downloads/class-generator"));
-    // }
+   
 }

@@ -16,8 +16,8 @@ public class MenuBar extends JMenuBar {
     List<String> data = new ArrayList<String>();
     public JFileChooser fileChooser;
     JMenu apropoJMenu =  new JMenu(" Apropos ");
-    JMenu helpJMenu =  new JMenu(" Help ");
-    JMenu fileMenu = new JMenu("File  ");
+    JMenu helpJMenu =  new JMenu(" Aider ");
+    JMenu fileMenu = new JMenu(" Fichier");
     JMenuItem newProjectItem;
     JMenuItem openProjectItem;
 
@@ -52,16 +52,16 @@ public class MenuBar extends JMenuBar {
 
 
         ImageIcon folderIcon = new ImageIcon(getClass().getResource("../images/folder.png"));
-        newProjectItem = new JMenuItem("New project ", folderIcon);
+        newProjectItem = new JMenuItem("Nouveau projet ", folderIcon);
         fileMenu.add(newProjectItem);
 
         ImageIcon openProjectIcon = new ImageIcon(getClass().getResource("../images/open.png"));
-        openProjectItem = new JMenuItem("Open project ", openProjectIcon);
+        openProjectItem = new JMenuItem("Ouvrir un projet ", openProjectIcon);
         fileMenu.add(openProjectItem);
         
 
         ImageIcon exitIcon = new ImageIcon(getClass().getResource("../images/exit.png"));
-        JMenuItem exitItem = new JMenuItem("Exit", exitIcon);
+        JMenuItem exitItem = new JMenuItem("Quitter", exitIcon);
         fileMenu.add(exitItem);
         exitItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
