@@ -191,11 +191,11 @@ public class LesNomsDesClasses extends JPanel {
             }
             else if(superClass.equals("aucun")) {
 
-                errorsField.append("Ajouter "+nom+"\n");
+                errorsField.append("Ajouter le Class: "+nom+"\n");
                 lesNomDesClass.add(nom);
                 model.addElement(nom);
             }else{
-                errorsField.append("Ajouter "+nom+",le Super Class est "+superClass+"\n");
+                errorsField.append("Ajouter le Class: "+nom+",son Class parent est :"+superClass+"\n");
                 lesNomDesClass.add(nom);
 
                 model.addElement(nom);

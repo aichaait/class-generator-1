@@ -393,7 +393,7 @@ public class App extends JFrame {
             //print the number of class in component 2
 
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "2");
-            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Le nombre est "+nombreDesClasses+"\n");
+            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Le nombre des Classes est "+nombreDesClasses+"\n");
             this.currentPage++;
         }
        
