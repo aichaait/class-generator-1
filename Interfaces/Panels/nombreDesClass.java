@@ -110,18 +110,18 @@ public class nombreDesClass extends JPanel {
     private void submitButtonActionPerformed(){
         String nombreDesClassesStr = inputNombreDesClasses.getText();
         if(nombreDesClassesStr.equals("")){
-            errorsField.setText("Veuillez vous donner un nombre");
+            errorsField.setText("Veuillez donner un nombre");
         }else{
             try{
                 nombreDesClasses = Integer.parseInt(nombreDesClassesStr);
                 if(nombreDesClasses <= 0){
-                    errorsField.setText("Veuillez vous donner un nombre superieur à 0");
+                    errorsField.setText("Veuillez donner un nombre superieur à 0");
                 }else{
-                    errorsField.setText("Nombre valide\nNext pour continue");
+                    errorsField.setText("Nombre valide\nCliquez sur Suivant pour continue");
                     inputNombreDesClasses.setText("");
                 }
             }catch(Exception e){
-                errorsField.setText("Veuillez vous donner un nombre valide");
+                errorsField.setText("Veuillez donner un nombre valide");
             }
         }
         inputNombreDesClasses.setText("");

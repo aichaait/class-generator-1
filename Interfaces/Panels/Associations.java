@@ -172,7 +172,7 @@ public class Associations extends javax.swing.JPanel {
         choixDeClassDarrivee.setSelectedIndex(0);
 
         if(role.equals("")){
-            errorField.setText("Remplir touts les champs");
+            errorField.setText("Remplir tous les champs");
         }else{
             errorField.setText("type: "+type+"\n multiplicity: "+multiplicy+"\nrole: "+role+"\nClass D'arrivee: "+classDarrivee);
         }

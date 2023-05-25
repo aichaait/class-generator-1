@@ -217,7 +217,7 @@ public class WriteXmlToCpp {
                 printLesParametres(maMethode, CppFile);
                 
                 CppFile.write(")"+"{"+"\n");
-                CppFile.write("\t"+"\t"+"//Ecrit ici"+"\n"+"\n");
+                CppFile.write("\t"+"\t"+"//Ecrire ici"+"\n"+"\n");
                 CppFile.write("\t"+"}"+"\n");
             }catch(Exception e){
                 System.out.println(e.getMessage());

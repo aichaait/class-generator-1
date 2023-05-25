@@ -67,7 +67,7 @@ public ParametresDesMethodes() {
         setBackground(new java.awt.Color(179, 179, 255));
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setText("Ajouter Parametres de : "+nomDeCurrentMethode);
+        titreDePanel.setText("Ajouter les Parametres de : "+nomDeCurrentMethode);
 
         nomLabel.setFont(new java.awt.Font("Liberation Serif", 1, 18)); // NOI18N
         nomLabel.setText("Nom");
@@ -156,7 +156,7 @@ public ParametresDesMethodes() {
         if (nom.equals("")) {
             errorsField.setText("Le nom est obligatoire");
         } else {
-            errorsField.setText("Ajouter "+type + " " + nom +"\n");
+            errorsField.setText(type + " " + nom +" a été ajouté \n");
             inputNom.setText("");
             choixDesTypes.setSelectedIndex(0);
         }

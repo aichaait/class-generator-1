@@ -166,7 +166,7 @@ public class LesNomsDesClasses extends JPanel {
     addButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt){
             if(nombreDesClasses == 0){
-                errorsField.append("Vous fini, press Next pour continue\n");
+                errorsField.append("Vous avez fini, appuyez sur Suivant pour continuer\n");
             }else{
                 nomDeClass = inputNom.getText();
                 if(isValidClassName(nomDeClass)){
@@ -175,7 +175,7 @@ public class LesNomsDesClasses extends JPanel {
                     nombreDesClasses--;
                 }
                 else{
-                    errorsField.setText("Le nom est invalid donner un autre nom\n ");
+                    errorsField.setText("Le nom est invalide donner un autre nomn \n");
 
                 }
                 
@@ -191,11 +191,11 @@ public class LesNomsDesClasses extends JPanel {
             }
             else if(superClass.equals("aucun")) {
 
-                errorsField.append("Ajouter le Class: "+nom+"\n");
+                errorsField.append("la classe " +nom+" a été ajoutée :  \n");
                 lesNomDesClass.add(nom);
                 model.addElement(nom);
             }else{
-                errorsField.append("Ajouter le Class: "+nom+",son Class parent est :"+superClass+"\n");
+                errorsField.append("la classe " +nom+" a été ajoutée, sa Classe parent est  :"+superClass+"\n");
                 lesNomDesClass.add(nom);
 
                 model.addElement(nom);
