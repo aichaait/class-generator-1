@@ -161,7 +161,7 @@ public class App extends JFrame {
                 classDarrivee = ((Associations)cardPanels.getComponents()[3]).getChoixDeClassDarrivee().getSelectedItem().toString();
 
                 if(role.equals("")){
-                    ((Associations)cardPanels.getComponents()[3]).getErrorField().setText("Remplir touts les champs");
+                    ((Associations)cardPanels.getComponents()[3]).getErrorField().setText("Remplir tous les champs");
                 }else{
                     elementClass = Writer.findClass(nomDeCurrentClass, doc);
 
@@ -179,7 +179,7 @@ public class App extends JFrame {
                 String type = ((Methodes)cardPanels.getComponents()[4]).getChoixDesTypes().getSelectedItem().toString();
                 String errors = "";
                 if(nomDeCurrentMethode.equals("")){
-                    errors += "Nom est obligatoire";
+                    errors += "le Nom est obligatoire";
                 }
                 if(errors.equals("")){
                     ((Methodes)cardPanels.getComponents()[4]).getInputNom().setText("");
@@ -206,7 +206,7 @@ public class App extends JFrame {
                 if (nom.equals("")) {
                     ((ParametresDesMethodes)cardPanels.getComponents()[5]).getErrorsField().setText("Le nom est obligatoire");
                 } else {
-                    ((ParametresDesMethodes)cardPanels.getComponents()[5]).getErrorsField().setText(type + " " + nom +" Added\n");
+                    ((ParametresDesMethodes)cardPanels.getComponents()[5]).getErrorsField().setText(type + " " + nom +" Est Ajouté \n");
                     ((ParametresDesMethodes)cardPanels.getComponents()[5]).getInputNom().setText("");
                     ((ParametresDesMethodes)cardPanels.getComponents()[5]).getChoixDesTypes().setSelectedIndex(0);
                     elementClass = Writer.findClass(nomDeCurrentClass, doc);
@@ -402,13 +402,13 @@ public class App extends JFrame {
     private void dansLeNombreDesClassesPage(int nombreDesClasses) {
         //get the number of class from the first page
         if(nombreDesClasses == -1){
-            ((nombreDesClass)cardPanels.getComponents()[0]).getErrorsField().setText("Il faut donner un nombre puis clicker sur SUBMIT");
+            ((nombreDesClass)cardPanels.getComponents()[0]).getErrorsField().setText("Il faut donner un nombre puis clicker sur SOUMETTRE");
         }else{
             ((LesNomsDesClasses)cardPanels.getComponents()[1]).setNombreDesClasses(nombreDesClasses);
             //print the number of class in component 2
 
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "2");
-            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Le nombre des Classes est "+nombreDesClasses+"\n");
+            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Le nombre des Classes est " +nombreDesClasses+"\n");
             this.currentPage++;
         }
        
@@ -429,7 +429,7 @@ public class App extends JFrame {
             //set up the next page
             try{
             nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
-            ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
+            ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Les Attributs Du Classe : "+nomDeCurrentClass);
             //pass to next page
             this.currentPage++;
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
@@ -438,7 +438,7 @@ public class App extends JFrame {
             }
         }
         else{
-            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Rester "+nombreDesClasses+" classes pour ajouter\n");
+            ((LesNomsDesClasses)cardPanels.getComponents()[1]).getErrorsField().setText("Il Reste "+nombreDesClasses+" Classes A Ajouter\n");
 
         }
 
@@ -447,7 +447,7 @@ public class App extends JFrame {
          //we need to get the attributes of the current class
         try{
             nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
-            ((Associations)cardPanels.getComponents()[3]).getTitreDePanel().setText("Associations De Class : "+nomDeCurrentClass);
+            ((Associations)cardPanels.getComponents()[3]).getTitreDePanel().setText("Les Associations Du Classe : "+nomDeCurrentClass);
             //now we need to show the Associations page for the current class
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "4");
          currentPage++;
@@ -466,7 +466,7 @@ public class App extends JFrame {
             ((Attributes)cardPanels.getComponents()[2]).getErrorsField().setText("Error: "+e.getMessage());
 
         }
-        ((Methodes)cardPanels.getComponent(4)).getTitreDePanel().setText("Methodes De Class : "+nomDeCurrentClass);
+        ((Methodes)cardPanels.getComponent(4)).getTitreDePanel().setText("Les Méthodes Du Classe : "+nomDeCurrentClass);
         ((CardLayout)cardPanels.getLayout()).show(cardPanels,"5");
         currentPage++;
     }
@@ -477,8 +477,8 @@ public class App extends JFrame {
 
         if(hasParametres == 1){//if the methode has parametres we go to parameteres page
             //set the name of the current methode 
-            myFooter.nextButton.setText("Retour aux methodes");
-            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres De Methode : "+nomDeCurrentMethode);
+            myFooter.nextButton.setText("Veuillez Retourner Aux Méthodes");
+            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres Du Methode : "+nomDeCurrentMethode);
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "6");
             currentPage++;
         }else if (hasParametres == 0){
@@ -487,7 +487,7 @@ public class App extends JFrame {
                     
 
                     nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(++currentClass);
-                    ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Attributes De Class : "+nomDeCurrentClass);
+                    ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Les Attributs Du Classe : "+nomDeCurrentClass);
                     ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
                 }catch(Exception e){
                     ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText("Error: "+e.getMessage());
@@ -562,13 +562,13 @@ public class App extends JFrame {
                 File sqlFolder = new File(projectPath + File.separator + "SQLrequetes");
                 sqlFolder.mkdir();
                 FolderPanel.updateFolder(projectFolder );
-                JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Folders created successfully");
+                JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Dossiers créés avec succès");
                 myFooter.nextButton.setVisible(true);
                 ((CardLayout)cardPanels.getLayout()).show(cardPanels, "1");
 
 
             } else {
-                JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Project folder already exists");
+                JOptionPane.showMessageDialog(((StartPage)cardPanels.getComponents()[9]), "Le dossier de projet existe déjà");
             }
         }
     }
@@ -576,12 +576,12 @@ public class App extends JFrame {
         //choose a directory
         
                 JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                chooser.setDialogTitle("Choose a folder");
+                chooser.setDialogTitle("choisir un dossier ");
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
                 int returnValue = chooser.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    System.out.println("Selected folder: " + chooser.getSelectedFile().getPath());
+                    System.out.println("le Dossier sélectionné :" + chooser.getSelectedFile().getPath());
                     FolderPanel.updateFolder(new File(chooser.getSelectedFile().getPath()));
                     GlobalprojectPath = chooser.getSelectedFile().getAbsolutePath();
                 }

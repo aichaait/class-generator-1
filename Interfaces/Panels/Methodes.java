@@ -107,7 +107,7 @@ public class Methodes extends JPanel {
 
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setText("Methodes De Class : ");
+        titreDePanel.setText("Les Methodes Du Classe : ");
 
 
         nomLabel.setText("Nom");
@@ -124,7 +124,7 @@ public class Methodes extends JPanel {
         typeDeRetourLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
 
-        parametresLabel.setText("Methodes avoir les parametres");
+        parametresLabel.setText("la méthode a-t-elle des paramètres ? ");
         parametresLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
 

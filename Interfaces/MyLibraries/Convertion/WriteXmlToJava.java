@@ -203,7 +203,7 @@ public class WriteXmlToJava {
                 printLesParametres(maMethode, JavaFile);
                 
                 JavaFile.write(")"+"{"+"\n");
-                JavaFile.write("\t"+"\t"+"//Ecrit ici"+"\n"+"\n");
+                JavaFile.write("\t"+"\t"+"//Ecrire ici"+"\n"+"\n");
                 JavaFile.write("\t"+"}"+"\n");
             }catch(Exception e){
                 System.out.println(e.getMessage());
