@@ -310,13 +310,25 @@ public class App extends JFrame {
         
         
 
-      
+        myMenuBar.getHomeMenu().addMenuListener(new MenuListener() {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+
+            }
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+
+            }
+
+            
+        });
         myMenuBar.getApropoJMenu().addMenuListener(new MenuListener() {
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 ((CardLayout)cardPanels.getLayout()).show(cardPanels, "apropos");
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
-                ((CardLayout)cardPanels.getLayout()).show(cardPanels, "1");
+                ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
             }
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
@@ -326,8 +338,11 @@ public class App extends JFrame {
                 ((CardLayout)cardPanels.getLayout()).show(cardPanels, "help");
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
+
             }
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
+                ((CardLayout)cardPanels.getLayout()).show(cardPanels, "welcome");
+
             }
         });
 

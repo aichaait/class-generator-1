@@ -89,12 +89,12 @@ public class LesNomsDesClasses extends JPanel {
 
 
         titreDePanel.setFont(new Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setText("Les noms du classes");
+        titreDePanel.setText("Les noms des classes");
         titreDePanel.setHorizontalAlignment(SwingConstants.CENTER);
 
 
         nomLabel.setFont(new Font("Liberation Sans", 1, 18)); // NOI18N
-        nomLabel.setText("Nom du classe : ");
+        nomLabel.setText("Nom de la classe : ");
         inputNom.setHorizontalAlignment(SwingConstants.CENTER);
 
         inputNom.setBorder(BorderFactory.createLineBorder(Color.decode("#8E2DE2"),2));

@@ -18,6 +18,7 @@ public class MenuBar extends JMenuBar {
     JMenu apropoJMenu =  new JMenu(" Apropos ");
     JMenu helpJMenu =  new JMenu(" Aider ");
     JMenu fileMenu = new JMenu(" Fichier");
+    JMenu homeMenu = new JMenu("home");
     JMenuItem newProjectItem;
     JMenuItem openProjectItem;
 
@@ -73,9 +74,14 @@ public class MenuBar extends JMenuBar {
         
         
 
+        add(homeMenu);
         add(fileMenu);
         add(apropoJMenu);
         add(helpJMenu);
+    }
+
+    public JMenu getHomeMenu() {
+        return homeMenu;
     }
     
 }

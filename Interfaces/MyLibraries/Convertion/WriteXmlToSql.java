@@ -54,7 +54,7 @@ public class WriteXmlToSql {
         JavaFile.write("\nCREATE TABLE  "+capitalize(className));
         JavaFile.write(" ("+"\n");
         JavaFile.write("\tID INT PRIMARY KEY ,\n");
-        printleschampduTable(monClass, JavaFile);
+        printlesChampsDuTable(monClass, JavaFile);
         
         JavaFile.write("\n");
         JavaFile.write(");"+"\n");
@@ -94,7 +94,7 @@ public class WriteXmlToSql {
             
     }
 
-    private void printleschampduTable(Element monClass, FileWriter JavaFile) {
+    private void printlesChampsDuTable(Element monClass, FileWriter JavaFile) {
        
         List<Element> listDesAtributtes = monClass.getChildren("attributes").get(0).getChildren("attribute");
         for (int i = 0; i < listDesAtributtes.size(); i++) {
