@@ -107,7 +107,7 @@ public class Methodes extends JPanel {
 
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setText("Les Methodes Du Classe : ");
+        titreDePanel.setText(" les Methodes De la Classe : ");
 
 
         nomLabel.setText("Nom");
