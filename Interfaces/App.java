@@ -511,6 +511,8 @@ public class App extends JFrame {
         myFooter.nextButton.setText("Suivant");
         ((CardLayout)cardPanels.getLayout()).show(cardPanels, "5");
         currentPage--;
+        ((Methodes)cardPanels.getComponents()[4]).setHasParametres(0);
+        ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText("");
     }
 
     public void affiche(){

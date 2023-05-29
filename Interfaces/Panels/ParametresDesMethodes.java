@@ -153,13 +153,9 @@ public ParametresDesMethodes() {
     private void addButtonActionPerformed() {
         nom = inputNom.getText();
         type = choixDesTypes.getSelectedItem().toString();
-        if (nom.equals("")) {
-            errorsField.setText("Le nom est obligatoire");
-        } else {
             errorsField.setText(type + " " + nom +" a été ajouté \n");
             inputNom.setText("");
             choixDesTypes.setSelectedIndex(0);
-        }
         
     
     }

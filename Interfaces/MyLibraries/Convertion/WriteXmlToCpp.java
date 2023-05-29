@@ -227,7 +227,7 @@ public class WriteXmlToCpp {
     }
 
    private void printLesParametres(Element maMethode, FileWriter CppFile) {
-    List<Element> listDesParametres = maMethode.getChildren("param");
+    List<Element> listDesParametres = maMethode.getChildren("parametres").get(0).getChildren("parametre");
     for (int i = 0; i < listDesParametres.size(); i++) {
         Element monParametre = (Element) listDesParametres.get(i);
         String name = monParametre.getAttributeValue("name");
