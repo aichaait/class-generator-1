@@ -51,7 +51,7 @@ public class Associations extends javax.swing.JPanel {
 
 
         titreDePanel.setFont(new java.awt.Font("Liberation Sans", 1, 48)); // NOI18N
-        titreDePanel.setText("Associations De Class : ");
+        titreDePanel.setText("les Associations De la  Classe : ");
 
         errorField.setColumns(20);
         errorField.setRows(5);

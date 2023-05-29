@@ -90,7 +90,7 @@ public class Attributes extends JPanel {
         listDesTypesAttributes = new String[] { "Entier", "Reel", "Chaine", "Charactere", "Booleen" };
 
         titreDePanel.setFont(new java.awt.Font("Liberation Serif", 1, 48)); // NOI18N
-        titreDePanel.setText("Attributes De Class: "+nomDeCurrentClass);
+        titreDePanel.setText("Attributes De Classe: "+nomDeCurrentClass);
 
         nomLabel.setText("Nom");
         nomLabel.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N

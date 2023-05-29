@@ -429,7 +429,7 @@ public class App extends JFrame {
             //set up the next page
             try{
             nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
-            ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Les Attributs Du Classe : "+nomDeCurrentClass);
+            ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Les Attributs De la  Classe : "+nomDeCurrentClass);
             //pass to next page
             this.currentPage++;
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
@@ -447,7 +447,7 @@ public class App extends JFrame {
          //we need to get the attributes of the current class
         try{
             nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(currentClass);
-            ((Associations)cardPanels.getComponents()[3]).getTitreDePanel().setText("Les Associations Du Classe : "+nomDeCurrentClass);
+            ((Associations)cardPanels.getComponents()[3]).getTitreDePanel().setText("Les Associations De la Classe :" +nomDeCurrentClass);
             //now we need to show the Associations page for the current class
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "4");
          currentPage++;
@@ -466,7 +466,7 @@ public class App extends JFrame {
             ((Attributes)cardPanels.getComponents()[2]).getErrorsField().setText("Error: "+e.getMessage());
 
         }
-        ((Methodes)cardPanels.getComponent(4)).getTitreDePanel().setText("Les Méthodes Du Classe : "+nomDeCurrentClass);
+        ((Methodes)cardPanels.getComponent(4)).getTitreDePanel().setText("Les Méthodes De la Classe : "+nomDeCurrentClass);
         ((CardLayout)cardPanels.getLayout()).show(cardPanels,"5");
         currentPage++;
     }
@@ -478,7 +478,7 @@ public class App extends JFrame {
         if(hasParametres == 1){//if the methode has parametres we go to parameteres page
             //set the name of the current methode 
             myFooter.nextButton.setText("Veuillez Retourner Aux Méthodes");
-            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres Du Methode : "+nomDeCurrentMethode);
+            ((ParametresDesMethodes)cardPanels.getComponents()[5]).getTitreDePanel().setText("Parametres De la Methode : "+nomDeCurrentMethode);
             ((CardLayout)cardPanels.getLayout()).show(cardPanels, "6");
             currentPage++;
         }else if (hasParametres == 0){
@@ -487,7 +487,7 @@ public class App extends JFrame {
                     
 
                     nomDeCurrentClass =  ((LesNomsDesClasses)cardPanels.getComponents()[1]).getLesNomDesClass().get(++currentClass);
-                    ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Les Attributs Du Classe : "+nomDeCurrentClass);
+                    ((Attributes)cardPanels.getComponents()[2]).getTitreDePanel().setText("Les Attributs De la Classe : "+nomDeCurrentClass);
                     ((CardLayout)cardPanels.getLayout()).show(cardPanels, "3");
                 }catch(Exception e){
                     ((Methodes)cardPanels.getComponents()[4]).getErrorsField().setText("Error: "+e.getMessage());
