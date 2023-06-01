@@ -170,6 +170,8 @@ public class Associations extends javax.swing.JPanel {
         //reset all
         choixDeType.setSelectedIndex(0);
         choixDeClassDarrivee.setSelectedIndex(0);
+        inputRole.setText("");
+        etoileButton.setSelected(true);
 
         if(role.equals("")){
             errorField.setText("Remplir tous les champs");

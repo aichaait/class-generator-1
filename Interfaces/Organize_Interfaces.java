@@ -202,7 +202,6 @@ public class Organize_Interfaces extends JFrame {
         parametresAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 nomDeCurrentMethode = ((Methodes)cardPanels.getComponents()[4]).getNomDeCurrentMethode();
-                System.out.println("name: "+nomDeCurrentMethode);
                 String nom = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getInputNom().getText();
                 String type = ((ParametresDesMethodes)cardPanels.getComponents()[5]).getChoixDesTypes().getSelectedItem().toString();
                 if (nom.equals("")) {
@@ -381,8 +380,7 @@ public class Organize_Interfaces extends JFrame {
         }
         
         else if(currentPage == -1){
-            affiche();
-            System.out.println(GlobalprojectPath+"/DiagrammeDesClasses/DG.xml");
+            //save the xml file
             enregistre(GlobalprojectPath+"/DiagrammeDesClasses/DG.xml");
             Writer.createDTDFile(GlobalprojectPath+"/DiagrammeDesClasses");
 
@@ -468,6 +466,10 @@ public class Organize_Interfaces extends JFrame {
             ((Attributes)cardPanels.getComponents()[2]).getErrorsField().setText("Error: "+e.getMessage());
 
         }
+        // clear the errors field
+        ((Associations)cardPanels.getComponents()[3]).getErrorField().setText("");
+
+        
         ((Methodes)cardPanels.getComponent(4)).getTitreDePanel().setText("Les Méthodes De la Classe : "+nomDeCurrentClass);
         ((CardLayout)cardPanels.getLayout()).show(cardPanels,"5");
         currentPage++;
@@ -591,6 +593,7 @@ public class Organize_Interfaces extends JFrame {
                 }
     
         }  
+        
     
     
  
